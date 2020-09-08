@@ -11,6 +11,8 @@
 *.orig
 *.rej
 *.so
+*.user*
+*.code-workspace
 *.so.*
 *_pch.h.cpp
 *_resource.rc
