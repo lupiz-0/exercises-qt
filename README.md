@@ -1,0 +1,3 @@
+esercitazione di qt
+
+
