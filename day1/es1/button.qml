@@ -7,5 +7,8 @@ Window {
     visible: true
     title: qsTr("SwitchButton exercise")
 
-    SwitchButton{}
+    SwitchButton
+    {
+        anchors.centerIn: parent
+    }
 }

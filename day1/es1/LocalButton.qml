@@ -5,11 +5,10 @@ Rectangle {
 
     property string text: qsTr("none")
 
+    width: 40
+    height: 40
+
     signal clicked
-
-    width: parent.width/parent.children.length
-    height: parent.height
-
 
     Text {
         anchors.centerIn: parent

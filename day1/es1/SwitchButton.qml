@@ -5,18 +5,21 @@ Row {
 
     width: 160
     height: 40
-    anchors.centerIn: parent
     state: "unchecked"
 
     LocalButton {
         text: qsTr("on")
         color: switchButton.state == "checked"? "blue": "lightgray"
+        width: parent.width/parent.children.length
+        height: parent.height
 
         onClicked: switchButton.state = "checked"
     }
     LocalButton {
         text: qsTr("off")
         color: switchButton.state == "checked"? "lightgray": "Darkgray"
+        width: parent.width/parent.children.length
+        height: parent.height
 
         onClicked: switchButton.state = "unchecked"
     }
