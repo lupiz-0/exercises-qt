@@ -8,16 +8,18 @@ Row {
     state: "unchecked"
 
     LocalButton {
+        id: leftButton
+
         text: qsTr("on")
-        color: switchButton.state == "checked"? "blue": "lightgray"
         width: parent.width/parent.children.length
         height: parent.height
 
         onClicked: switchButton.state = "checked"
     }
     LocalButton {
+        id: rightButton
+
         text: qsTr("off")
-        color: switchButton.state == "checked"? "lightgray": "Darkgray"
         width: parent.width/parent.children.length
         height: parent.height
 
@@ -27,9 +29,13 @@ Row {
     states: [
         State {
             name: "checked"
+            PropertyChanges { target: leftButton; color: "blue"}
+            PropertyChanges { target: rightButton; color: "lightgray"}
         },
         State {
             name: "unchecked"
+            PropertyChanges { target: leftButton; color: "lightgray"}
+            PropertyChanges { target: rightButton; color: "Darkgray"}
         }
     ]
 }

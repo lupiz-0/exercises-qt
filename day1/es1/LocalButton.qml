@@ -5,9 +5,6 @@ Rectangle {
 
     property string text: qsTr("none")
 
-    width: 80
-    height: 40
-
     signal clicked
 
     Text {
