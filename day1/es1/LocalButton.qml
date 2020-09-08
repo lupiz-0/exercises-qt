@@ -3,12 +3,10 @@ import QtQuick 2.0
 Rectangle {
     id: button
 
-    property string stateName: "unchecked"
-    property color colorForTheStateChecked: "lightgray"
-    property color colorForTheStateUnchecked: "lightgray"
     property string text: qsTr("none")
 
-    color: switchButton.state == "checked"? colorForTheStateChecked: colorForTheStateUnchecked
+    signal clicked
+
     width: parent.width/parent.children.length
     height: parent.height
 
@@ -21,7 +19,7 @@ Rectangle {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            switchButton.state = stateName
+            button.clicked()
         }
     }
 

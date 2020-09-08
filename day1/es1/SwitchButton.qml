@@ -9,16 +9,16 @@ Row {
     state: "unchecked"
 
     LocalButton {
-        stateName: "checked"
-        colorForTheStateChecked: "blue"
-        colorForTheStateUnchecked: "lightgray"
         text: qsTr("on")
+        color: switchButton.state == "checked"? "blue": "lightgray"
+
+        onClicked: switchButton.state = "checked"
     }
     LocalButton {
-        stateName: "unchecked"
-        colorForTheStateChecked: "lightgray"
-        colorForTheStateUnchecked: "Darkgray"
         text: qsTr("off")
+        color: switchButton.state == "checked"? "lightgray": "Darkgray"
+
+        onClicked: switchButton.state = "unchecked"
     }
 
     states: [
