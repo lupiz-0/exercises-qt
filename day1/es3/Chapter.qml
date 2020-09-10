@@ -62,6 +62,30 @@ Column {
             horizontalAlignment: Text.AlignHCenter
             //verticalAlignment: Text.AlignVCenter
             clip:true
+            state: "getOut"
+
+
+            states: [
+                State {
+                    name: "getIn"
+                    when: (frame.isExpanded && content.height === frame.contentMaxHeight)
+                    PropertyChanges
+                    {
+                        target: contentText; y: (frame.contentMaxHeight - contentText.heightOfTheFullText)*0.5
+                    }
+                    PropertyChanges { target: contentText; opacity: 1}
+                },
+                State {
+                    name: "getOut"
+                    when: (!frame.isExpanded || frame.isExpanded && content.height !== frame.contentMaxHeight)
+                    PropertyChanges
+                    {
+                        target: contentText; y: frame.contentMaxHeight
+                    }
+                    PropertyChanges { target: contentText; opacity: 0}
+                }
+            ]
+
 
             Behavior on y {
                 NumberAnimation { duration: frame.animationTime }
@@ -85,6 +109,17 @@ Column {
     }
 
     states: [
+        State {
+            name: "compressContent"
+            when: (!frame.isExpanded)
+            PropertyChanges { target: content; height: 0}
+        },
+        State {
+            name: "expandContent"
+            when: (frame.isExpanded)
+            PropertyChanges { target: content; height: frame.contentMaxHeight}
+        }
+        /*
         State {
             name: "compressContent"
             when: (frame.isExpanded == false && contentText.y == frame.contentMaxHeight)
@@ -113,5 +148,17 @@ Column {
             PropertyChanges { target: contentText; y: frame.contentMaxHeight}
             PropertyChanges { target: contentText; opacity: 0}
         }
+        */
     ]
+
+
+
+    Timer {
+        interval: 500;
+        running: true;
+        repeat: true
+        onTriggered: {
+            console.log("y = ", contentText.y)
+        }
+    }
 }

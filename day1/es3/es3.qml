@@ -18,14 +18,11 @@ Window {
         function changeChapter(sender){
             var otherChapters = []
             for(var i = 0; i < allChapters.children.length; i++) {
-            //for(var childd in allChapters.children) {
                 if(allChapters.children[i].id === sender.id && allChapters.children[i] !== sender)
                     otherChapters.push(allChapters.children[i])
-            //    if(childd.id === sender.id && childd !== sender)
-            //        otherChapters.push(childd)
             }
 
-            if(sender.isExpanded === true) {
+            if(sender.isExpanded) {
                 sender.isExpanded = false
             }
             else {
