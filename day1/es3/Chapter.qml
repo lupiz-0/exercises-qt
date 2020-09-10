@@ -3,31 +3,20 @@ import QtQuick 2.0
 Column {
     id: frame
 
+
     property string title: "no tile"
     property string content: "no content"
-    property bool expanded: false
+    property bool isExpanded: false
     readonly property int contentMaxHeight: 200
-    readonly property int animationTime: 300
-    // ↓↓↓ states
-    //readonly property string expandedState: "expanded"
-    //readonly property string compressedState: "compressed"
-    //readonly property string getOutTextState: "getOutText"
-    //readonly property string getInTextState: "getInText"
-    // ↑↑↑ states
+    //readonly property int animationTime: 300
+    readonly property int animationTime: 2000
 
     width: 160
     //state: expandedState
     state: "compressedState"
 
 
-    signal clickChapter()
-
-
-    function switchState(){
-        //state = state == compressedState? expandedState: compressedState
-        expanded = !expanded
-    }
-
+    signal clickChapter(var sender)
 
     Rectangle {
         id: title
@@ -45,8 +34,7 @@ Column {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                frame.switchState()
-                clickChapter()
+                clickChapter(frame)
             }
         }
     }
@@ -87,8 +75,7 @@ Column {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                frame.switchState()
-                clickChapter()
+                clickChapter(frame)
             }
         }
 
@@ -100,28 +87,28 @@ Column {
     states: [
         State {
             name: "compressContent"
-            when: (frame.expanded == false && contentText.y == frame.contentMaxHeight)
+            when: (frame.isExpanded == false && contentText.y == frame.contentMaxHeight)
             PropertyChanges { target: content; height: 0}
             PropertyChanges { target: contentText; y: frame.contentMaxHeight}
             PropertyChanges { target: contentText; opacity: 0}
         },
         State {
             name: "expandContent"
-            when: (frame.expanded == true && content.height < frame.contentMaxHeight)
+            when: (frame.isExpanded == true && content.height < frame.contentMaxHeight)
             PropertyChanges { target: content; height: frame.contentMaxHeight}
             PropertyChanges { target: contentText; y: frame.contentMaxHeight}
             PropertyChanges { target: contentText; opacity: 0}
         },
         State {
             name: "getInText"
-            when: (frame.expanded == true && content.height == frame.contentMaxHeight)
+            when: (frame.isExpanded == true && content.height == frame.contentMaxHeight)
             PropertyChanges { target: content; height: frame.contentMaxHeight}
             PropertyChanges { target: contentText; y: (frame.contentMaxHeight - contentText.heightOfTheFullText)*0.5}
             PropertyChanges { target: contentText; opacity: 1}
         },
         State {
             name: "getOutText"
-            when: (frame.expanded == false && content.height > 0)
+            when: (frame.isExpanded == false && content.height > 0)
             PropertyChanges { target: content; height: frame.contentMaxHeight}
             PropertyChanges { target: contentText; y: frame.contentMaxHeight}
             PropertyChanges { target: contentText; opacity: 0}
