@@ -5,56 +5,78 @@ Window {
     width: 640
     height: 800
     visible: true
-    title: qsTr("Hello World")
-
-
-
+    title: qsTr("Chapters exercise")
 
     Column {
         id: allChapters
 
+        readonly property int animationTime: 300
+
+        function changeChapter(clickedChapter){
+
+            var otherChapters = [] // all the chapters different from the clicked chapter
+            var chapterExpanded = undefined // here we set the chapter expanded ( if is present one )
+
+            for(var i = 0; i < allChapters.children.length; i++) {
+
+                if(allChapters.children[i].id === clickedChapter.id && allChapters.children[i] !== clickedChapter)
+                    otherChapters.push(allChapters.children[i]) // collect all the chapters different from the clicked
+
+                if(allChapters.children[i].isExpanded)
+                    chapterExpanded = allChapters.children[i]
+            }
+
+            if(clickedChapter.isExpanded === true)
+                clickedChapter.isExpanded = false // if the chapter clicked is expanded the simply set to close
+            else {
+
+                // set all the chapters not clicked to be closed
+                for(var j = 0; j < otherChapters.length; j++)
+                    otherChapters[j].isExpanded = false
+
+                // if nobody else chapter is expanded now then set immediately to expand the clicked chapter, else expande with a delay
+                if(chapterExpanded === undefined)
+                    clickedChapter.isExpanded = true
+                else {
+                    timerForDelayOpeningChapter.chapter = clickedChapter
+                    timerForDelayOpeningChapter.start()
+                }
+            }
+        }
+
         anchors.centerIn: parent
 
-        function changeChapter(sender){
-            var otherChapters = []
-            for(var i = 0; i < allChapters.children.length; i++) {
-            //for(var childd in allChapters.children) {
-                if(allChapters.children[i].id === sender.id && allChapters.children[i] !== sender)
-                    otherChapters.push(allChapters.children[i])
-            //    if(childd.id === sender.id && childd !== sender)
-            //        otherChapters.push(childd)
-            }
+        Timer {
+            id: timerForDelayOpeningChapter
 
-            if(sender.isExpanded === true) {
-                sender.isExpanded = false
-            }
-            else {
-                for(var j = 0; j < otherChapters.length; j++)
-                {
-                    otherChapters[j].isExpanded = false
-                }
-                sender.isExpanded = true
-            }
+            property var chapter: undefined
 
-        //    console.log("number other ", otherChapters.length)
+            interval: allChapters.animationTime
+
+            onTriggered: {
+                chapter.isExpanded = true
+            }
         }
 
         Chapter {
             title: "title 0"
-            content: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda dello sporgere e del rientrare di quelli ..."
-            onClickChapter: allChapters.changeChapter(sender)
+            content: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda"
+            onClickChapter: allChapters.changeChapter(clickedChapter)
+            animationTime: allChapters.animationTime
         }
 
         Chapter {
             title: "title 1"
-            content: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda dello sporgere e del rientrare di quelli ..."
-            onClickChapter: allChapters.changeChapter(sender)
+            content: "dello sporgere e del rientrare di quelli, vien quasi a un tratto, tra un promontorio a destra e un'ampia"
+            onClickChapter: allChapters.changeChapter(clickedChapter)
+            animationTime: allChapters.animationTime
         }
 
         Chapter {
             title: "title 2"
-            content: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda dello sporgere e del rientrare di quelli ..."
-            onClickChapter: allChapters.changeChapter(sender)
+            content: "costiera dall'altra parte"
+            onClickChapter: allChapters.changeChapter(clickedChapter)
+            animationTime: allChapters.animationTime
         }
     }
 }
