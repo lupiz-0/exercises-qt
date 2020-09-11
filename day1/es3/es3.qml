@@ -7,10 +7,22 @@ Window {
     visible: true
     title: qsTr("Chapters exercise")
 
+    /*
+    ListView {
+        width: 180
+
+        model: ChapterModel {}
+
+        delegate: Chapter {
+            title: titleA
+            content: chapterText
+            onClickChapter: allChapters.changeChapter(clickedChapter)
+        }
+    }
+    */
+
     Column {
         id: allChapters
-
-        readonly property int animationTime: 300
 
         function changeChapter(clickedChapter){
 
@@ -51,32 +63,31 @@ Window {
 
             property var chapter: undefined
 
-            interval: allChapters.animationTime
+            interval: firstChapter.animationTime
 
             onTriggered: {
                 chapter.isExpanded = true
             }
+        }     
+
+        Chapter {
+            id: firstChapter
+
+            titleText: "title 0"
+            contentText: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda"
+            onClickChapter: allChapters.changeChapter(clickedChapter)
         }
 
         Chapter {
-            title: "title 0"
-            content: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda"
+            titleText: "title 1"
+            contentText: "dello sporgere e del rientrare di quelli, vien quasi a un tratto, tra un promontorio a destra e un'ampia"
             onClickChapter: allChapters.changeChapter(clickedChapter)
-            animationTime: allChapters.animationTime
         }
 
         Chapter {
-            title: "title 1"
-            content: "dello sporgere e del rientrare di quelli, vien quasi a un tratto, tra un promontorio a destra e un'ampia"
+            titleText: "title 2"
+            contentText: "costiera dall'altra parte"
             onClickChapter: allChapters.changeChapter(clickedChapter)
-            animationTime: allChapters.animationTime
-        }
-
-        Chapter {
-            title: "title 2"
-            content: "costiera dall'altra parte"
-            onClickChapter: allChapters.changeChapter(clickedChapter)
-            animationTime: allChapters.animationTime
         }
     }
 }

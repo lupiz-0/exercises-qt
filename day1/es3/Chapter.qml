@@ -1,12 +1,13 @@
 import QtQuick 2.0
+import QtQuick 2.15
 
 Column {
     id: frame
 
-    property string title: "no tile"
-    property string content: "no content"
     property bool isExpanded: false
-    property int animationTime: 2000
+    property alias contentText: contentText.text
+    property alias titleText: titleText.text
+    property alias animationTime: content.animationTime
     readonly property int contentMaxHeight: 200
 
     signal clickChapter(var clickedChapter)
@@ -21,8 +22,9 @@ Column {
         color: "gold"
 
         Text {
+            id: titleText
+
             anchors.centerIn: parent
-            text: frame.title
             font.pointSize: 20
         }
 
@@ -37,6 +39,8 @@ Column {
     Rectangle {
         id: content
 
+        readonly property int animationTime: 2000
+
         width: frame.width
         color: "deepskyblue"
         clip:true
@@ -45,18 +49,17 @@ Column {
             id: contentText
 
             x: 0
-            text: frame.content
             wrapMode: Text.WordWrap
             width: content.width
             height: contentHeight
             horizontalAlignment: Text.AlignHCenter
 
             Behavior on y {
-                NumberAnimation { duration: frame.animationTime }
+                NumberAnimation { duration: content.animationTime }
             }
 
             Behavior on opacity {
-                NumberAnimation { duration: frame.animationTime }
+                OpacityAnimator { duration: content.animationTime }
             }
         }
 
@@ -68,7 +71,7 @@ Column {
         }
 
         Behavior on height {
-            NumberAnimation { duration: frame.animationTime }
+            NumberAnimation { duration: content.animationTime }
         }
     }
 
