@@ -23,7 +23,7 @@ Rectangle {
         anchors.leftMargin: frameSize
 
         Behavior on width {
-            NumberAnimation { duration: 1000 }
+            NumberAnimation { duration: 450 }
         }
     }
 }
