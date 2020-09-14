@@ -7,24 +7,23 @@ Window {
     visible: true
     title: qsTr("Chapters exercise")
 
-    /*
-    ListView {
-        width: 180
-
-        model: ChapterModel {}
-
-        delegate: Chapter {
-            title: titleA
-            content: chapterText
-            onClickChapter: allChapters.changeChapter(clickedChapter)
-        }
-    }
-    */
-
     Column {
         id: allChapters
 
-        function changeChapter(clickedChapter){
+        property int selectedChapter: -1
+//        property bool areAllCompressed: selectedChapter != chapter0.uniqueIdentifier && chapter0.uniqueIdentifier !== selectedChapter
+//                                        && selectedChapter != chapter1.uniqueIdentifier && chapter1.uniqueIdentifier !== selectedChapter
+//                                        && selectedChapter != chapter1.uniqueIdentifier && chapter2.uniqueIdentifier !== selectedChapter
+
+        function clickChapter(idNewChapter) {
+            if(selectedChapter === idNewChapter)
+                selectedChapter = -1
+            else
+                selectedChapter = idNewChapter
+        }
+
+        /*
+        function changeChapterOld(clickedChapter){
 
             var otherChapters = [] // all the chapters different from the clicked chapter
             var chapterExpanded = undefined // here we set the chapter expanded ( if is present one )
@@ -55,9 +54,11 @@ Window {
                 }
             }
         }
+        */
 
         anchors.centerIn: parent
 
+        /*
         Timer {
             id: timerForDelayOpeningChapter
 
@@ -68,26 +69,48 @@ Window {
             onTriggered: {
                 chapter.isExpanded = true
             }
-        }     
+        } 
+        */    
 
         Chapter {
-            id: firstChapter
+            id: chapter0
 
             titleText: "title 0"
             contentText: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda"
-            onClickChapter: allChapters.changeChapter(clickedChapter)
+            onClickChapter: allChapters.clickChapter(idNewChapter)
+            uniqueIdentifier: 0
+            selectedChapter: allChapters.selectedChapter
+            othersCompressed: chapter1.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
+            //areAllCompressed: allChapters.areAllCompressed
         }
 
         Chapter {
+            id: chapter1
+
             titleText: "title 1"
             contentText: "dello sporgere e del rientrare di quelli, vien quasi a un tratto, tra un promontorio a destra e un'ampia"
-            onClickChapter: allChapters.changeChapter(clickedChapter)
+            onClickChapter: allChapters.clickChapter(idNewChapter)
+            uniqueIdentifier: 1
+            selectedChapter: allChapters.selectedChapter
+            othersCompressed: chapter0.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
+            //areAllCompressed: allChapters.areAllCompressed
         }
 
         Chapter {
+            id: chapter2
+
             titleText: "title 2"
             contentText: "costiera dall'altra parte"
-            onClickChapter: allChapters.changeChapter(clickedChapter)
+            onClickChapter: allChapters.clickChapter(idNewChapter)
+            uniqueIdentifier: 2
+            selectedChapter: allChapters.selectedChapter
+            othersCompressed: chapter0.permitOpeningOfAnotherChapter && chapter1.permitOpeningOfAnotherChapter
+            //areAllCompressed: allChapters.areAllCompressed
+        }
+
+        Timer {
+            interval: 500; running: true; repeat: true
+            onTriggered: console.log(chapter1.state, " ", chapter1.othersCompressed)
         }
     }
 }
