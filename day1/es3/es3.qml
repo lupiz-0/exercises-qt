@@ -11,9 +11,6 @@ Window {
         id: allChapters
 
         property int selectedChapter: -1
-//        property bool areAllCompressed: selectedChapter != chapter0.uniqueIdentifier && chapter0.uniqueIdentifier !== selectedChapter
-//                                        && selectedChapter != chapter1.uniqueIdentifier && chapter1.uniqueIdentifier !== selectedChapter
-//                                        && selectedChapter != chapter1.uniqueIdentifier && chapter2.uniqueIdentifier !== selectedChapter
 
         function clickChapter(idNewChapter) {
             if(selectedChapter === idNewChapter)
@@ -22,55 +19,7 @@ Window {
                 selectedChapter = idNewChapter
         }
 
-        /*
-        function changeChapterOld(clickedChapter){
-
-            var otherChapters = [] // all the chapters different from the clicked chapter
-            var chapterExpanded = undefined // here we set the chapter expanded ( if is present one )
-
-            for(var i = 0; i < allChapters.children.length; i++) {
-
-                if(allChapters.children[i].id === clickedChapter.id && allChapters.children[i] !== clickedChapter)
-                    otherChapters.push(allChapters.children[i]) // collect all the chapters different from the clicked
-
-                if(allChapters.children[i].isExpanded)
-                    chapterExpanded = allChapters.children[i]
-            }
-
-            if(clickedChapter.isExpanded === true)
-                clickedChapter.isExpanded = false // if the chapter clicked is expanded the simply set to close
-            else {
-
-                // set all the chapters not clicked to be closed
-                for(var j = 0; j < otherChapters.length; j++)
-                    otherChapters[j].isExpanded = false
-
-                // if nobody else chapter is expanded now then set immediately to expand the clicked chapter, else expande with a delay
-                if(chapterExpanded === undefined)
-                    clickedChapter.isExpanded = true
-                else {
-                    timerForDelayOpeningChapter.chapter = clickedChapter
-                    timerForDelayOpeningChapter.start()
-                }
-            }
-        }
-        */
-
         anchors.centerIn: parent
-
-        /*
-        Timer {
-            id: timerForDelayOpeningChapter
-
-            property var chapter: undefined
-
-            interval: firstChapter.animationTime
-
-            onTriggered: {
-                chapter.isExpanded = true
-            }
-        } 
-        */    
 
         Chapter {
             id: chapter0
@@ -80,8 +29,7 @@ Window {
             onClickChapter: allChapters.clickChapter(idNewChapter)
             uniqueIdentifier: 0
             selectedChapter: allChapters.selectedChapter
-            othersCompressed: chapter1.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
-            //areAllCompressed: allChapters.areAllCompressed
+            othersChaptersPermitOpening: chapter1.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
         }
 
         Chapter {
@@ -92,8 +40,7 @@ Window {
             onClickChapter: allChapters.clickChapter(idNewChapter)
             uniqueIdentifier: 1
             selectedChapter: allChapters.selectedChapter
-            othersCompressed: chapter0.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
-            //areAllCompressed: allChapters.areAllCompressed
+            othersChaptersPermitOpening: chapter0.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
         }
 
         Chapter {
@@ -104,13 +51,7 @@ Window {
             onClickChapter: allChapters.clickChapter(idNewChapter)
             uniqueIdentifier: 2
             selectedChapter: allChapters.selectedChapter
-            othersCompressed: chapter0.permitOpeningOfAnotherChapter && chapter1.permitOpeningOfAnotherChapter
-            //areAllCompressed: allChapters.areAllCompressed
-        }
-
-        Timer {
-            interval: 500; running: true; repeat: true
-            onTriggered: console.log(chapter1.state, " ", chapter1.othersCompressed)
+            othersChaptersPermitOpening: chapter0.permitOpeningOfAnotherChapter && chapter1.permitOpeningOfAnotherChapter
         }
     }
 }
