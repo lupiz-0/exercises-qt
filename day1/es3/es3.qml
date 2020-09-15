@@ -7,10 +7,19 @@ Window {
     visible: true
     title: qsTr("Chapters exercise")
 
-    Column {
+
+    ListView {
         id: allChapters
 
         property int selectedChapter: -1
+        property bool othersChaptersPermitOpening: {
+            var permitOpening = true
+            for(var i = 0; i < allChapters.count; i++) {
+                if(i !== selectedChapter && !allChapters.itemAtIndex(i).permitOpeningOfAnotherChapter)
+                    permitOpening = false
+            }
+            return permitOpening
+        }
 
         function clickChapter(idNewChapter) {
             if(selectedChapter === idNewChapter)
@@ -19,39 +28,31 @@ Window {
                 selectedChapter = idNewChapter
         }
 
-        anchors.centerIn: parent
+        width: 180
+        height: 800
 
-        Chapter {
-            id: chapter0
+        model: ListModel {
 
-            titleText: "title 0"
-            contentText: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda"
-            onClickChapter: allChapters.clickChapter(idNewChapter)
-            uniqueIdentifier: 0
-            selectedChapter: allChapters.selectedChapter
-            othersChaptersPermitOpening: chapter1.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
+            ListElement {
+                modelText: "title 0"
+                modelContent: "Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda"
+            }
+            ListElement {
+                modelText: "title 1"
+                modelContent: "dello sporgere e del rientrare di quelli, vien quasi a un tratto, tra un promontorio a destra e un'ampia"
+            }
+            ListElement {
+                modelText: "title 2"
+                modelContent: "costiera dall'altra parte"
+            }
         }
 
-        Chapter {
-            id: chapter1
-
-            titleText: "title 1"
-            contentText: "dello sporgere e del rientrare di quelli, vien quasi a un tratto, tra un promontorio a destra e un'ampia"
+        delegate: Chapter {        
+            titleText: modelText
+            contentText: modelContent
             onClickChapter: allChapters.clickChapter(idNewChapter)
-            uniqueIdentifier: 1
             selectedChapter: allChapters.selectedChapter
-            othersChaptersPermitOpening: chapter0.permitOpeningOfAnotherChapter && chapter2.permitOpeningOfAnotherChapter
-        }
-
-        Chapter {
-            id: chapter2
-
-            titleText: "title 2"
-            contentText: "costiera dall'altra parte"
-            onClickChapter: allChapters.clickChapter(idNewChapter)
-            uniqueIdentifier: 2
-            selectedChapter: allChapters.selectedChapter
-            othersChaptersPermitOpening: chapter0.permitOpeningOfAnotherChapter && chapter1.permitOpeningOfAnotherChapter
+            othersChaptersPermitOpening: allChapters.othersChaptersPermitOpening
         }
     }
 }

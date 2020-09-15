@@ -4,10 +4,10 @@ import QtQuick 2.15
 Column {
     id: frame
 
-    property int uniqueIdentifier
     property int selectedChapter
     property bool othersChaptersPermitOpening
-    property bool permitOpeningOfAnotherChapter: selectedChapter !== uniqueIdentifier && contentText.y === frame.contentMaxHeight
+    property bool permitOpeningOfAnotherChapter: selectedChapter !== delegateIndex && contentText.y === frame.contentMaxHeight
+    property int delegateIndex: index
     property alias contentText: contentText.text
     property alias titleText: titleText.text
     readonly property int contentMaxHeight: 200
@@ -33,7 +33,7 @@ Column {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                clickChapter(uniqueIdentifier)
+                clickChapter(delegateIndex)
             }
         }
     }
@@ -62,7 +62,7 @@ Column {
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                clickChapter(uniqueIdentifier)
+                clickChapter(delegateIndex)
             }
         }
     }
@@ -70,7 +70,7 @@ Column {
     states: [
         State {
             name: "opened"
-            when: frame.selectedChapter === frame.uniqueIdentifier && othersChaptersPermitOpening
+            when: frame.selectedChapter === frame.delegateIndex && othersChaptersPermitOpening
         }
     ]
 
