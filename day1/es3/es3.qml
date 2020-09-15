@@ -13,12 +13,11 @@ Window {
 
         property int selectedChapter: -1
         property bool othersChaptersPermitOpening: {
-            var permitOpening = true
             for(var i = 0; i < allChapters.count; i++) {
                 if(i !== selectedChapter && !allChapters.itemAtIndex(i).permitOpeningOfAnotherChapter)
-                    permitOpening = false
+                    return false
             }
-            return permitOpening
+            return true
         }
 
         function clickChapter(idNewChapter) {
