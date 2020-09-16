@@ -6,11 +6,11 @@ Column {
 
     property int selectedChapter
     property bool othersChaptersPermitOpening
-    property bool permitOpeningOfAnotherChapter: selectedChapter !== delegateIndex && contentText.y === frame.contentMaxHeight
-    property int delegateIndex: index
     property alias contentText: contentText.text
     property alias titleText: titleText.text
     readonly property int contentMaxHeight: 200
+    readonly property bool permitOpeningOfAnotherChapter: selectedChapter !== delegateIndex && contentText.y === frame.contentMaxHeight
+    readonly property int delegateIndex: index
 
     signal clickChapter(var idNewChapter)
 
