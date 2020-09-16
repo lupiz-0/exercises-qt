@@ -1,45 +1,45 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
+import QtQuick.Layouts 1.15
 
 Window {
     id: mainWindow
 
-    property var cardPrefab: Qt.createComponent("Card.qml");
-
     width: 640
-    height: 480
-    visible: true
+    height: 480    
     title: qsTr("Hello World")
 
-    function createCard() {
-        while (mainWindow.cardPrefab.status !== Component.Ready){ }
-        mainWindow.cardPrefab.createObject(
-                    mainWindow, {
-                        "x": Math.random()*mainWindow.width
-                        , "y": Math.random()*mainWindow.height
-                        , "widthParent": mainWindow.width
-                        , "heightParent": mainWindow.height
-                    }
-            )
-    }
+    Column {
+        spacing: 0
 
-    property int widthParent
-    property int heightParent
+        Rectangle {
+            id: windowArea
 
-    Component.onCompleted: {
-        for(var i = 0; i < 10; i++) {
-            mainWindow.createCard()
-      }
-    }
+            property var cardPrefab: Qt.createComponent("Card.qml");
 
-    /*
-    Card {
-        x: 0
-        y: 0
+            function createCard(text) {
+                while (windowArea.cardPrefab.status !== Component.Ready){ }
+                var newObjectCreated = windowArea.cardPrefab.createObject(windowArea)
+                newObjectCreated.x = Math.random()*(windowArea.width - newObjectCreated.width)
+                newObjectCreated.y = Math.random()*(windowArea.height - newObjectCreated.height)
+                newObjectCreated.drag.maximumX = Qt.binding(function(){ return windowArea.width - newObjectCreated.width })
+                newObjectCreated.drag.maximumY = Qt.binding(function(){ return windowArea.height - newObjectCreated.height })
+                newObjectCreated.text = text
+            }
+
+            visible: true
+            width: mainWindow.width
+            height: mainWindow.height - barCreationNewCard.height
+            Component.onCompleted: {
+                windowArea.createCard("Quel ramo del lago di Como, che volge a mezzogiorno, tra due catene non interrotte di monti, tutto a seni e a golfi, a seconda dello sporgere e del rientrare di quelli, vien quasi a un tratto, tra un promontorio a destra e un'ampia costiera dall'altra parte")
+            }
+        }
+
+        BarCreationNewCard {
+            id: barCreationNewCard
+
+            width: mainWindow.width
+            onCreateCardButtonClicked: windowArea.createCard(text)
+        }
     }
-    Card {
-        x: 200
-        y: 200
-    }
-    */
 }
