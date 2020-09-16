@@ -10,16 +10,17 @@ Window {
     title: qsTr("Hello World")
 
     Column {
-        spacing: 0
-
         Rectangle {
             id: windowArea
 
-            property var cardPrefab: Qt.createComponent("Card.qml");
+            Component {
+                id: cardComponent
+                Card {
+                }
+            }
 
             function createCard(text) {
-                while (windowArea.cardPrefab.status !== Component.Ready){ }
-                var newObjectCreated = windowArea.cardPrefab.createObject(windowArea)
+                var newObjectCreated  = cardComponent.createObject(windowArea)
                 newObjectCreated.x = Math.random()*(windowArea.width - newObjectCreated.width)
                 newObjectCreated.y = Math.random()*(windowArea.height - newObjectCreated.height)
                 newObjectCreated.drag.maximumX = Qt.binding(function(){ return windowArea.width - newObjectCreated.width })
@@ -27,7 +28,6 @@ Window {
                 newObjectCreated.text = text
             }
 
-            visible: true
             width: mainWindow.width
             height: mainWindow.height - barCreationNewCard.height
             Component.onCompleted: {
