@@ -10,6 +10,7 @@ Rectangle {
     signal createCardButtonClicked
 
     height: 50
+    color: "#00000000"
 
     Rectangle {
         id: innerArea
@@ -17,6 +18,7 @@ Rectangle {
         anchors.fill: parent
         anchors.margins: 5
         clip: true
+        color: "#00000000"
 
         Row {
             id: innerAreaRow

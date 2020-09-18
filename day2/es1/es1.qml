@@ -20,12 +20,11 @@ Window {
             }
 
             function createCard(text) {
-                var newObjectCreated  = cardComponent.createObject(windowArea)
+                var newObjectCreated  = cardComponent.createObject(windowArea, {"text": text})
                 newObjectCreated.x = Math.random()*(windowArea.width - newObjectCreated.width)
                 newObjectCreated.y = Math.random()*(windowArea.height - newObjectCreated.height)
                 newObjectCreated.drag.maximumX = Qt.binding(function(){ return windowArea.width - newObjectCreated.width })
                 newObjectCreated.drag.maximumY = Qt.binding(function(){ return windowArea.height - newObjectCreated.height })
-                newObjectCreated.text = text
             }
 
             width: mainWindow.width

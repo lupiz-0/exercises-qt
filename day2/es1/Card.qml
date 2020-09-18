@@ -6,12 +6,14 @@ MouseArea {
     property alias text: contentAreaText.text
 
     width: 150
-    height: topBar.height + contentArea.height
+    height: column.height
     drag.target: this
     drag.minimumX: 0
     drag.minimumY: 0
 
     Column {
+        id: column
+
         Rectangle {
             id: topBar
 
