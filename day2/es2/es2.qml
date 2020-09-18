@@ -52,7 +52,7 @@ Window {
                 color: index%2 === 0? "lightslategrey": "lightgrey"
                 width: mainWindow.width
                 onPushRecipePage: {
-                    stack.push(recipePage, {"title": title, "imageSource": imageSource, "difficultyId": difficulty, "preparationTime": preparationTime})
+                    stack.push(recipePage, {"title": description, "imageSource": imageSource, "difficultyId": difficulty, "preparationTime": preparationTime})
                 }
             }
         }

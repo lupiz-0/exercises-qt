@@ -3,7 +3,7 @@ import QtQuick 2.0
 Rectangle {
     id: root
 
-    signal pushRecipePage(string title, string imageSource, int difficulty, int preparationTime)
+    signal pushRecipePage
 
     height: 100
 
@@ -42,6 +42,6 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: pushRecipePage(description, imageSource, difficulty, preparationTime)
+        onClicked: pushRecipePage()
     }
 }
