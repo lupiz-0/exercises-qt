@@ -10,39 +10,28 @@ Rectangle {
     signal createCardButtonClicked
 
     height: 50
-    color: "#00000000"
+    readonly property int borderWidth: 5
+    color: "black"
 
-    Rectangle {
-        id: innerArea
-
-        anchors.fill: parent
-        anchors.margins: 5
-        clip: true
-        color: "#00000000"
-
-        Row {
-            id: innerAreaRow
-
-            spacing: innerArea.anchors.margins
-
-            TextArea {
-                id: textArea
-
-                color: "black"
-                width: innerArea.width - createCardButton.width - innerArea.anchors.margins
-                placeholderText: qsTr("Enter text for new card")
-                background: Rectangle {
-                    color: "lightgreen"
-                    height: innerArea.height
-                }
-            }
-
-            Button {
-                id: createCardButton
-
-                text: "Create card"
-                onClicked: barCreationNewCard.createCardButtonClicked()
-            }
+    TextArea {
+        id: textArea
+        anchors.left: parent.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: createCardButton.left
+        anchors.margins: parent.borderWidth
+        background: Rectangle {
+            color: "lightgreen"
         }
+    }
+
+    Button {
+        id: createCardButton
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.margins: parent.borderWidth
+        text: "Create card"
+        onClicked: barCreationNewCard.createCardButtonClicked()
     }
 }
