@@ -1,5 +1,13 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>images/carote_latte.jpg</file>
+        <file>images/lasagne_asparagi.jpg</file>
+        <file>images/orata_forno.jpg</file>
+        <file>images/penne_ragu_verdura.jpg</file>
+        <file>images/zucca_allo_zenzero.jpg</file>
+        <file>Recipe.qml</file>
+        <file>RecipePage.qml</file>
+        <file>RecipeSlot.qml</file>
     </qresource>
 </RCC>

@@ -8,6 +8,7 @@ Window {
     width: 500
     height: 400
     title: qsTr("Recipe exercise")
+    visible: true
 
     ListModel {
         id: recipesModel
