@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import org.example 1.0
 
 Rectangle {
     id: root
@@ -27,7 +28,7 @@ Rectangle {
 
                 anchors.margins: 5
                 anchors.fill: parent
-                source: imageSource
+                source: model.imageSource
                 fillMode: Image.PreserveAspectCrop
                 horizontalAlignment: Image.AlignHCenter
             }
@@ -35,7 +36,7 @@ Rectangle {
 
         Text {
             width: insetArea.width - x
-            text: description
+            text: model.description
             elide: Text.ElideRight
         }
     }

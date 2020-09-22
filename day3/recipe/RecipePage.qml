@@ -6,9 +6,7 @@ MouseArea {
 
     property int difficultyId
     property int preparationTime
-    property string difficultyText: switch(difficultyId){ case Recipe.Difficulty.High: return qsTr("Alta")
-                                                          case Recipe.Difficulty.Mid: return qsTr("Media")
-                                                          case Recipe.Difficulty.Low: return qsTr("Bassa") }
+    property string difficultyString
     property alias title: title.text
     property alias imageSource: image.source
 
@@ -44,7 +42,7 @@ MouseArea {
             Text {
                 id: difficulty
 
-                text: qsTr("Difficoltà: %1").arg(difficultyText)
+                text: qsTr("Difficoltà: %1").arg(difficultyString)
                 elide: Text.ElideRight
                 width: column.width
             }
