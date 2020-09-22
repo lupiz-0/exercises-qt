@@ -3,28 +3,22 @@
 
 #include <QtCore>
 #include <QtGui>
+#include <memory>
 
-enum DifficultyLevel {
-    Low,
-    Mid,
-    High
-};
-
-
-struct RecipeData {
-    RecipeData(QString descr, QString  imageSo, DifficultyLevel difficul, int prepTime): description(descr), imageSource(imageSo), difficulty(difficul), preparationTime(prepTime){}
-
-    QString  description;
-    QString  imageSource;
-    DifficultyLevel difficulty;
-    int preparationTime;
-};
 
 class RecipesModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
+    enum DifficultyLevel {
+        LowDifficulty,
+        MidDifficulty,
+        HighDifficulty,
+        DifficultyCount,
+    };
+    Q_ENUM(DifficultyLevel)
 
+    static const QString difficultyStrings[];
 
     enum RoleNames {
         DescriptionRole = Qt::UserRole,
@@ -34,7 +28,14 @@ public:
         DifficultyStringRole = Qt::UserRole + 4
     };
 
+    struct RecipeData {
+        RecipeData(QString descr, QString  imageSo, DifficultyLevel difficul, int prepTime): description(descr), imageSource(imageSo), difficulty(difficul), preparationTime(prepTime){}
 
+        QString  description;
+        QString  imageSource;
+        DifficultyLevel difficulty;
+        int preparationTime;
+    };
 
     explicit RecipesModel(QObject *parent = 0);
     ~RecipesModel();
@@ -45,9 +46,7 @@ public: // QAbstractItemModel interface
 protected:
     QHash<int, QByteArray> roleNames() const override;
 private:
-    static QString difficultyLevelToString(DifficultyLevel difficultyLevel);
-
-    QList<QSharedPointer<RecipeData>> m_data;
+    QList<std::shared_ptr<RecipeData>> m_data;
     static const QHash<int, QByteArray> m_roleNames;
 };
 

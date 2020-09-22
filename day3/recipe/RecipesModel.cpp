@@ -4,14 +4,20 @@ const QHash<int, QByteArray> RecipesModel::m_roleNames {
     {DescriptionRole, "description"}, {ImageSourceRole, "imageSource"}, {DifficultyRole, "difficulty"}, {PreparationTimeRole, "preparationTime"}, {DifficultyStringRole, "difficultyString"}
 };
 
+const QString RecipesModel::difficultyStrings[DifficultyCount]{
+    "Bassa",
+    "Media",
+    "Alta"
+};
+
 RecipesModel::RecipesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    m_data.append(QSharedPointer<RecipeData>(new RecipeData("Carote al latte", "images/carote_latte.jpg", DifficultyLevel::High, 10)));
-    m_data.append(QSharedPointer<RecipeData>(new RecipeData("Lasagne asparagi e raspadura", "images/lasagne_asparagi.jpg", DifficultyLevel::Mid, 20)));
-    m_data.append(QSharedPointer<RecipeData>(new RecipeData("Orata al forno", "images/orata_forno.jpg", DifficultyLevel::Low, 30)));
-    m_data.append(QSharedPointer<RecipeData>(new RecipeData("Penne al ragù di verdura", "images/penne_ragu_verdura.jpg", DifficultyLevel::High, 40)));
-    m_data.append(QSharedPointer<RecipeData>(new RecipeData("Zucca allo zenzero", "images/zucca_allo_zenzero.jpg", DifficultyLevel::Mid, 50)));
+    m_data.append(std::make_shared<RecipeData>("Carote al latte", "images/carote_latte.jpg", DifficultyLevel::HighDifficulty, 10));
+    m_data.append(std::make_shared<RecipeData>("Lasagne asparagi e raspadura", "images/lasagne_asparagi.jpg", DifficultyLevel::MidDifficulty, 20));
+    m_data.append(std::make_shared<RecipeData>("Orata al forno", "images/orata_forno.jpg", DifficultyLevel::LowDifficulty, 30));
+    m_data.append(std::make_shared<RecipeData>("Penne al ragù di verdura", "images/penne_ragu_verdura.jpg", DifficultyLevel::HighDifficulty, 40));
+    m_data.append(std::make_shared<RecipeData>("Zucca allo zenzero", "images/zucca_allo_zenzero.jpg", DifficultyLevel::MidDifficulty, 50));
 }
 
 RecipesModel::~RecipesModel()
@@ -42,7 +48,7 @@ QVariant RecipesModel::data(const QModelIndex &index, int role) const
         case PreparationTimeRole:
             return m_data.value(row)->preparationTime;
         case DifficultyStringRole:
-            return difficultyLevelToString(m_data.value(row)->difficulty);
+            return difficultyStrings[m_data.value(row)->difficulty];
     }
 
     return QVariant();
@@ -51,18 +57,4 @@ QVariant RecipesModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> RecipesModel::roleNames() const
 {
     return m_roleNames;
-}
-
-
-QString RecipesModel::difficultyLevelToString(DifficultyLevel difficultyLevel)
-{
-    switch(difficultyLevel) {
-        case DifficultyLevel::High:
-            return "Alta";
-        case DifficultyLevel::Mid:
-            return "Media";
-        case DifficultyLevel::Low:
-            return "Bassa";
-    }
-    return "fail conversion";
 }
