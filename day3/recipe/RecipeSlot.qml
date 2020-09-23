@@ -8,20 +8,28 @@ Rectangle {
 
     height: 100
 
-    Row {
+
+    Item {
         id: insetArea
 
         anchors.margins: 10
         anchors.fill: parent
-        spacing: anchors.margins
+
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: pushRecipePage()
+        }
 
         Rectangle {
+            id: imageFrame
 
             readonly property real aspectRatio: 1.5
 
             color: "white"
-            height: insetArea.height
-            width: insetArea.height*aspectRatio
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height*aspectRatio
 
             Image {
                 id: image
@@ -35,14 +43,28 @@ Rectangle {
         }
 
         Text {
-            width: insetArea.width - x
+            id: descriptionText
+
+            anchors.left: imageFrame.right
+            anchors.right: star.left
+            anchors.leftMargin: 10
             text: model.description
             elide: Text.ElideRight
         }
-    }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: pushRecipePage()
+        Image{
+            id: star
+
+            anchors.right: parent.right
+            height: parent.height*0.5
+            width: sourceSize.width / sourceSize.height * height
+            source: preferred? "images/star_enabled.png": "images/star_disabled.png"
+
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: model.preferred = !model.preferred
+            }
+        }
     }
 }

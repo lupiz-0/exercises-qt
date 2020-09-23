@@ -10,6 +10,7 @@ Window {
     height: 400
     title: qsTr("Recipe exercise")
     visible: true
+    minimumWidth: 250
 
     Component {
         id: recipesListView
@@ -20,7 +21,7 @@ Window {
                 color: index%2 === 0? "lightslategrey": "lightgrey"
                 width: ListView.view.width
                 onPushRecipePage: {
-                    stack.push(recipePage, {"title": description, "imageSource": imageSource, "difficultyString": difficultyString, "preparationTime": preparationTime})
+                    stack.push(recipePage, {"title": description, "imageSource": imageSource, "difficultyString": difficultyString, "preparationTime": preparationTime}, {"preferred": preferred})
                 }
             }
         }

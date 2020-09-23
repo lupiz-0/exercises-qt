@@ -8,5 +8,7 @@
         <file>images/zucca_allo_zenzero.jpg</file>
         <file>RecipePage.qml</file>
         <file>RecipeSlot.qml</file>
+        <file>images/star_disabled.png</file>
+        <file>images/star_enabled.png</file>
     </qresource>
 </RCC>
