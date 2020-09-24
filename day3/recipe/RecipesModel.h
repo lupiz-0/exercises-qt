@@ -30,18 +30,19 @@ public:
     };
 
     struct RecipeData {
-        RecipeData(QString descr, QString  imageSo, DifficultyLevel difficul, int prepTime, bool pref): description(descr), imageSource(imageSo), difficulty(difficul)
-            , preparationTime(prepTime), preferred(pref){}
+        RecipeData(const QString& description, const QString& imageSource, DifficultyLevel difficulty, int preparationTime, bool preferred): m_description(description)
+            , m_imageSource(imageSource), m_difficulty(difficulty)
+            , m_preparationTime(preparationTime), m_preferred(preferred) {}
 
-        QString  description;
-        QString  imageSource;
-        DifficultyLevel difficulty;
-        int preparationTime;
-        bool preferred;
+        QString  m_description;
+        QString  m_imageSource;
+        DifficultyLevel m_difficulty;
+        int m_preparationTime;
+        bool m_preferred;
     };
 
     explicit RecipesModel(QObject *parent = 0);
-    ~RecipesModel();
+    ~RecipesModel() = default;
 
 public: // QAbstractItemModel interface
     int rowCount(const QModelIndex &parent) const override;
@@ -51,7 +52,11 @@ public: // QAbstractItemModel interface
 protected:
     QHash<int, QByteArray> roleNames() const override;
 private:
-    QList<std::shared_ptr<RecipeData>> m_data;
+    QVector<RecipeData> m_data = {  RecipeData("Carote al latte", "images/carote_latte.jpg", DifficultyLevel::HighDifficulty, 10, false)
+                                    , RecipeData("Lasagne asparagi e raspadura", "images/lasagne_asparagi.jpg", DifficultyLevel::MidDifficulty, 20, false)
+                                    , RecipeData("Orata al forno", "images/orata_forno.jpg", DifficultyLevel::LowDifficulty, 30, false)
+                                    , RecipeData("Penne al ragù di verdura", "images/penne_ragu_verdura.jpg", DifficultyLevel::HighDifficulty, 40, false)
+                                    , RecipeData("Zucca allo zenzero", "images/zucca_allo_zenzero.jpg", DifficultyLevel::MidDifficulty, 50, false)};
     static const QHash<int, QByteArray> m_roleNames;
 };
 

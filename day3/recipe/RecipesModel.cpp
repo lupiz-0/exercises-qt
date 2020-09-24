@@ -14,15 +14,6 @@ const QString RecipesModel::difficultyStrings[DifficultyCount]{
 RecipesModel::RecipesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    m_data.append(std::make_shared<RecipeData>("Carote al latte", "images/carote_latte.jpg", DifficultyLevel::HighDifficulty, 10, false));
-    m_data.append(std::make_shared<RecipeData>("Lasagne asparagi e raspadura", "images/lasagne_asparagi.jpg", DifficultyLevel::MidDifficulty, 20, false));
-    m_data.append(std::make_shared<RecipeData>("Orata al forno", "images/orata_forno.jpg", DifficultyLevel::LowDifficulty, 30, false));
-    m_data.append(std::make_shared<RecipeData>("Penne al ragù di verdura", "images/penne_ragu_verdura.jpg", DifficultyLevel::HighDifficulty, 40, false));
-    m_data.append(std::make_shared<RecipeData>("Zucca allo zenzero", "images/zucca_allo_zenzero.jpg", DifficultyLevel::MidDifficulty, 50, false));
-}
-
-RecipesModel::~RecipesModel()
-{
 }
 
 int RecipesModel::rowCount(const QModelIndex &parent) const
@@ -41,17 +32,17 @@ QVariant RecipesModel::data(const QModelIndex &index, int role) const
 
     switch(role) {
         case DescriptionRole:
-            return m_data.value(row)->description;
+            return m_data[row].m_description;
         case ImageSourceRole:
-            return m_data.value(row)->imageSource;
+            return m_data[row].m_imageSource;
         case DifficultyRole:
-            return m_data.value(row)->difficulty;
+            return m_data[row].m_difficulty;
         case PreparationTimeRole:
-            return m_data.value(row)->preparationTime;
+            return m_data[row].m_preparationTime;
         case DifficultyStringRole:
-            return difficultyStrings[m_data.value(row)->difficulty];
+            return difficultyStrings[m_data[row].m_difficulty];
         case PreferredRole:
-            return m_data.value(row)->preferred;
+            return m_data[row].m_preferred;
     }
 
     return QVariant();
@@ -71,8 +62,8 @@ bool RecipesModel::setData(const QModelIndex& index, const QVariant& value, int 
 
     switch (role) {
     case PreferredRole:
-        if (value != m_data.value(row)->preferred) {
-            m_data.value(row)->preferred = value.toBool();
+        if (value != m_data[row].m_preferred) {
+            m_data[row].m_preferred = value.toBool();
             emit dataChanged(index, index);
             return true;
         }
