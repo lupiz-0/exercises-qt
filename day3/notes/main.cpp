@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "notesmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +16,10 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+
+    qRegisterMetaType<NoteItem>();
+    NotesModel notesModel;
+    engine.rootContext()->setContextProperty("noteModel", &notesModel);
     engine.load(url);
 
     return app.exec();

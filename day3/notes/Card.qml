@@ -3,13 +3,25 @@ import QtQuick 2.0
 MouseArea {
     id: card
 
+    property int uniqueId
     property alias text: contentAreaText.text
+
+    signal printCards
 
     width: 150
     height: column.height
     drag.target: this
     drag.minimumX: 0
     drag.minimumY: 0
+    drag.onActiveChanged:  {
+        if(!drag.active) {
+            var cardFromNoteModel = noteModel.getUsingUniqueId(uniqueId)
+            cardFromNoteModel.x = card.x
+            cardFromNoteModel.y = card.y
+            noteModel.addNote(cardFromNoteModel)
+            card.printCards()
+        }
+    }
 
     Column {
         id: column
@@ -34,6 +46,8 @@ MouseArea {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
+                        noteModel.removeNote(card.uniqueId)
+                        card.printCards()
                         card.destroy()
                     }
                 }
