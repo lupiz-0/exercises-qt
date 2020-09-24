@@ -47,7 +47,6 @@ MouseArea {
                     anchors.fill: parent
                     onClicked: {
                         noteModel.removeNote(card.uniqueId)
-                        card.printCards()
                         card.destroy()
                     }
                 }

@@ -19,7 +19,7 @@ Window {
                 console.log("print cards:");
                 for(var i = 0; i < noteModel.count; i++) {
                     var noteItem = noteModel.getUsingInternalArrayId(i)
-                    var message = "   card: id(%1), x(%2), y(%3), text(%4)"
+                    var message = "   card: id(%1) x(%2) y(%3) text(%4)"
                     console.log(message.arg(noteItem.id).arg(noteItem.x).arg(noteItem.y).arg(noteItem.text))
                 }
             }
@@ -34,7 +34,6 @@ Window {
 
                 var noteItem = noteModel.newNoteItem(newObjectCreated.uniqueId, newObjectCreated.x, newObjectCreated.y, text);
                 noteModel.addNote(noteItem)
-                printCards();
             }
 
             width: mainWindow.width
@@ -48,6 +47,11 @@ Window {
                 Card {
                     onPrintCards: windowArea.printCards()
                 }
+            }
+
+            Connections {
+                target: noteModel
+                function onCountChanged(arg) { windowArea.printCards(); }
             }
         }
 
