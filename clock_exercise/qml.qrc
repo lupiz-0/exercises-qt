@@ -1,5 +1,17 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>Clock.qml</file>
+        <file>images/comp_tic-tac.svg</file>
+        <file>images/ic-clock-hand_hours.svg</file>
+        <file>images/ic-clock-hands_center.svg</file>
+        <file>TimerSettingPage.qml</file>
+        <file>AlarmPage.qml</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Regular.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Black.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-SemiBold.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Bold.otf</file>
+        <file>images/switch-on-disable.svg</file>
+        <file>images/switch-on-selected.svg</file>
     </qresource>
 </RCC>
