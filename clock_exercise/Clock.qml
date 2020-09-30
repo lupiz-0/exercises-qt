@@ -21,9 +21,6 @@ Rectangle {
         source: "fonts/BuenosAires_Family/BuenosAires-SemiBold.otf"
     }
 
-
-
-
     Text {
         x: 162
         y: 40

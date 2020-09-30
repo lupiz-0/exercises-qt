@@ -13,11 +13,6 @@ ClockManager::ClockManager(QObject *parent) : QObject(parent), mTimerForRefresh(
     refresh();
 }
 
-int ClockManager::testfunction(int number)
-{
-    return number*2;
-}
-
 void ClockManager::refreshDateText() {
     QString previousDateText = mDateText;
     mDateText = QDate::currentDate().toString("dddd dd MMMM");
