@@ -16,9 +16,8 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
-
-    ClockManager clockManager;
-    engine.rootContext()->setContextProperty("clockManager", &clockManager);
+    
+    engine.rootContext()->setContextProperty("clockManager", new ClockManager(&engine));
     engine.load(url);
 
     return app.exec();

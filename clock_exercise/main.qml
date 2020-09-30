@@ -12,6 +12,16 @@ Window {
     visible: true
     title: qsTr("Clock Exercise")
 
+    FontLoader {
+        id: buenosAiresRegular;
+        source: "fonts/BuenosAires_Family/BuenosAires-Regular.otf"
+    }
+
+    FontLoader {
+        id: buenosAiresSemiBold;
+        source: "fonts/BuenosAires_Family/BuenosAires-SemiBold.otf"
+    }
+
     StackView {
         id: stack
         initialItem: clockPage
@@ -20,24 +30,9 @@ Window {
 
     Component {
         id: clockPage
-        Clock {
-            onTimerButtonClicked: stack.push(timerSettingPage)
-            onAlarmButtonClicked: stack.push(alarmPage)
-        }
-    }
-
-    Component {
-        id: timerSettingPage
-        TimerSettingPage {
-            onBack: stack.pop()
-        }
-    }
-
-
-    Component {
-        id: alarmPage
-        AlarmPage {
-            onBack: stack.pop()
+        ClockPage {
+            onTimerButtonClicked: console.log("timer button clicked")
+            onAlarmButtonClicked: console.log("alarm button clicked")
         }
     }
 }

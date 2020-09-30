@@ -1,47 +1,43 @@
 #include <QTime>
-#include <memory>
 #include<QDebug>
 #include "clockmanager.h"
 
 
 
-ClockManager::ClockManager(QObject *parent) : QObject(parent), mTimerForRefresh(new QTimer())
+ClockManager::ClockManager(QObject *parent) : QObject(parent), m_timerForRefresh(this)
 {
-    connect(mTimerForRefresh.get(), &QTimer::timeout, this, &ClockManager::refresh);
-    mTimerForRefresh->start(1000);
+    connect(&m_timerForRefresh, &QTimer::timeout, this, &ClockManager::refresh);
+    m_timerForRefresh.start(20000);
 
     refresh();
 }
 
 void ClockManager::refreshDateText() {
-    QString previousDateText = mDateText;
-    mDateText = QDate::currentDate().toString("dddd dd MMMM");
-    if(mDateText != previousDateText)
-        dateTextChanged();
+    QString newDateText = QDate::currentDate().toString("dddd dd MMMM");
+    if(newDateText == m_dateText)
+        return;
+    m_dateText = newDateText;
+    emit dateTextChanged();
 }
 
-void ClockManager::refreshClockHandsAngles() {
-
-    float previousHoursClockHandsAngle = mHoursClockHandsAngle;
-    float previousMinutesClockHandsAngle = mMinutesClockHandsAngle;
+void ClockManager::refreshTime() {
+    float previousHours = m_hours;
+    float previousMinutes = m_minutes;
 
     QTime time = QTime::currentTime();
-    mMinutesClockHandsAngle = time.minute()/60.0f*360.0f - 90.0f + time.second()/60.0f*(360.0f/60.0f);
-    mHoursClockHandsAngle = time.hour();
-    if(mHoursClockHandsAngle > 12.0f)
-        mHoursClockHandsAngle -= 12.0f;
-    mHoursClockHandsAngle = mHoursClockHandsAngle/12.0f*360.0f - 90.0f;
+    m_minutes = time.minute();
+    m_hours = time.hour();
 
-    if(mHoursClockHandsAngle != previousHoursClockHandsAngle)
-        hoursClockHandsAngleChanged();
+    if(m_hours != previousHours)
+        emit hoursChanged();
 
-    if(mMinutesClockHandsAngle != previousMinutesClockHandsAngle)
-        minutesClockHandAngleChanged();
+    if(m_minutes != previousMinutes)
+        emit minutesChanged();
 }
 
 void ClockManager::refresh()
 {
     refreshDateText();
-    refreshClockHandsAngles();
+    refreshTime();
 }
 
