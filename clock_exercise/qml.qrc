@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ClockPage.qml</file>
+        <file>images/comp_tic-tac.svg</file>
+        <file>images/ic-clock-hand_hours.svg</file>
+        <file>images/ic-clock-hands_center.svg</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Regular.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Black.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-SemiBold.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Bold.otf</file>
+        <file>images/switch-on-selected.svg</file>
+        <file>ClockFace.qml</file>
+        <file>ClockButton.qml</file>
+        <file>images/223-bell.svg</file>
+        <file>images/timer_icon.png</file>
+    </qresource>
+</RCC>
