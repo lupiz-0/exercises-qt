@@ -10,10 +10,6 @@ Rectangle {
     readonly property real angleOfOneMinute: 360/amountMinutesInClockFace
     readonly property real angleOfOneMinuteForHourClockHand: 360/(amountMinutesInClockFace*amountHoursInClockFace)
 
-    x: 31
-    y: 220
-    width: 418
-    height: width
     color: "#1B2F46"
     radius: width*0.5
 
@@ -39,7 +35,7 @@ Rectangle {
                 origin.x: hourHand.height/2
                 origin.y: hourHand.height/2
                 angle: {
-                    var ang = clockManager.hours > clockFace.amountHoursInClockFace? clockManager.hours - clockFace.amountHoursInClockFace: clockManager.hours
+                    var ang = clockManager.hours % clockFace.amountHoursInClockFace
                     ang = ang*angleOfOneHour + clockManager.minutes*clockFace.angleOfOneMinuteForHourClockHand - clockFace.clockHandImageAdaptationAngle
                 }
 

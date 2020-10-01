@@ -14,23 +14,24 @@ class ClockManager : public QObject
     QString m_dateText;
     int m_minutes;
     int m_hours;
+    QTimer m_timerForRefresh;
 
 public:
     explicit ClockManager(QObject *parent = nullptr);
+
+public slots:
 
 signals:
     void dateTextChanged();
     void minutesChanged();
     void hoursChanged();
 
-public slots:
+protected:
+
+private slots:
+    void refresh();
 
 private:
     void refreshTime();
     void refreshDateText();
-
-    QTimer m_timerForRefresh;
-
-private slots:
-    void refresh();
 };

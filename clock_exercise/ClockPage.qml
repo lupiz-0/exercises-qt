@@ -62,6 +62,10 @@ Rectangle {
     }
 
     ClockFace {
+        x: 31
+        y: 220
+        width: 418
+        height: 418
     }
 
     ClockButton {

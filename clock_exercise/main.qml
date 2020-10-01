@@ -5,10 +5,12 @@ import QtQuick.Controls 2.15
 Window {
     width: 480
     height: 800
+    // ↓↓↓ to disable window resizing
     maximumHeight: height
     maximumWidth: width
     minimumHeight: height
     minimumWidth: width
+    // ↑↑↑ to disable window resizing
     visible: true
     title: qsTr("Clock Exercise")
 
