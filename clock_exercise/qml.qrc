@@ -26,5 +26,6 @@
         <file>images/btn-arrow-hover.svg</file>
         <file>ArrowButton.qml</file>
         <file>StartButton.qml</file>
+        <file>TimerPage.qml</file>
     </qresource>
 </RCC>
