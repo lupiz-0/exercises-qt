@@ -10,6 +10,8 @@ Rectangle {
     readonly property real angleOfOneMinute: 360/amountMinutesInClockFace
     readonly property real angleOfOneMinuteForHourClockHand: 360/(amountMinutesInClockFace*amountHoursInClockFace)
 
+    width: 418
+    height: 418
     color: "#1B2F46"
     radius: width*0.5
 

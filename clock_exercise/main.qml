@@ -53,6 +53,7 @@ Window {
         ClockPage {
             onTimerButtonClicked: stack.push(timerSettingPage)
             onAlarmButtonClicked: console.log("alarm button clicked")
+            onClickOnTimerIcon: stack.push(timerPage)
         }
     }
 
@@ -60,6 +61,14 @@ Window {
         id: timerSettingPage
         TimerSettingPage {
             onBack: stack.pop()
+            onStartTimer: stack.push(timerPage)
+        }
+    }
+
+    Component {
+        id: timerPage
+        TimerPage {
+            onBack: stack.pop(null)
         }
     }
 }

@@ -27,5 +27,14 @@
         <file>ArrowButton.qml</file>
         <file>StartButton.qml</file>
         <file>TimerPage.qml</file>
+        <file>TitleOfThePage.qml</file>
+        <file>LineUnderTitleOfThePage.qml</file>
+        <file>TimerButton.qml</file>
+        <file>images/btn-reload-active.svg</file>
+        <file>images/btn-reload-hover.svg</file>
+        <file>images/btn-pause-active.svg</file>
+        <file>images/btn-pause-hover.svg</file>
+        <file>images/btn-play-active.svg</file>
+        <file>images/btn-play-hover.svg</file>
     </qresource>
 </RCC>
