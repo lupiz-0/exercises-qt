@@ -63,4 +63,5 @@ private:
     void refreshTimerHoursAndMinutes();
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
+    void noneExp(){};
 };

@@ -56,7 +56,7 @@ void ClockManager::restartTimer() {
     m_timerCurrentSeconds = convertHoursAndMinutesToSeconds(m_timerHoursOnStartTimer, m_timerMinutesOnStartTimer);
     refreshTimerHoursAndMinutes();
 
-    if(timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds)) emit timerCurrentSecondsChanged();
+    timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds) ? emit timerCurrentSecondsChanged() : noneExp();
 }
 
 void ClockManager::setTimerCurrentTime(int hours, int minutes) {
@@ -67,7 +67,7 @@ void ClockManager::setTimerCurrentTime(int hours, int minutes) {
     m_timerCurrentSeconds = convertHoursAndMinutesToSeconds(hours, minutes);
     refreshTimerHoursAndMinutes();
 
-    if(timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds)) emit timerCurrentSecondsChanged();
+    timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds) ? emit timerCurrentSecondsChanged() : noneExp();
 }
 
 void ClockManager::refreshTimerHoursAndMinutes() {
@@ -92,5 +92,5 @@ void ClockManager::decreaseTimerCurrentSeconds() {
     m_timerCurrentSeconds = qMax(0.0f, (float)m_timerCurrentSeconds);
     refreshTimerHoursAndMinutes();
 
-    if(timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds)) emit timerCurrentSecondsChanged();
+    timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds) ? emit timerCurrentSecondsChanged() : noneExp();
 }
