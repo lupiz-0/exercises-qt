@@ -36,5 +36,6 @@
         <file>images/btn-pause-hover.svg</file>
         <file>images/btn-play-active.svg</file>
         <file>images/btn-play-hover.svg</file>
+        <file>AlarmSettingPage.qml</file>
     </qresource>
 </RCC>
