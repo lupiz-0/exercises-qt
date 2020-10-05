@@ -42,9 +42,10 @@ Window {
         source: "fonts/BuenosAires_Family/BuenosAires-Book.otf"
     }
 
+
     StackView {
         id: stack
-        initialItem: clockPage
+        initialItem: alarmSettingPage//clockPage
         anchors.fill: parent
     }
 
@@ -69,6 +70,13 @@ Window {
         id: timerPage
         TimerPage {
             onBack: stack.pop(null)
+        }
+    }
+
+    Component {
+        id: alarmSettingPage
+        AlarmSettingPage {
+            onBack: stack.pop()
         }
     }
 }

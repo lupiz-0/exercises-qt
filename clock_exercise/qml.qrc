@@ -37,5 +37,16 @@
         <file>images/btn-play-active.svg</file>
         <file>images/btn-play-hover.svg</file>
         <file>AlarmSettingPage.qml</file>
+        <file>TopAlarmButton.qml</file>
+        <file>images/ic-tick-disabled.svg</file>
+        <file>images/ic-tick-hover.svg</file>
+        <file>images/ic-tick-selected.svg</file>
+        <file>TickOfTopAlarmButton.qml</file>
+        <file>images/ic-clock-hand_mins.svg</file>
+        <file>images/ic-clock-hand-alarm.svg</file>
+        <file>AlarmClockHand.qml</file>
+        <file>MinuteClockHand.qml</file>
+        <file>HoursClockHand.qml</file>
+        <file>AlarmSlider.qml</file>
     </qresource>
 </RCC>
