@@ -3,70 +3,60 @@ import QtQuick 2.0
 Rectangle {
     id: clockFace
 
+    property alias alarmClockHandVisible: alarmClockHand.visible
+    property int alarmHours: 11
+    property int alarmMinutes: 10
+    property real scaledWidth //if 0 not scale, else set a scale to reach this value on width
+    property real scaledHeight //if 0 not scale, else set a scale to reach this value on height
     readonly property real amountMinutesInClockFace: 60
-    readonly property real clockHandImageAdaptationAngle: 90
+    readonly property real clockHandHoursImageAdaptationAngle: -90
+    readonly property real clockHandMinutesImageAdaptationAngle: 180
+    readonly property real clockHandAlarmImageAdaptationAngle: 180
     readonly property real amountHoursInClockFace: 12
     readonly property real angleOfOneHour: 360/amountHoursInClockFace
     readonly property real angleOfOneMinute: 360/amountMinutesInClockFace
     readonly property real angleOfOneMinuteForHourClockHand: 360/(amountMinutesInClockFace*amountHoursInClockFace)
+
+    function angleFromHoursAndMinutes(hours, minutes, adaptationAngle) {
+        var ang = hours % clockFace.amountHoursInClockFace
+        return ang * clockFace.angleOfOneHour + minutes * clockFace.angleOfOneMinuteForHourClockHand + adaptationAngle
+    }
 
     width: 418
     height: 418
     color: "#1B2F46"
     radius: width*0.5
 
+    transform: Scale {
+        xScale: scaledWidth === 0? 1: scaledWidth/width
+        yScale: scaledHeight === 0? 1: scaledHeight/height
+    }
+
     Image {
 
         width: 375
-        height: width
+        height: 375
         source: "images/comp_tic-tac.svg"
         anchors.centerIn: parent
 
-        Image {
-            id: hourHand
+        AlarmClockHand {
+            id: alarmClockHand
 
-            x: parent.width/2 - height/2
-            y: parent.height/2 - height/2
-            width: 110
-            height: 11
-            source: "images/ic-clock-hand_hours.svg"
-
-            transform: Rotation{
-                id: hourHandRotation
-
-                origin.x: hourHand.height/2
-                origin.y: hourHand.height/2
-                angle: {
-                    var ang = clockManager.hours % clockFace.amountHoursInClockFace
-                    ang = ang*angleOfOneHour + clockManager.minutes*clockFace.angleOfOneMinuteForHourClockHand - clockFace.clockHandImageAdaptationAngle
-                }
-
-                Behavior on angle {
-                    NumberAnimation { duration: clockManager.timeOfTheDissolveAnimation }
-                }
-            }
+            x: parent.width/2 - width/2
+            y: parent.height/2 - width/2
+            angle: angleFromHoursAndMinutes(clockFace.alarmHours, clockFace.alarmMinutes, clockFace.clockHandAlarmImageAdaptationAngle)
         }
 
-        Image {
-            id: minuteHand
-
+        HoursClockHand {
             x: parent.width/2 - height/2
             y: parent.height/2 - height/2
-            width: 130
-            height: 8
-            source: "images/ic-clock-hand_hours.svg"
+            angle: angleFromHoursAndMinutes(clockManager.hours, clockManager.minutes, clockFace.clockHandHoursImageAdaptationAngle)
+        }
 
-            transform: Rotation{
-                id: minuteHandRotation
-
-                origin.x: minuteHand.height/2
-                origin.y: minuteHand.height/2
-                angle: clockManager.minutes*clockFace.angleOfOneMinute - clockFace.clockHandImageAdaptationAngle
-
-                Behavior on angle {
-                    NumberAnimation { duration: clockManager.timeOfTheDissolveAnimation }
-                }
-            }
+        MinuteClockHand {
+            x: parent.width/2 - width/2
+            y: parent.height/2 - width/2
+            angle: clockManager.minutes*clockFace.angleOfOneMinute + clockFace.clockHandMinutesImageAdaptationAngle
         }
 
         Image {

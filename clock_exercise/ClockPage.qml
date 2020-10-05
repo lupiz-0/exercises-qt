@@ -61,6 +61,7 @@ Rectangle {
     ClockFace {
         x: 31
         y: 220
+        alarmClockHandVisible: false
     }
 
     ClockButton {
