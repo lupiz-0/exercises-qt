@@ -16,7 +16,7 @@ Image {
         origin.y: root.width/2
 
         Behavior on angle {
-            NumberAnimation { duration: 500 }
+            NumberAnimation { duration: clockManager.timeOfTheDissolveAnimation }
         }
     }
 }

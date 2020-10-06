@@ -4,10 +4,10 @@ Rectangle {
     id: clockFace
 
     property alias alarmClockHandVisible: alarmClockHand.visible
-    property int alarmHours: 11
-    property int alarmMinutes: 10
-    property real scaledWidth //if 0 not scale, else set a scale to reach this value on width
-    property real scaledHeight //if 0 not scale, else set a scale to reach this value on height
+    property int alarmHours
+    property int alarmMinutes
+    property real scaledWidth //if 0 not scale, else set a scale to reach this value on width (see "transform: Scale {" in this page)
+    property real scaledHeight //if 0 not scale, else set a scale to reach this value on height (see "transform: Scale {" in this page)
     readonly property real clockHandHoursImageAdaptationAngle: -90
     readonly property real clockHandMinutesImageAdaptationAngle: 180
     readonly property real clockHandAlarmImageAdaptationAngle: 180
@@ -27,8 +27,8 @@ Rectangle {
     radius: width*0.5
 
     transform: Scale {
-        xScale: scaledWidth === 0? 1: scaledWidth/width
-        yScale: scaledHeight === 0? 1: scaledHeight/height
+        xScale: clockFace.scaledWidth === 0? 1: clockFace.scaledWidth / clockFace.width
+        yScale: clockFace.scaledHeight === 0? 1: clockFace.scaledHeight / clockFace.height
     }
 
     Image {

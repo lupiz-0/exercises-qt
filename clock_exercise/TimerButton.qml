@@ -18,7 +18,7 @@ MouseArea {
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 500
+                duration: clockManager.timeOfTheDissolveAnimation
             }
         }
     }
@@ -31,7 +31,7 @@ MouseArea {
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 500
+                duration: clockManager.timeOfTheDissolveAnimation
             }
         }
     }

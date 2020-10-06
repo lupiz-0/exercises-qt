@@ -5,7 +5,6 @@ Rectangle {
 
     property alias text: buttonText.text
 
-
     signal buttonClicked
 
     width: 190

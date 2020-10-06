@@ -26,15 +26,15 @@ Rectangle {
     TopAlarmButton {
         x: 34; y: 140
         text: qsTr("Everyday")
-        selected: everydayModality
-        onButtonClicked: {everydayModality = true}
+        selected: alarmSettingPage.everydayModality
+        onButtonClicked: {alarmSettingPage.everydayModality = true}
     }
 
     TopAlarmButton {
         x: 254; y: 140
         text: qsTr("date")
-        selected: !everydayModality
-        onButtonClicked: {everydayModality = false}
+        selected: !alarmSettingPage.everydayModality
+        onButtonClicked: {alarmSettingPage.everydayModality = false}
     }
 
     ClockFace {
@@ -53,9 +53,9 @@ Rectangle {
 
     BigButton {
         x: 23; y: 706
+        text: qsTr("SET ALARM")
         onButtonClicked: {
             console.log("set alarm ...")
         }
-        text: qsTr("SET ALARM")
     }
 }

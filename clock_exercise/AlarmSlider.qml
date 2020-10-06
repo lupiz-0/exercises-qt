@@ -15,21 +15,44 @@ Slider {
     to: (clockManager.hoursInADay + startingHour)*clockManager.minutesInOneHour
 
     background: Image {
+            id: background
+
             source: "images/comp-slider.svg"
             width: 504
             height: 74
         }
 
-    handle: Image {
+    handle: Item {
         id: handle
 
-        property int horizontalAdjust: 8
+        readonly property int horizontalAdjust: 8
 
-        width: 52*2.1 // original size multiplied for a scale factor ( with original size it differs from mockup and is not possible obtain size from mockup )
-        height: 57*2.1 // original size multiplied for a scale factor ( with original size it differs from mockup and is not possible obtain size from mockup )
-        source: "images/handle-enable.svg"
+        width: 52*2.1 // original size of the image multiplied for a scale factor ( with original size it differs from mockup and is not possible obtain size from mockup )
+        height: 57*2.1 // original size  of the image multiplied for a scale factor ( with original size it differs from mockup and is not possible obtain size from mockup )
         x: root.leftPadding + root.visualPosition * (root.availableWidth - width + horizontalAdjust) - horizontalAdjust/2
-        y: root.topPadding + root.availableHeight / 2 - height / 2
+        y: 7
+
+        Image {
+            anchors.fill: parent
+            source: "images/handle-enable.svg"
+            opacity: root.pressed? 0:1
+
+            Behavior on opacity {
+                NumberAnimation { duration: clockManager.timeOfTheDissolveAnimation }
+            }
+
+        }
+
+        Image {
+            anchors.fill: parent
+            source: "images/handle-pressed.svg"
+            opacity: root.pressed? 1:0
+
+            Behavior on opacity {
+                NumberAnimation { duration: clockManager.timeOfTheDissolveAnimation }
+            }
+
+        }
     }
 
     Text {
