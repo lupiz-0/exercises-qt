@@ -22,7 +22,7 @@ Item {
             y: 43
             width: 190
             height: 116
-            text: root.value < 10? "0" + root.value.toString(): root.value.toString()
+            text: root.value < 10 ? "0" + root.value : root.value
             color: "#FCB647"
             font.pixelSize: 120
             horizontalAlignment: Text.AlignHCenter
@@ -49,11 +49,13 @@ Item {
         id: upButton
 
         y: 290
-        onClicked: root.value = Math.min(root.value + 1, root.max)
+        onClicked: {
+            root.value = (root.value + 1) % (root.max + 1)
+        }
     }
 
     Rectangle {
-        y: (downButton.y + downButton.height - upButton.y)*0.5 + upButton.y - height/2
+        y: (downButton.y + downButton.height - upButton.y) * 0.5 + upButton.y - height / 2
         width: 190
         height: 2
         color: "#1B2F46"
@@ -64,6 +66,8 @@ Item {
 
         y: 401
         rotation: 180
-        onClicked: root.value = Math.max(root.value - 1, 0)
+        onClicked: {
+            root.value = root.value > 0 ? root.value - 1 : root.max
+        }
     }
 }

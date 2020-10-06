@@ -40,7 +40,7 @@ Rectangle {
                 }
 
                 Behavior on angle {
-                    NumberAnimation { duration: 500 }
+                    NumberAnimation { duration: clockManager.timeOfTheDissolveAnimation }
                 }
             }
         }
@@ -62,7 +62,7 @@ Rectangle {
                 angle: clockManager.minutes*clockFace.angleOfOneMinute - clockFace.clockHandImageAdaptationAngle
 
                 Behavior on angle {
-                    NumberAnimation { duration: 500 }
+                    NumberAnimation { duration: clockManager.timeOfTheDissolveAnimation }
                 }
             }
         }

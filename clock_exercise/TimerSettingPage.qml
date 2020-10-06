@@ -49,7 +49,7 @@ Rectangle {
 
         x: 262
         text: qsTr("mins")
-        max: 60
+        max: 59
     }
 
     Text {
@@ -69,8 +69,7 @@ Rectangle {
         x: 23
         y: 706
         onButtonClicked: console.log("start ...")
-        enabled: (hoursNumberField.value === 0 && minutesNumberField.value === 0)? false: true
+        enabled: hoursNumberField.value > 0 || minutesNumberField.value > 0
         text: qsTr("START")
     }
 }
-

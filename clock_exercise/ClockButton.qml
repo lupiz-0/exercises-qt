@@ -3,8 +3,6 @@ import QtQuick 2.0
 Rectangle {
     id: button
 
-    property int timeOfDissolve: 500
-
     property alias text: buttonText.text
 
 
@@ -19,7 +17,7 @@ Rectangle {
 
     Behavior on color {
         ColorAnimation {
-            duration: timeOfDissolve
+            duration: clockManager.timeOfTheDissolveAnimation
         }
     }
 
@@ -37,7 +35,7 @@ Rectangle {
 
         Behavior on color {
             ColorAnimation {
-                duration: timeOfDissolve
+                duration: clockManager.timeOfTheDissolveAnimation
             }
         }
     }

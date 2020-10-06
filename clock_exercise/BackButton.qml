@@ -1,24 +1,24 @@
 import QtQuick 2.0
 
-Image {
-    id: backButton
+MouseArea {
+    id: root
 
     signal back
 
     width: 80
     height: 80
-    source: "images/btn-back-active.svg"
-    opacity: mouseArea.containsMouse? 0.5: 1.0
+    hoverEnabled: true
+    onClicked: back()
 
-    MouseArea {
-        id: mouseArea
-
+    Image {
         anchors.fill: parent
-        onClicked: backButton.back()
-        hoverEnabled: true
-    }
+        source: "images/btn-back-active.svg"
+        opacity: root.containsMouse ? 0.5 : 1.0
 
-    Behavior on opacity {
-        NumberAnimation { duration: 500 }
+        Behavior on opacity {
+            NumberAnimation {
+                duration: clockManager.timeOfTheDissolveAnimation
+            }
+        }
     }
 }
