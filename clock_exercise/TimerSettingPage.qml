@@ -9,23 +9,27 @@ Rectangle {
     color: "#151B2E"
 
     BackButton {
-        x: 28; y: 20
+        x: 28
+        y: 20
         onBack: timerSettingPage.back()
     }
 
     TitleOfThePage {
-        y: 40; anchors.horizontalCenter: parent.horizontalCenter
+        y: 40
+        anchors.horizontalCenter: parent.horizontalCenter
         text: qsTr("Timer")
     }
 
     LineUnderTitleOfThePage {
-        y: 115; anchors.horizontalCenter: parent.horizontalCenter
+        y: 115
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     TimerUpDownNumberField {
         id: hoursNumberField
 
-        x: 28; y: 160
+        x: 28
+        y: 160
         text: qsTr("hours")
         max: 99
     }
@@ -33,13 +37,15 @@ Rectangle {
     TimerUpDownNumberField {
         id: minutesNumberField
 
-        x: 262; y: 160
+        x: 262
+        y: 160
         text: qsTr("mins")
         max: 59
     }
 
     Text {
-        x: 225; y: 199
+        x: 225
+        y: 199
         width: 30
         height: 143
         text: qsTr(":")
@@ -50,7 +56,7 @@ Rectangle {
         font.styleName: "Regular"
     }
 
-    StartButton {
+    BigButton {
         x: 23
         y: 706
         onButtonClicked: {
