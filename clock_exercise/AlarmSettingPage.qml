@@ -41,9 +41,21 @@ Rectangle {
         x: 88; y: 226
         scaledWidth: 304
         scaledHeight: 304
+        alarmHours: alarmSlider.hours
+        alarmMinutes: alarmSlider.minutes
     }
 
     AlarmSlider {
-        x: 18; y:598
+        id: alarmSlider
+
+        anchors.horizontalCenter: parent.horizontalCenter; y:575
+    }
+
+    BigButton {
+        x: 23; y: 706
+        onButtonClicked: {
+            console.log("set alarm ...")
+        }
+        text: qsTr("SET ALARM")
     }
 }

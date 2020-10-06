@@ -45,7 +45,7 @@ Window {
 
     StackView {
         id: stack
-        initialItem: alarmSettingPage//clockPage
+        initialItem: clockPage
         anchors.fill: parent
     }
 
@@ -53,7 +53,7 @@ Window {
         id: clockPage
         ClockPage {
             onTimerButtonClicked: stack.push(timerSettingPage)
-            onAlarmButtonClicked: console.log("alarm button clicked")
+            onAlarmButtonClicked: stack.push(alarmSettingPage)
             onClickOnTimerIcon: stack.push(timerPage)
         }
     }

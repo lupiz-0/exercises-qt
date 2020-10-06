@@ -25,7 +25,7 @@
         <file>TimerUpDownNumberField.qml</file>
         <file>images/btn-arrow-hover.svg</file>
         <file>ArrowButton.qml</file>
-        <file>StartButton.qml</file>
+        <file>BigButton.qml</file>
         <file>TimerPage.qml</file>
         <file>TitleOfThePage.qml</file>
         <file>LineUnderTitleOfThePage.qml</file>
@@ -48,5 +48,8 @@
         <file>MinuteClockHand.qml</file>
         <file>HoursClockHand.qml</file>
         <file>AlarmSlider.qml</file>
+        <file>images/handle-enable.svg</file>
+        <file>images/handle-pressed.svg</file>
+        <file>images/comp-slider.svg</file>
     </qresource>
 </RCC>

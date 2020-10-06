@@ -8,14 +8,13 @@ Rectangle {
     property int alarmMinutes: 10
     property real scaledWidth //if 0 not scale, else set a scale to reach this value on width
     property real scaledHeight //if 0 not scale, else set a scale to reach this value on height
-    readonly property real amountMinutesInClockFace: 60
     readonly property real clockHandHoursImageAdaptationAngle: -90
     readonly property real clockHandMinutesImageAdaptationAngle: 180
     readonly property real clockHandAlarmImageAdaptationAngle: 180
     readonly property real amountHoursInClockFace: 12
     readonly property real angleOfOneHour: 360/amountHoursInClockFace
-    readonly property real angleOfOneMinute: 360/amountMinutesInClockFace
-    readonly property real angleOfOneMinuteForHourClockHand: 360/(amountMinutesInClockFace*amountHoursInClockFace)
+    readonly property real angleOfOneMinute: 360/clockManager.minutesInOneHour
+    readonly property real angleOfOneMinuteForHourClockHand: 360.0/(clockManager.minutesInOneHour * amountHoursInClockFace)
 
     function angleFromHoursAndMinutes(hours, minutes, adaptationAngle) {
         var ang = hours % clockFace.amountHoursInClockFace
