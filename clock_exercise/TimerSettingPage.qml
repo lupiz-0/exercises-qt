@@ -59,12 +59,12 @@ Rectangle {
     BigButton {
         x: 23
         y: 706
+        text: qsTr("START")
+        enabled: hoursNumberField.value > 0 || minutesNumberField.value > 0
         onButtonClicked: {
             clockManager.setTimerCurrentTime(parseInt(hoursNumberField.value), parseInt(minutesNumberField.value))
             clockManager.timerRunning = true
             startTimer()
         }
-        enabled: hoursNumberField.value > 0 || minutesNumberField.value > 0
-        text: qsTr("START")
     }
 }
