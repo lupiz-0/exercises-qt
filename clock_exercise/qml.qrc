@@ -14,5 +14,17 @@
         <file>ClockButton.qml</file>
         <file>images/223-bell.svg</file>
         <file>images/timer_icon.png</file>
+        <file>TimerSettingPage.qml</file>
+        <file>images/btn-back-active.svg</file>
+        <file>images/btn-back-hover.svg</file>
+        <file>BackButton.qml</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Light.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Thin.otf</file>
+        <file>fonts/BuenosAires_Family/BuenosAires-Book.otf</file>
+        <file>images/btn-arrow-active.svg</file>
+        <file>TimerUpDownNumberField.qml</file>
+        <file>images/btn-arrow-hover.svg</file>
+        <file>ArrowButton.qml</file>
+        <file>StartButton.qml</file>
     </qresource>
 </RCC>

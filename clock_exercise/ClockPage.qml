@@ -3,8 +3,6 @@ import QtQuick 2.0
 Rectangle {
     id: clockPage
 
-    property int timeOfDissolve: 500
-
     signal timerButtonClicked
     signal alarmButtonClicked
 

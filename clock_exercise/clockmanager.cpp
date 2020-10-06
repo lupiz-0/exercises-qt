@@ -2,8 +2,6 @@
 #include<QDebug>
 #include "clockmanager.h"
 
-
-
 ClockManager::ClockManager(QObject *parent) : QObject(parent), m_timerForRefresh(this)
 {
     connect(&m_timerForRefresh, &QTimer::timeout, this, &ClockManager::refresh);

@@ -3,16 +3,17 @@ import QtQuick 2.0
 Rectangle {
     id: button
 
-    property alias text: buttonText.text
+    property bool enabled: true
 
+    property alias text: buttonText.text
 
     signal buttonClicked
 
-    width: 190
+    width: 434
     height: 64
-    color: mouseArea.containsMouse? "#FCB647": "#151B2E"
-    border.color : "#FCB647"
-    border.width : 1
+    color: button.enabled ? (mouseArea.containsMouse ? "#9900A6E2" : "#00A6E2") : "#0000A6E2"
+    border.color: button.enabled ? (mouseArea.containsMouse ? "9900A6E2" : "#00A6E2") : "#8000A6E2"
+    border.width: 1
     radius: 32
 
     Behavior on color {
@@ -24,9 +25,9 @@ Rectangle {
     Text {
         id: buttonText
 
-        width: 96
+        width: 98
         height: 36
-        color: mouseArea.containsMouse? "#151B2E": "#FCB647"
+        color: button.enabled ? (mouseArea.containsMouse ? "#99FFFFFF" : "#FFFFFF") : "#8000A6E2"
         anchors.centerIn: parent
         font.pixelSize: 30
         horizontalAlignment: Text.AlignHCenter
@@ -45,7 +46,9 @@ Rectangle {
 
         hoverEnabled: true
         anchors.fill: parent
-        onClicked: button.buttonClicked()
+        onClicked: {
+            if (button.enabled)
+                button.buttonClicked()
+        }
     }
 }
-
