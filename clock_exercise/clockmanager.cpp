@@ -58,12 +58,13 @@ void ClockManager::setTimerCurrentTime(int hours, int minutes) {
 }
 
 void ClockManager::decreaseTimerCurrentSeconds() {
-    NotifierOfChange timerCurrentSecondsNotifier(m_timerCurrentSeconds);
+    NotifierOfChange timerCurrentSecondsNotifier( m_timerCurrentSeconds,
+        [this]() {
+            emit timerCurrentSecondsChanged();
+        });
 
     m_timerCurrentSeconds -= SECONDS_TIMER_INTERVAL;
     m_timerCurrentSeconds = qMax(0.0f, (float)m_timerCurrentSeconds);
-
-    timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds) ? emit timerCurrentSecondsChanged() : noneExp();
 }
 
 void ClockManager::setTimerCurrentSeconds(float timerCurrentSeconds) {
