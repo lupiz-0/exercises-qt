@@ -23,4 +23,63 @@ Rectangle {
         y: 115
         anchors.horizontalCenter: parent.horizontalCenter
     }
+
+    Row {
+        y: 140
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        DateNumberField {
+            id: day
+
+            max: 99
+            numberFontSize: 120
+            onSetUpDownModality: {
+                day.upDownModality = true
+                month.upDownModality = false
+                year.upDownModality = false
+            }
+        }
+        Text {
+            text: " / "
+            font.pixelSize: 40
+            font.family: "Buenos Aires"
+            font.styleName: "Regular"
+            color: "#9FAAB0"
+            opacity: 0.8
+            height: 196
+            verticalAlignment: Text.AlignBottom
+        }
+        DateNumberField {
+            id: month
+
+            max: 99
+            numberFontSize: 120
+            onSetUpDownModality: {
+                day.upDownModality = false
+                month.upDownModality = true
+                year.upDownModality = false
+            }
+        }
+        Text {
+            text: " / "
+            font.pixelSize: 40
+            font.family: "Buenos Aires"
+            font.styleName: "Regular"
+            color: "#9FAAB0"
+            opacity: 0.8
+            height: 196
+            verticalAlignment: Text.AlignBottom
+        }
+        DateNumberField {
+            id: year
+
+            max: 9999
+            numberFontSize: 60
+            onSetUpDownModality: {
+                day.upDownModality = false
+                month.upDownModality = false
+                year.upDownModality = true
+            }
+        }
+    }
 }
