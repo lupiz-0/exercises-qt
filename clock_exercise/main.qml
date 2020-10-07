@@ -44,7 +44,7 @@ Window {
 
     StackView {
         id: stack
-        initialItem: dateSettingPage //clockPage
+        initialItem: /*dateSettingPage //*/ clockPage
         anchors.fill: parent
     }
 
