@@ -6,6 +6,7 @@ Rectangle {
     signal back
 
     color: "#151B2E"
+    Component.onCompleted: clockManager.setCurrentDateOnTheAlarm()
 
     BackButton {
         x: 28
@@ -33,6 +34,7 @@ Rectangle {
 
             max: 99
             numberFontSize: 120
+            value: clockManager.alarmDay
             onSetUpDownModality: {
                 day.upDownModality = true
                 month.upDownModality = false
@@ -54,6 +56,7 @@ Rectangle {
 
             max: 99
             numberFontSize: 120
+            value: clockManager.alarmMonth
             onSetUpDownModality: {
                 day.upDownModality = false
                 month.upDownModality = true
@@ -75,6 +78,7 @@ Rectangle {
 
             max: 9999
             numberFontSize: 60
+            value: clockManager.alarmYear
             onSetUpDownModality: {
                 day.upDownModality = false
                 month.upDownModality = false

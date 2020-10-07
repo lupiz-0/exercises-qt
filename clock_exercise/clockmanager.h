@@ -14,6 +14,9 @@ class ClockManager : public QObject
     Q_PROPERTY(bool timerRunning MEMBER m_timerRunning NOTIFY timerRunningChanged)
     Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged WRITE setTimerCurrentSeconds)
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
+    Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
+    Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)
+    Q_PROPERTY(int alarmYear MEMBER m_alarmYear NOTIFY alarmYearChanged WRITE setAlarmYear)
 
     QString m_dateText;
     int m_minutes;
@@ -24,21 +27,28 @@ class ClockManager : public QObject
     float m_timerCurrentSeconds;
     int m_timerHoursOnStartTimer;
     int m_timerMinutesOnStartTimer;
+    int m_alarmDay;
+    int m_alarmMonth;
+    int m_alarmYear;
 
 public:
     explicit ClockManager(QObject *parent = nullptr);
     void setTimerCurrentSeconds(float timerCurrentSeconds);
+    void setAlarmDay(int alarmDay);
+    void setAlarmMonth(int alarmMonth);
+    void setAlarmYear(int alarmYear);
 
     static constexpr int TIME_OF_THE_DISSOLVE_ANIMATION = 500;
 
     static constexpr int MINUTES_IN_ONE_HOUR = 60;
     static constexpr int SECONDS_TIMER_INTERVAL = 20;
     static constexpr int SECONDS_IN_ONE_MINUTE = 60;
-    static constexpr int HOURS_IN_A_DAY= 24;
+    static constexpr int HOURS_IN_A_DAY = 24;
 
 public slots:
     void setTimerCurrentTime(int hours, int minutes);
     void restartTimer();
+    void setCurrentDateOnTheAlarm();
 
 signals:
     void dateTextChanged();
@@ -48,6 +58,9 @@ signals:
     void timerHoursChanged();
     void timerRunningChanged();
     void timerCurrentSecondsChanged();
+    void alarmDayChanged();
+    void alarmMonthChanged();
+    void alarmYearChanged();
 
 protected:
 
