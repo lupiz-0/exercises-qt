@@ -6,7 +6,7 @@ Rectangle {
     signal back
 
     color: "#151B2E"
-    Component.onCompleted: clockManager.setCurrentDateOnTheAlarm()
+    Component.onCompleted: clockManager.setCurrentDate()
 
     BackButton {
         x: 28
@@ -33,13 +33,13 @@ Rectangle {
             id: day
 
             numberFontSize: 120
-            value: clockManager.alarmDay
-            text: clockManager.alarmDayName
+            value: clockManager.dayOfDate
+            text: clockManager.dayOfDateName
             onIncrease: {
-                clockManager.addToAlarmDate(1, 0, 0)
+                clockManager.addToDate(1, 0, 0)
             }
             onDecrease: {
-                clockManager.addToAlarmDate(-1, 0, 0)
+                clockManager.addToDate(-1, 0, 0)
             }
             onSetUpDownModality: {
                 day.upDownModality = true
@@ -61,13 +61,13 @@ Rectangle {
             id: month
 
             numberFontSize: 120
-            value: clockManager.alarmMonth
-            text: clockManager.alarmMonthName
+            value: clockManager.monthOfDate
+            text: clockManager.monthOfDateName
             onIncrease: {
-                clockManager.addToAlarmDate(0, 1, 0)
+                clockManager.addToDate(0, 1, 0)
             }
             onDecrease: {
-                clockManager.addToAlarmDate(0, -1, 0)
+                clockManager.addToDate(0, -1, 0)
             }
             onSetUpDownModality: {
                 day.upDownModality = false
@@ -89,13 +89,13 @@ Rectangle {
             id: year
 
             numberFontSize: 60
-            value: clockManager.alarmYear
+            value: clockManager.yearOfDate
             text: qsTr("Year")
             onIncrease: {
-                clockManager.addToAlarmDate(0, 0, 1)
+                clockManager.addToDate(0, 0, 1)
             }
             onDecrease: {
-                clockManager.addToAlarmDate(0, 0, -1)
+                clockManager.addToDate(0, 0, -1)
             }
             onSetUpDownModality: {
                 day.upDownModality = false
