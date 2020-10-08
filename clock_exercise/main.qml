@@ -44,7 +44,7 @@ Window {
 
     StackView {
         id: stack
-        initialItem: clockPage
+        initialItem: alarmClockListPage //clockPage
         anchors.fill: parent
     }
 
@@ -85,6 +85,13 @@ Window {
     Component {
         id: dateSettingPage
         DateSettingPage {
+            onBack: stack.pop()
+        }
+    }
+
+    Component {
+        id: alarmClockListPage
+        AlarmClockListPage {
             onBack: stack.pop()
         }
     }
