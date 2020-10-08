@@ -25,6 +25,9 @@ class ClockManager : public QObject
     Q_PROPERTY(QString alarmDayName MEMBER m_alarmDayName NOTIFY alarmDayNameChanged WRITE setAlarmDayName)
     Q_PROPERTY(QString alarmMonthName MEMBER m_alarmMonthName NOTIFY alarmMonthNameChanged WRITE setAlarmMonthName)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
+    Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
+    Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)
+    Q_PROPERTY(int alarmYear MEMBER m_alarmYear NOTIFY alarmYearChanged WRITE setAlarmYear)
 
     QString m_dateText;
     int m_minutes;
@@ -36,6 +39,9 @@ class ClockManager : public QObject
     int m_yearOfDate;
     QString m_dayOfDateName;
     QString m_monthOfDateName;
+    int m_alarmDay;
+    int m_alarmMonth;
+    int m_alarmYear;
     // ↑↑↑ properties
 
     // ↓↓↓ not properties
@@ -52,6 +58,9 @@ public:
     void setYearOfDate(int yearOfDate);
     void setDayOfDateName(QString dayOfDateName);
     void setMonthOfDateName(QString monthOfDateName);
+    void setAlarmDay(int alarmDay);
+    void setAlarmMonth(int alarmMonth);
+    void setAlarmYear(int alarmYear);
 
     static constexpr int TIME_OF_THE_DISSOLVE_ANIMATION = 500;
     static constexpr int MINUTES_IN_ONE_HOUR = 60;
@@ -63,7 +72,10 @@ public slots:
     void setTimerCurrentTime(int hours, int minutes);
     void restartTimer();
     void setCurrentDate();
+    void setCurrentAlarmDate();
     void addToDate(int daysNumber, int monthsNumber, int yearsNumber);
+    void confirmAlarmDate();
+    void setDateOfDatePageLikeDateOfAlarm();
 
 signals:
     void dateTextChanged();
@@ -78,6 +90,9 @@ signals:
     void yearOfDateChanged();
     void dayOfDateNameChanged();
     void monthOfDateNameChanged();
+    void alarmDayChanged();
+    void alarmMonthChanged();
+    void alarmYearChanged();
 
 protected:
 
@@ -91,4 +106,5 @@ private:
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
     void setDate(int days, int months, int years);
     void setDateNames(QString day, QString month);
+    void setAlarmDate(int days, int months, int years);
 };

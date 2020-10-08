@@ -9,6 +9,7 @@ Rectangle {
     signal openDateSettingPage
 
     color: "#151B2E"
+    Component.onCompleted: clockManager.setCurrentAlarmDate()
 
     BackButton {
         x: 28
@@ -40,9 +41,14 @@ Rectangle {
     TopAlarmButton {
         x: 254
         y: 140
-        text: qsTr("date")
+        text: {
+            clockManager.alarmDay.toString().padStart(
+                        2, '0') + "/" + clockManager.alarmMonth.toString(
+                        ).padStart(2, '0') + "/" + clockManager.alarmYear
+        }
         selected: !alarmSettingPage.everydayModality
         onButtonClicked: {
+            clockManager.setDateOfDatePageLikeDateOfAlarm()
             alarmSettingPage.everydayModality = false
             alarmSettingPage.openDateSettingPage()
         }

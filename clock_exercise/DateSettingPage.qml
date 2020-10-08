@@ -6,7 +6,6 @@ Rectangle {
     signal back
 
     color: "#151B2E"
-    Component.onCompleted: clockManager.setCurrentDate()
 
     BackButton {
         x: 28
@@ -110,7 +109,8 @@ Rectangle {
         y: 706
         text: qsTr("SET DATE")
         onButtonClicked: {
-            console.log("set date ...")
+            clockManager.confirmAlarmDate()
+            dataSettingPage.back()
         }
     }
 }
