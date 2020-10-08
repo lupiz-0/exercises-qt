@@ -104,4 +104,13 @@ Rectangle {
             }
         }
     }
+
+    BigButton {
+        x: 23
+        y: 706
+        text: qsTr("SET DATE")
+        onButtonClicked: {
+            console.log("set date ...")
+        }
+    }
 }
