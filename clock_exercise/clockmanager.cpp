@@ -87,21 +87,21 @@ void ClockManager::setCurrentAlarmDate() {
 void ClockManager::setDayOfDate(int dayOfDate) {
     if(m_dayOfDate != dayOfDate) {
         m_dayOfDate = dayOfDate;
-        dayOfDateChanged();
+        emit dayOfDateChanged();
     }
 }
 
 void ClockManager::setMonthOfDate(int monthOfDate) {
     if(m_monthOfDate != monthOfDate) {
         m_monthOfDate = monthOfDate;
-        monthOfDateChanged();
+        emit monthOfDateChanged();
     }
 }
 
 void ClockManager::setYearOfDate(int yearOfDate) {
     if(m_yearOfDate != yearOfDate) {
         m_yearOfDate = yearOfDate;
-        yearOfDateChanged();
+        emit yearOfDateChanged();
     }
 }
 
@@ -129,14 +129,14 @@ void ClockManager::setAlarmDate(int days, int months, int years) {
 void ClockManager::setDayOfDateName(QString dayOfDateName) {
     if(m_dayOfDateName != dayOfDateName) {
         m_dayOfDateName = dayOfDateName;
-        dayOfDateNameChanged();
+        emit dayOfDateNameChanged();
     }
 }
 
 void ClockManager::setMonthOfDateName(QString monthOfDateName) {
     if(m_monthOfDateName != monthOfDateName) {
         m_monthOfDateName = monthOfDateName;
-        monthOfDateNameChanged();
+        emit monthOfDateNameChanged();
     }
 }
 
@@ -148,21 +148,21 @@ void ClockManager::setDateNames(QString day, QString month) {
 void ClockManager::setAlarmDay(int alarmDay) {
     if(m_alarmDay != alarmDay){
         m_alarmDay = alarmDay;
-        alarmDayChanged();
+        emit alarmDayChanged();
     }
 }
 
 void ClockManager::setAlarmMonth(int alarmMonth) {
     if(m_alarmMonth != alarmMonth) {
         m_alarmMonth = alarmMonth;
-        alarmMonthChanged();
+        emit alarmMonthChanged();
     }
 }
 
 void ClockManager::setAlarmYear(int alarmYear){
     if(m_alarmYear != alarmYear) {
         m_alarmYear = alarmYear;
-        alarmYearChanged();
+        emit alarmYearChanged();
     }
 }
 
