@@ -32,9 +32,15 @@ Rectangle {
         DateNumberField {
             id: day
 
-            max: 99
             numberFontSize: 120
             value: clockManager.alarmDay
+            text: clockManager.alarmDayName
+            onIncrease: {
+                clockManager.addToAlarmDate(1, 0, 0)
+            }
+            onDecrease: {
+                clockManager.addToAlarmDate(-1, 0, 0)
+            }
             onSetUpDownModality: {
                 day.upDownModality = true
                 month.upDownModality = false
@@ -54,9 +60,15 @@ Rectangle {
         DateNumberField {
             id: month
 
-            max: 99
             numberFontSize: 120
             value: clockManager.alarmMonth
+            text: clockManager.alarmMonthName
+            onIncrease: {
+                clockManager.addToAlarmDate(0, 1, 0)
+            }
+            onDecrease: {
+                clockManager.addToAlarmDate(0, -1, 0)
+            }
             onSetUpDownModality: {
                 day.upDownModality = false
                 month.upDownModality = true
@@ -76,9 +88,15 @@ Rectangle {
         DateNumberField {
             id: year
 
-            max: 9999
             numberFontSize: 60
             value: clockManager.alarmYear
+            text: qsTr("Year")
+            onIncrease: {
+                clockManager.addToAlarmDate(0, 0, 1)
+            }
+            onDecrease: {
+                clockManager.addToAlarmDate(0, 0, -1)
+            }
             onSetUpDownModality: {
                 day.upDownModality = false
                 month.upDownModality = false

@@ -17,6 +17,8 @@ class ClockManager : public QObject
     Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
     Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)
     Q_PROPERTY(int alarmYear MEMBER m_alarmYear NOTIFY alarmYearChanged WRITE setAlarmYear)
+    Q_PROPERTY(QString alarmDayName MEMBER m_alarmDayName NOTIFY alarmDayNameChanged WRITE setAlarmDayName)
+    Q_PROPERTY(QString alarmMonthName MEMBER m_alarmMonthName NOTIFY alarmMonthNameChanged WRITE setAlarmMonthName)
 
     QString m_dateText;
     int m_minutes;
@@ -30,6 +32,8 @@ class ClockManager : public QObject
     int m_alarmDay;
     int m_alarmMonth;
     int m_alarmYear;
+    QString m_alarmDayName;
+    QString m_alarmMonthName;
 
 public:
     explicit ClockManager(QObject *parent = nullptr);
@@ -37,6 +41,8 @@ public:
     void setAlarmDay(int alarmDay);
     void setAlarmMonth(int alarmMonth);
     void setAlarmYear(int alarmYear);
+    void setAlarmDayName(QString alarmDayName);
+    void setAlarmMonthName(QString alarmMonthName);
 
     static constexpr int TIME_OF_THE_DISSOLVE_ANIMATION = 500;
 
@@ -49,6 +55,7 @@ public slots:
     void setTimerCurrentTime(int hours, int minutes);
     void restartTimer();
     void setCurrentDateOnTheAlarm();
+    void addToAlarmDate(int daysNumber, int monthsNumber, int yearsNumber);
 
 signals:
     void dateTextChanged();
@@ -61,6 +68,8 @@ signals:
     void alarmDayChanged();
     void alarmMonthChanged();
     void alarmYearChanged();
+    void alarmDayNameChanged();
+    void alarmMonthNameChanged();
 
 protected:
 
@@ -72,5 +81,6 @@ private:
     void refreshDateText();
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
-    void noneExp(){};
+    void setAlarmDate(int days, int months, int years);
+    void setAlarmDateNames(QString day, QString month);
 };

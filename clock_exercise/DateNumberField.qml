@@ -4,11 +4,13 @@ Item {
     id: root
 
     property bool upDownModality: false
-    property alias max: numericUpDown.max
     property alias numberFontSize: numericUpDown.numberFontSize
     property alias value: numericUpDown.value
+    property alias text: numericUpDown.text
 
     signal setUpDownModality
+    signal increase
+    signal decrease
 
     width: upDownModality ? numericUpDown.width : littleLabel.width
     height: upDownModality ? numericUpDown.height : littleLabel.height
@@ -37,8 +39,9 @@ Item {
     DateUpDownNumberField {
         id: numericUpDown
 
-        text: qsTr("Tue")
         visible: root.upDownModality
         enabled: root.upDownModality
+        onIncrease: root.increase()
+        onDecrease: root.decrease()
     }
 }

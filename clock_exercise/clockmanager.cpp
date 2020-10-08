@@ -76,9 +76,8 @@ void ClockManager::setTimerCurrentSeconds(float timerCurrentSeconds) {
 
 void ClockManager::setCurrentDateOnTheAlarm() {
     QDate date = QDate::currentDate();
-    setAlarmDay(date.day());
-    setAlarmMonth(date.month());
-    setAlarmYear(date.year());
+    setAlarmDate(date.day(), date.month(), date.year());
+    setAlarmDateNames(date.toString("ddd"), date.toString("MMM"));
 }
 
 void ClockManager::setAlarmDay(int alarmDay) {
@@ -87,15 +86,51 @@ void ClockManager::setAlarmDay(int alarmDay) {
         alarmDayChanged();
     }
 }
+
 void ClockManager::setAlarmMonth(int alarmMonth) {
     if(m_alarmMonth != alarmMonth) {
         m_alarmMonth = alarmMonth;
         alarmMonthChanged();
     }
 }
+
 void ClockManager::setAlarmYear(int alarmYear) {
     if(m_alarmYear != alarmYear) {
         m_alarmYear = alarmYear;
         alarmYearChanged();
     }
+}
+
+void ClockManager::addToAlarmDate(int daysNumber, int monthsNumber, int yearsNumber) {
+    QDate date(m_alarmYear, m_alarmMonth, m_alarmDay);
+    date = date.addDays(daysNumber);
+    date = date.addMonths(monthsNumber);
+    date = date.addYears(yearsNumber);
+    setAlarmDate(date.day(), date.month(), date.year());
+    setAlarmDateNames(date.toString("ddd"), date.toString("MMM"));
+}
+
+void ClockManager::setAlarmDate(int days, int months, int years) {
+    setAlarmDay(days);
+    setAlarmMonth(months);
+    setAlarmYear(years);
+}
+
+void ClockManager::setAlarmDayName(QString alarmDayName) {
+    if(m_alarmDayName != alarmDayName) {
+        m_alarmDayName = alarmDayName;
+        alarmDayNameChanged();
+    }
+}
+
+void ClockManager::setAlarmMonthName(QString alarmMonthName) {
+    if(m_alarmMonthName != alarmMonthName) {
+        m_alarmMonthName = alarmMonthName;
+        alarmMonthNameChanged();
+    }
+}
+
+void ClockManager::setAlarmDateNames(QString day, QString month) {
+    setAlarmDayName(day);
+    setAlarmMonthName(month);
 }

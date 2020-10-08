@@ -4,9 +4,11 @@ Item {
     id: root
 
     property alias text: textField.text
-    property int value: 0
-    property int max: 99
+    property int value
     property alias numberFontSize: numberText.font.pixelSize
+
+    signal increase
+    signal decrease
 
     width: 190
     height: 512
@@ -29,6 +31,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             font.family: "Buenos Aires"
             font.styleName: "Regular"
+            font.capitalization: Font.Capitalize
         }
 
         Text {
@@ -51,9 +54,7 @@ Item {
         id: upButton
 
         y: 300
-        onClicked: {
-            root.value = (root.value + 1) % (root.max + 1)
-        }
+        onClicked: root.increase()
     }
 
     Rectangle {
@@ -68,8 +69,6 @@ Item {
 
         y: 411
         rotation: 180
-        onClicked: {
-            root.value = root.value > 0 ? root.value - 1 : root.max
-        }
+        onClicked: root.decrease()
     }
 }
