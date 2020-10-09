@@ -34,4 +34,9 @@ Rectangle {
         font.family: "Buenos Aires"
         font.styleName: "Thin"
     }
+
+    ActivationAlarmSwitch {
+        x: 331
+        y: 189
+    }
 }

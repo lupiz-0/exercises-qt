@@ -55,5 +55,7 @@
         <file>DateUpDownNumberField.qml</file>
         <file>DateNumberField.qml</file>
         <file>AlarmClockListPage.qml</file>
+        <file>ActivationAlarmSwitch.qml</file>
+        <file>images/switch-off-selected.svg</file>
     </qresource>
 </RCC>
