@@ -23,4 +23,15 @@ Rectangle {
         y: 115
         anchors.horizontalCenter: parent.horizontalCenter
     }
+
+    Text {
+        anchors.horizontalCenter: parent.horizontalCenter
+        y: 342
+        text: qsTr("No alarm")
+        color: "#9FAAB0"
+        font.pixelSize: 60
+        horizontalAlignment: Text.AlignHCenter
+        font.family: "Buenos Aires"
+        font.styleName: "Thin"
+    }
 }

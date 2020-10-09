@@ -6,6 +6,7 @@ Rectangle {
     signal timerButtonClicked
     signal alarmButtonClicked
     signal clickOnTimerIcon
+    signal clickOnBellIcon
 
     color: "#151B2E"
 
@@ -20,7 +21,7 @@ Rectangle {
         y: 33
         width: 50
         height: 50
-        onClicked: clickOnTimerIcon()
+        onClicked: clockPage.clickOnTimerIcon()
         visible: clockManager.timerCurrentSeconds > 0.0
 
         Image {
@@ -31,12 +32,19 @@ Rectangle {
         }
     }
 
-    Image {
-        x: 413
-        y: 43
-        width: 30
-        height: 30
-        source: "images/223-bell.svg"
+    MouseArea {
+        x: 403
+        y: 33
+        width: 50
+        height: 50
+        onClicked: clockPage.clickOnBellIcon()
+
+        Image {
+            anchors.centerIn: parent
+            width: 29
+            height: 29
+            source: "images/223-bell.svg"
+        }
     }
 
     LineUnderTitleOfThePage {
