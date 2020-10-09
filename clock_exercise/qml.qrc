@@ -57,5 +57,8 @@
         <file>AlarmClockListPage.qml</file>
         <file>ActivationAlarmSwitch.qml</file>
         <file>images/switch-off-selected.svg</file>
+        <file>images/check_disabled.svg</file>
+        <file>images/check_selected.svg</file>
+        <file>CheckBox.qml</file>
     </qresource>
 </RCC>
