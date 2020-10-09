@@ -4,42 +4,28 @@ Rectangle {
     id: timerSettingPage
 
     signal back
+    signal startTimer
 
     color: "#151B2E"
 
     BackButton {
-        id: backButton
-
-        x: 28
-        y: 20
+        x: 28; y: 20
         onBack: timerSettingPage.back()
     }
 
-    Text {
-        x: 199
-        y: 40
-        width: 82
-        height: 36
+    TitleOfThePage {
+        y: 40; anchors.horizontalCenter: parent.horizontalCenter
         text: qsTr("Timer")
-        color: "#9FAAB0"
-        font.pixelSize: 30
-        horizontalAlignment: Text.AlignHCenter
-        font.family: "Buenos Aires"
-        font.styleName: "SemiBold"
     }
 
-    Rectangle {
-        anchors.horizontalCenter: parent.horizontalCenter
-        y: 115
-        width: 424
-        height: 1
-        color: "#9FAAB0"
+    LineUnderTitleOfThePage {
+        y: 115; anchors.horizontalCenter: parent.horizontalCenter
     }
 
     TimerUpDownNumberField {
         id: hoursNumberField
 
-        x: 28
+        x: 28; y: 160
         text: qsTr("hours")
         max: 99
     }
@@ -47,14 +33,13 @@ Rectangle {
     TimerUpDownNumberField {
         id: minutesNumberField
 
-        x: 262
+        x: 262; y: 160
         text: qsTr("mins")
         max: 59
     }
 
     Text {
-        x: 225
-        y: 199
+        x: 225; y: 199
         width: 30
         height: 143
         text: qsTr(":")
@@ -68,7 +53,11 @@ Rectangle {
     StartButton {
         x: 23
         y: 706
-        onButtonClicked: console.log("start ...")
+        onButtonClicked: {
+            clockManager.setTimerCurrentTime(parseInt(hoursNumberField.value), parseInt(minutesNumberField.value))
+            clockManager.timerRunning = true
+            startTimer()
+        }
         enabled: hoursNumberField.value > 0 || minutesNumberField.value > 0
         text: qsTr("START")
     }

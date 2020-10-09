@@ -7,7 +7,6 @@ Item {
     property int value: 0
     property int max: 99
 
-    y: 160
     width: 190
     height: 502
 
@@ -18,11 +17,10 @@ Item {
         radius: 30
 
         Text {
-            x: 0
-            y: 43
+            x: 0; y: 43
             width: 190
             height: 116
-            text: root.value < 10 ? "0" + root.value : root.value
+            text: root.value.toString().padStart(2, '0');
             color: "#FCB647"
             font.pixelSize: 120
             horizontalAlignment: Text.AlignHCenter
@@ -33,8 +31,7 @@ Item {
         Text {
             id: textField
 
-            x: 73
-            y: 215
+            x: 73; y: 215
             width: 44
             height: 24
             color: "#9FAAB0"

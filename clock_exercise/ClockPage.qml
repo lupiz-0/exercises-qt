@@ -5,28 +5,30 @@ Rectangle {
 
     signal timerButtonClicked
     signal alarmButtonClicked
+    signal clickOnTimerIcon
 
     color: "#151B2E"
 
-    Text {
-        x: 162
+    TitleOfThePage {
         y: 40
-        width: 156
-        height: 36
+        anchors.horizontalCenter: parent.horizontalCenter
         text: qsTr("DeveClock")
-        color: "#9FAAB0"
-        font.pixelSize: 30
-        horizontalAlignment: Text.AlignHCenter
-        font.family: "Buenos Aires"
-        font.styleName: "SemiBold"
     }
 
-    Image {
-        x: 359
-        y: 43
-        width: 30
-        height: 33
-        source: "images/timer_icon.png"
+    MouseArea {
+        x: 349
+        y: 33
+        width: 50
+        height: 50
+        onClicked: clickOnTimerIcon()
+        visible: clockManager.timerCurrentSeconds > 0.0
+
+        Image {
+            anchors.centerIn: parent
+            width: 30
+            height: 33
+            source: "images/timer_icon.png"
+        }
     }
 
     Image {
@@ -37,12 +39,9 @@ Rectangle {
         source: "images/223-bell.svg"
     }
 
-    Rectangle {
-        x: 31
-        y: 110
-        width: 418
-        height: 1
-        color: "#9FAAB0"
+    LineUnderTitleOfThePage {
+        y: 115
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     Text {
@@ -62,8 +61,6 @@ Rectangle {
     ClockFace {
         x: 31
         y: 220
-        width: 418
-        height: 418
     }
 
     ClockButton {
