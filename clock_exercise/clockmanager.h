@@ -10,20 +10,16 @@ class ClockManager : public QObject
     Q_PROPERTY(QString dateText MEMBER m_dateText NOTIFY dateTextChanged)
     Q_PROPERTY(int minutes MEMBER m_minutes NOTIFY minutesChanged)
     Q_PROPERTY(int hours MEMBER m_hours NOTIFY hoursChanged)
-
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
-
-    Q_PROPERTY(int timerMinutes MEMBER m_timerMinutes NOTIFY timerMinutesChanged)
-    Q_PROPERTY(int timerHours MEMBER m_timerHours NOTIFY timerHoursChanged)
-    Q_PROPERTY(bool timerIsInPlay MEMBER m_timerIsInPlay NOTIFY timerIsInPlayChanged)
-    Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged)
+    Q_PROPERTY(bool timerRunning MEMBER m_timerRunning NOTIFY timerRunningChanged)
+    Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged WRITE setTimerCurrentSeconds)
+    Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
+    Q_PROPERTY(int minutesInOneHour MEMBER MINUTES_IN_ONE_HOUR CONSTANT)
 
     QString m_dateText;
     int m_minutes;
     int m_hours;
-    int m_timerMinutes;
-    int m_timerHours;
-    bool m_timerIsInPlay;
+    bool m_timerRunning;
 
     QTimer m_timerForRefresh;
     float m_timerCurrentSeconds;
@@ -32,6 +28,7 @@ class ClockManager : public QObject
 
 public:
     explicit ClockManager(QObject *parent = nullptr);
+    void setTimerCurrentSeconds(float timerCurrentSeconds);
 
     static constexpr int TIME_OF_THE_DISSOLVE_ANIMATION = 500;
 
@@ -49,7 +46,7 @@ signals:
     void hoursChanged();
     void timerMinutesChanged();
     void timerHoursChanged();
-    void timerIsInPlayChanged();
+    void timerRunningChanged();
     void timerCurrentSecondsChanged();
 
 protected:
@@ -60,7 +57,6 @@ private slots:
 private:
     void refreshTime();
     void refreshDateText();
-    void refreshTimerHoursAndMinutes();
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
     void noneExp(){};

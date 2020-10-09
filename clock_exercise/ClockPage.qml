@@ -9,18 +9,19 @@ Rectangle {
 
     color: "#151B2E"
 
-
     TitleOfThePage {
-        y: 40; anchors.horizontalCenter: parent.horizontalCenter
+        y: 40
+        anchors.horizontalCenter: parent.horizontalCenter
         text: qsTr("DeveClock")
     }
 
     MouseArea {
-        x: 349; y:33
-        width: 50; height: 50
+        x: 349
+        y: 33
+        width: 50
+        height: 50
         onClicked: clickOnTimerIcon()
         visible: clockManager.timerCurrentSeconds > 0.0
-        enabled: clockManager.timerCurrentSeconds > 0.0
 
         Image {
             anchors.centerIn: parent
@@ -31,18 +32,21 @@ Rectangle {
     }
 
     Image {
-        x: 413; y: 43
+        x: 413
+        y: 43
         width: 30
         height: 30
         source: "images/223-bell.svg"
     }
 
     LineUnderTitleOfThePage {
-        y: 115; anchors.horizontalCenter: parent.horizontalCenter
+        y: 115
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     Text {
-        x: 122; y: 153
+        x: 122
+        y: 153
         width: 236
         height: 29
         text: clockManager.dateText
@@ -55,17 +59,20 @@ Rectangle {
     }
 
     ClockFace {
-        x: 31; y: 220
+        x: 31
+        y: 220
     }
 
     ClockButton {
-        x: 18; y: 690
+        x: 18
+        y: 690
         text: qsTr("TIMER")
         onButtonClicked: clockPage.timerButtonClicked()
     }
 
     ClockButton {
-        x: 272; y: 690
+        x: 272
+        y: 690
         text: qsTr("ALARM")
         onButtonClicked: clockPage.alarmButtonClicked()
     }

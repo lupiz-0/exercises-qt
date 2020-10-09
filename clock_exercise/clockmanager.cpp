@@ -4,10 +4,7 @@
 #include "clockmanager.h"
 #include "notifierofchange.h"
 
-//int m_timerHoursOnStartTimer;
-//int m_timerMinutesOnStartTimer;
-
-ClockManager::ClockManager(QObject *parent) : QObject(parent), m_timerMinutes(0), m_timerHours(0), m_timerIsInPlay(false), m_timerForRefresh(this), m_timerCurrentSeconds(0)
+ClockManager::ClockManager(QObject *parent) : QObject(parent), m_timerRunning(false), m_timerCurrentSeconds(0)
   , m_timerHoursOnStartTimer(0), m_timerMinutesOnStartTimer(0)
 {
     connect(&m_timerForRefresh, &QTimer::timeout, this, &ClockManager::refresh);
@@ -42,7 +39,7 @@ void ClockManager::refreshTime() {
 void ClockManager::refresh() {
     refreshDateText();
     refreshTime();
-    if(m_timerIsInPlay)
+    if(m_timerRunning)
         decreaseTimerCurrentSeconds();
 }
 
@@ -51,38 +48,13 @@ float ClockManager::convertHoursAndMinutesToSeconds(int hours, int minutes) {
 }
 
 void ClockManager::restartTimer() {
-    NotifierOfChange timerCurrentSecondsNotifier(m_timerCurrentSeconds);
-
-    m_timerCurrentSeconds = convertHoursAndMinutesToSeconds(m_timerHoursOnStartTimer, m_timerMinutesOnStartTimer);
-    refreshTimerHoursAndMinutes();
-
-    timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds) ? emit timerCurrentSecondsChanged() : noneExp();
+    setTimerCurrentSeconds(convertHoursAndMinutesToSeconds(m_timerHoursOnStartTimer, m_timerMinutesOnStartTimer));
 }
 
 void ClockManager::setTimerCurrentTime(int hours, int minutes) {
-    NotifierOfChange timerCurrentSecondsNotifier(m_timerCurrentSeconds);
-
     m_timerHoursOnStartTimer = hours;
     m_timerMinutesOnStartTimer = minutes;
-    m_timerCurrentSeconds = convertHoursAndMinutesToSeconds(hours, minutes);
-    refreshTimerHoursAndMinutes();
-
-    timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds) ? emit timerCurrentSecondsChanged() : noneExp();
-}
-
-void ClockManager::refreshTimerHoursAndMinutes() {
-
-    int prevHours = m_timerHours;
-    int prevMinutes = m_timerMinutes;
-
-    m_timerHours = (int)(m_timerCurrentSeconds/SECONDS_IN_ONE_MINUTE) / MINUTES_IN_ONE_HOUR;
-    m_timerMinutes = (int)(m_timerCurrentSeconds/SECONDS_IN_ONE_MINUTE) % MINUTES_IN_ONE_HOUR;
-
-    if(m_timerHours != prevHours)
-        emit timerHoursChanged();
-
-    if(m_timerMinutes != prevMinutes)
-        emit timerMinutesChanged();
+    setTimerCurrentSeconds(convertHoursAndMinutesToSeconds(hours, minutes));
 }
 
 void ClockManager::decreaseTimerCurrentSeconds() {
@@ -90,7 +62,13 @@ void ClockManager::decreaseTimerCurrentSeconds() {
 
     m_timerCurrentSeconds -= SECONDS_TIMER_INTERVAL;
     m_timerCurrentSeconds = qMax(0.0f, (float)m_timerCurrentSeconds);
-    refreshTimerHoursAndMinutes();
 
     timerCurrentSecondsNotifier.isChanged(m_timerCurrentSeconds) ? emit timerCurrentSecondsChanged() : noneExp();
+}
+
+void ClockManager::setTimerCurrentSeconds(float timerCurrentSeconds) {
+    if(m_timerCurrentSeconds != timerCurrentSeconds) {
+        m_timerCurrentSeconds = timerCurrentSeconds;
+        emit timerCurrentSecondsChanged();
+    }
 }

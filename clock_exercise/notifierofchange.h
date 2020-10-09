@@ -1,13 +1,13 @@
 #pragma once
 
-template <typename typ>
+template <typename T>
 class NotifierOfChange
 {
 public:
-    NotifierOfChange(typ ty): m_previousValue(ty) {
+    NotifierOfChange(T ty): m_previousValue(ty) {
     }
 
-    bool isChanged(typ ty){
+    bool isChanged(T ty){
         if(ty != m_previousValue)
             return true;
         else
@@ -15,6 +15,6 @@ public:
     }
 
 private:
-    typ m_previousValue;
+    T m_previousValue;
 };
 

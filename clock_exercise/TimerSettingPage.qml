@@ -55,7 +55,7 @@ Rectangle {
         y: 706
         onButtonClicked: {
             clockManager.setTimerCurrentTime(parseInt(hoursNumberField.value), parseInt(minutesNumberField.value))
-            clockManager.timerIsInPlay = true
+            clockManager.timerRunning = true
             startTimer()
         }
         enabled: hoursNumberField.value > 0 || minutesNumberField.value > 0
