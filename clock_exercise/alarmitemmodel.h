@@ -37,6 +37,7 @@ public:
 public slots:
     void addNewAlarm(AlarmItemData alarm);
     AlarmItemData newAlarmItemData(){return AlarmItemData();}
+    void setAllNotSelected();
 
 signals:
     void atLeastOneEverydayAlarmChanged();
