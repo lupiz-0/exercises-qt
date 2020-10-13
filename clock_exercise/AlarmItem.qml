@@ -10,6 +10,9 @@ Item {
         x: 11
         anchors.verticalCenter: parent.verticalCenter
         on: selected
+        onChanged: {
+            selected = !selected
+        }
     }
 
     Text {
