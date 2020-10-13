@@ -27,6 +27,7 @@ Rectangle {
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         y: 342
+        visible: clockManager.alarmItemModel.rowCount() === 0
         text: qsTr("No alarm")
         color: "#9FAAB0"
         font.pixelSize: 60
@@ -35,8 +36,27 @@ Rectangle {
         font.styleName: "Thin"
     }
 
-    ActivationAlarmSwitch {
-        x: 331
-        y: 189
+    ListView {
+        x: 27
+        y: 133
+        width: 427
+        height: 625
+        model: clockManager.alarmItemModel
+        delegate: alarmItemDelegate
+        clip: true
+
+        section.property: "everyday"
+        section.criteria: ViewSection.FullString
+        section.delegate: sectionHeading
+    }
+
+    Component {
+        id: sectionHeading
+        SectionHeading {}
+    }
+
+    Component {
+        id: alarmItemDelegate
+        AlarmItem {}
     }
 }

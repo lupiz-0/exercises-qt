@@ -70,7 +70,19 @@ Rectangle {
         y: 706
         text: qsTr("SET ALARM")
         onButtonClicked: {
-            console.log("set alarm ...")
+            var alarmItemData = clockManager.alarmItemModel.newAlarmItemData()
+
+            alarmItemData.everyday = alarmSettingPage.everydayModality
+            alarmItemData.active = true
+            alarmItemData.selected = false
+            alarmItemData.day = clockManager.alarmDay
+            alarmItemData.month = clockManager.alarmMonth
+            alarmItemData.year = clockManager.alarmYear
+            alarmItemData.hours = alarmSlider.hours
+            alarmItemData.minutes = alarmSlider.minutes
+
+            clockManager.alarmItemModel.addNewAlarm(alarmItemData)
+            alarmSettingPage.back()
         }
     }
 }
