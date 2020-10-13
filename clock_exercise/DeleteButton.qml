@@ -30,7 +30,6 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         font.family: "Buenos Aires"
         font.styleName: "SemiBold"
-        opacity: button.opacity
 
         Behavior on opacity {
             NumberAnimation {
