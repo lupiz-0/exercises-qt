@@ -5,11 +5,11 @@ MouseArea {
 
     property bool on: false
 
+    signal changed
+
     width: 28
     height: 29
-    onClicked: {
-        on = !on
-    }
+    onClicked: changed()
 
     Image {
         anchors.fill: parent
