@@ -51,6 +51,11 @@ Rectangle {
         section.delegate: sectionHeading
     }
 
+    DeleteButton {
+        x: 23
+        y: 706
+    }
+
     Component {
         id: sectionHeading
         SectionHeading {}
