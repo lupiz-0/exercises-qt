@@ -41,6 +41,9 @@ Item {
         x: 303
         anchors.verticalCenter: parent.verticalCenter
         on: active
+        onChanged: {
+            active = on
+        }
     }
 
     Rectangle {

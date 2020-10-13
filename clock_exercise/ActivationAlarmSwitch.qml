@@ -5,6 +5,8 @@ Rectangle {
 
     property bool on: false
 
+    signal changed
+
     width: 112
     height: 60
     radius: 8
@@ -50,6 +52,7 @@ Rectangle {
         anchors.fill: parent
         onClicked: {
             root.on = !root.on
+            root.changed()
         }
     }
 }
