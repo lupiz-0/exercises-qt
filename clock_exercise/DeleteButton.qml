@@ -3,6 +3,8 @@ import QtQuick 2.0
 Rectangle {
     id: button
 
+    property real hoverOpacity: mouseArea.containsMouse ? 0.75 : 1
+
     signal buttonClicked
 
     width: 434
@@ -11,7 +13,8 @@ Rectangle {
     border.color: "#80EC6545"
     border.width: 1
     radius: height / 2
-    opacity: mouseArea.containsMouse ? 0.8 : 1
+    opacity: clockManager.alarmItemModel.numberSelectedAlarms > 0 ? hoverOpacity : 0
+    visible: opacity > 0
 
     Behavior on opacity {
         NumberAnimation {
