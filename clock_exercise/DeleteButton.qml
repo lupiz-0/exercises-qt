@@ -24,7 +24,7 @@ Rectangle {
 
         y: 14
         anchors.horizontalCenter: parent.horizontalCenter
-        text: qsTr("DELETE")
+        text: qsTr("DELETE") + " (" + clockManager.alarmItemModel.numberSelectedAlarms + ")"
         color: "#EC6545"
         font.pixelSize: 30
         horizontalAlignment: Text.AlignHCenter
