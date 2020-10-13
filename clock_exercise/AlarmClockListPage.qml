@@ -6,6 +6,7 @@ Rectangle {
     signal back
 
     color: "#151B2E"
+    Component.onCompleted: clockManager.alarmItemModel.setAllNotSelected()
 
     BackButton {
         x: 28

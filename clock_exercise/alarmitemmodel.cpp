@@ -50,6 +50,15 @@ QHash<int, QByteArray> AlarmItemModel::roleNames() const
     return m_roleNames;
 }
 
+void AlarmItemModel::setAllNotSelected() {
+    for(int i = 0; i < m_data.count(); i++) {
+        if(m_data[i].m_selected == true) {
+            m_data[i].m_selected = false;
+            emit dataChanged( QAbstractListModel::index(i),  QAbstractListModel::index(i));
+        }
+    }
+}
+
 bool AlarmItemModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     int row = index.row();
