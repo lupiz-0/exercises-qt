@@ -2,6 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "clockmanager.h"
+#include "alarmitemmodel.h"
+#include "alarmitemdata.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,8 +18,9 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
-    
+
     engine.rootContext()->setContextProperty("clockManager", new ClockManager(&engine));
+    qRegisterMetaType<AlarmItemData>();
     engine.load(url);
 
     return app.exec();

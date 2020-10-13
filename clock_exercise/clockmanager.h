@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QDate>
+#include "alarmitemmodel.h"
 
 class ClockManager : public QObject
 {
@@ -16,6 +17,7 @@ class ClockManager : public QObject
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
     Q_PROPERTY(QDate alarmDate MEMBER m_alarmDate NOTIFY alarmDateChanged)
+    Q_PROPERTY(AlarmItemModel* alarmItemModel READ getAlarmItemModel CONSTANT)
 
     QString m_dateText;
     int m_minutes;
@@ -23,6 +25,7 @@ class ClockManager : public QObject
     bool m_timerRunning;
     float m_timerCurrentSeconds;
     QDate m_alarmDate;
+    AlarmItemModel m_alarmItemModel;
 
     QTimer m_timerForRefresh;
     int m_timerHoursOnStartTimer;
@@ -41,6 +44,7 @@ public:
 public slots:
     void setTimerCurrentTime(int hours, int minutes);
     void restartTimer();
+    AlarmItemModel* getAlarmItemModel(){return &m_alarmItemModel;}
 
 signals:
     void dateTextChanged();
@@ -63,3 +67,4 @@ private:
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
 };
+

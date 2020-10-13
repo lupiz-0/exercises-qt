@@ -61,5 +61,6 @@
         <file>images/check_selected.svg</file>
         <file>CheckBox.qml</file>
         <file>AlarmItem.qml</file>
+        <file>SectionHeading.qml</file>
     </qresource>
 </RCC>

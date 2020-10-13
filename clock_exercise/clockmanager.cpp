@@ -8,7 +8,6 @@ ClockManager::ClockManager(QObject *parent) : QObject(parent), m_timerRunning(fa
         , m_timerHoursOnStartTimer(0), m_timerMinutesOnStartTimer(0) {
     connect(&m_timerForRefresh, &QTimer::timeout, this, &ClockManager::refresh);
     m_timerForRefresh.start(SECONDS_TIMER_INTERVAL*1000);
-
     refresh();
 }
 
