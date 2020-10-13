@@ -1,11 +1,12 @@
 #include "alarmitemmodel.h"
+#include "notifierofchange.h"
 
 
 const QHash<int, QByteArray> AlarmItemModel::m_roleNames {
     {EverydayRole, "everyday"}, {ActiveRole, "active"}, {SelectedRole, "selected"}, {DayRole, "day"},  {MonthRole, "month"}, {YearRole, "year"}, {HoursRole, "hours"}, {MinutesRole, "minutes"}
 };
 
-AlarmItemModel::AlarmItemModel(): m_atLeastOneEverydayAlarm(false)
+AlarmItemModel::AlarmItemModel(): m_atLeastOneEverydayAlarm(false), m_numberSelectedAlarms(0)
 {
 }
 
@@ -57,6 +58,7 @@ void AlarmItemModel::setAllNotSelected() {
             emit dataChanged( QAbstractListModel::index(i),  QAbstractListModel::index(i));
         }
     }
+    setNumberSelectedAlarms(0);
 }
 
 bool AlarmItemModel::setData(const QModelIndex& index, const QVariant& value, int role)
@@ -83,6 +85,7 @@ bool AlarmItemModel::setData(const QModelIndex& index, const QVariant& value, in
         if (value != m_data[row].m_selected) {
             m_data[row].m_selected = value.toBool();
             emit dataChanged(index, index);
+            countNumberSelectedAlarms();
             return true;
         }
     case DayRole:
@@ -143,10 +146,30 @@ void AlarmItemModel::addNewAlarm(AlarmItemData alarm) {
         m_data.push_back(alarm);
 }
 
-
 void AlarmItemModel::setAtLeastOneEverydayAlarm(bool atLeastOneEverydayAlarm) {
     if(m_atLeastOneEverydayAlarm != atLeastOneEverydayAlarm){
         m_atLeastOneEverydayAlarm = atLeastOneEverydayAlarm;
         emit atLeastOneEverydayAlarmChanged();
+    }
+}
+
+void AlarmItemModel::setNumberSelectedAlarms(int numberSelectedAlarms) {
+    if(m_numberSelectedAlarms != numberSelectedAlarms){
+        m_numberSelectedAlarms = numberSelectedAlarms;
+        emit numberSelectedAlarmsChanged();
+    }
+}
+
+void AlarmItemModel::countNumberSelectedAlarms() {
+
+    NotifierOfChange numberSelectedAlarmsNotifier( m_numberSelectedAlarms,
+        [this]() {
+            emit numberSelectedAlarmsChanged();
+        });
+
+    m_numberSelectedAlarms = 0;
+    for(int i = 0; i < m_data.count(); i++) {
+        if(m_data[i].m_selected)
+            m_numberSelectedAlarms++;
     }
 }
