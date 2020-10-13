@@ -45,7 +45,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         on: active
         onChanged: {
-            active = on
+            active = !active
         }
     }
 
