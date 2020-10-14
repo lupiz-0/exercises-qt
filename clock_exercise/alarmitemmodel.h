@@ -9,9 +9,11 @@ class AlarmItemModel : public QAbstractListModel
 
     Q_PROPERTY(bool atLeastOneEverydayAlarm MEMBER m_atLeastOneEverydayAlarm NOTIFY atLeastOneEverydayAlarmChanged WRITE setAtLeastOneEverydayAlarm)
     Q_PROPERTY(int numberSelectedAlarms MEMBER m_numberSelectedAlarms NOTIFY numberSelectedAlarmsChanged WRITE setNumberSelectedAlarms)
-
+    Q_PROPERTY(int dataCount MEMBER m_dataCount NOTIFY dataCountChanged WRITE setDataCount)
+    
     bool m_atLeastOneEverydayAlarm;
     int m_numberSelectedAlarms;
+    int m_dataCount;
 
     QVector<AlarmItemData> m_data;
     static const QHash<int, QByteArray> m_roleNames;
@@ -36,15 +38,18 @@ public:
     Qt::ItemFlags flags(const QModelIndex& index) const override;
     void setAtLeastOneEverydayAlarm(bool atLeastOneEverydayAlarm);
     void setNumberSelectedAlarms(int numberSelectedAlarms);
+    void setDataCount(int dataCount);
 
 public slots:
     void addNewAlarm(AlarmItemData alarm);
     AlarmItemData newAlarmItemData(){return AlarmItemData();}
     void setAllNotSelected();
+    void deleteSelectedAlarms();
 
 signals:
     void atLeastOneEverydayAlarmChanged();
     void numberSelectedAlarmsChanged();
+    void dataCountChanged();
 
 protected:
     QHash<int, QByteArray> roleNames() const override;
@@ -52,7 +57,7 @@ protected:
 private slots:
 
 private:
-    void countNumberSelectedAlarms();
+
 };
 
 Q_DECLARE_METATYPE(AlarmItemModel*)
