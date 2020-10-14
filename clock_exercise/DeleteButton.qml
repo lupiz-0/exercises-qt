@@ -9,7 +9,7 @@ Rectangle {
 
     width: 434
     height: 64
-    color: "#00EC6545"
+    color: "#151B2E"
     border.color: "#80EC6545"
     border.width: 1
     radius: height / 2
