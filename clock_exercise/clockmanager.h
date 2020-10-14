@@ -50,8 +50,6 @@ signals:
     void dateTextChanged();
     void minutesChanged();
     void hoursChanged();
-    void timerMinutesChanged();
-    void timerHoursChanged();
     void timerRunningChanged();
     void timerCurrentSecondsChanged();
     void alarmDateChanged();
