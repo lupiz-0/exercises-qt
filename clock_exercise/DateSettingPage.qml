@@ -65,6 +65,8 @@ Rectangle {
         text: qsTr("SET DATE")
         onButtonClicked: {
             clockManager.alarmDate = dataSettingPage.dateObject
+            clockManager.alarmEverydayModality = false
+            clockManager.dateAlarmValid = true
             dataSettingPage.back()
         }
     }

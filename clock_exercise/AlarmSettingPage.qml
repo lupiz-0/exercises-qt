@@ -3,8 +3,6 @@ import QtQuick 2.0
 Rectangle {
     id: alarmSettingPage
 
-    property bool everydayModality: true
-
     signal back
     signal openDateSettingPage(var date)
 
@@ -32,19 +30,21 @@ Rectangle {
         x: 34
         y: 140
         text: qsTr("Everyday")
-        selected: alarmSettingPage.everydayModality
+        selected: clockManager.alarmEverydayModality
         onButtonClicked: {
-            alarmSettingPage.everydayModality = true
+            clockManager.alarmEverydayModality = true
         }
     }
 
     TopAlarmButton {
+
+        property string alarmDateText: clockManager.alarmDate.toLocaleDateString( Qt.locale(), "dd/MM/yyyy")
+
         x: 254
         y: 140
-        text: clockManager.alarmDate.toLocaleDateString( Qt.locale(), "dd/MM/yyyy");
-        selected: !alarmSettingPage.everydayModality
+        text: clockManager.dateAlarmValid ? alarmDateText : qsTr("Set date")
+        selected: !clockManager.alarmEverydayModality
         onButtonClicked: {
-            alarmSettingPage.everydayModality = false
             alarmSettingPage.openDateSettingPage(clockManager.alarmDate)
         }
     }
@@ -72,7 +72,7 @@ Rectangle {
         onButtonClicked: {
             var alarmItemData = clockManager.alarmItemModel.newAlarmItemData()
 
-            alarmItemData.everyday = alarmSettingPage.everydayModality
+            alarmItemData.everyday = clockManager.alarmEverydayModality
             alarmItemData.active = true
             alarmItemData.selected = false
             alarmItemData.day = clockManager.alarmDay
