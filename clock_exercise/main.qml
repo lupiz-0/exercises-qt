@@ -52,7 +52,11 @@ Window {
         id: clockPage
         ClockPage {
             onTimerButtonClicked: stack.push(timerSettingPage)
-            onAlarmButtonClicked: stack.push(alarmSettingPage)
+            onAlarmButtonClicked: {
+                clockManager.dateAlarmValid = false
+                clockManager.alarmEverydayModality = true
+                stack.push(alarmSettingPage)
+            }
             onClickOnTimerIcon: stack.push(timerPage)
             onClickOnBellIcon: stack.push(alarmClockListPage)
         }

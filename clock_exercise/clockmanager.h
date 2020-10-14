@@ -18,6 +18,8 @@ class ClockManager : public QObject
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
     Q_PROPERTY(QDate alarmDate MEMBER m_alarmDate NOTIFY alarmDateChanged)
     Q_PROPERTY(AlarmItemModel* alarmItemModel READ getAlarmItemModel CONSTANT)
+    Q_PROPERTY(bool alarmEverydayModality MEMBER m_alarmEverydayModality NOTIFY alarmEverydayModalityChanged WRITE setAlarmEverydayModality)
+    Q_PROPERTY(bool dateAlarmValid MEMBER m_dateAlarmValid NOTIFY dateAlarmValidChanged WRITE setDateAlarmValid)
 
     QString m_dateText;
     int m_minutes;
@@ -25,7 +27,9 @@ class ClockManager : public QObject
     bool m_timerRunning;
     float m_timerCurrentSeconds;
     QDate m_alarmDate;
+    bool m_alarmEverydayModality;
     AlarmItemModel m_alarmItemModel;
+    bool m_dateAlarmValid;
 
     QTimer m_timerForRefresh;
     int m_timerHoursOnStartTimer;
@@ -34,6 +38,8 @@ class ClockManager : public QObject
 public:
     explicit ClockManager(QObject *parent = nullptr);
     void setTimerCurrentSeconds(float timerCurrentSeconds);
+    void setAlarmEverydayModality(bool alarmEverydayModality);
+    void setDateAlarmValid(bool dateAlarmValid);
 
     static constexpr int TIME_OF_THE_DISSOLVE_ANIMATION = 500;
     static constexpr int MINUTES_IN_ONE_HOUR = 60;
@@ -53,6 +59,8 @@ signals:
     void timerRunningChanged();
     void timerCurrentSecondsChanged();
     void alarmDateChanged();
+    void alarmEverydayModalityChanged();
+    void dateAlarmValidChanged();
 
 protected:
 
