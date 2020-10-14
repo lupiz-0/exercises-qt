@@ -43,7 +43,8 @@ Rectangle {
             anchors.centerIn: parent
             width: 29
             height: 29
-            source: "images/223-bell.svg"
+            source: clockManager.alarmItemModel.numberActiveAlarms
+                    > 0 ? "images/223-bell-active.svg" : "images/223-bell.svg"
         }
     }
 

@@ -63,5 +63,6 @@
         <file>AlarmItem.qml</file>
         <file>SectionHeading.qml</file>
         <file>DeleteButton.qml</file>
+        <file>images/223-bell-active.svg</file>
     </qresource>
 </RCC>
