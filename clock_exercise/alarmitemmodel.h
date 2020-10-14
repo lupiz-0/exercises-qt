@@ -10,10 +10,12 @@ class AlarmItemModel : public QAbstractListModel
     Q_PROPERTY(bool atLeastOneEverydayAlarm MEMBER m_atLeastOneEverydayAlarm NOTIFY atLeastOneEverydayAlarmChanged WRITE setAtLeastOneEverydayAlarm)
     Q_PROPERTY(int numberSelectedAlarms MEMBER m_numberSelectedAlarms NOTIFY numberSelectedAlarmsChanged WRITE setNumberSelectedAlarms)
     Q_PROPERTY(int dataCount MEMBER m_dataCount NOTIFY dataCountChanged WRITE setDataCount)
+    Q_PROPERTY(int numberActiveAlarms MEMBER m_numberActiveAlarms NOTIFY numberActiveAlarmsChanged WRITE setNumberActiveAlarms)
     
     bool m_atLeastOneEverydayAlarm;
     int m_numberSelectedAlarms;
     int m_dataCount;
+    int m_numberActiveAlarms;
 
     QVector<AlarmItemData> m_data;
     static const QHash<int, QByteArray> m_roleNames;
@@ -39,6 +41,7 @@ public:
     void setAtLeastOneEverydayAlarm(bool atLeastOneEverydayAlarm);
     void setNumberSelectedAlarms(int numberSelectedAlarms);
     void setDataCount(int dataCount);
+    void setNumberActiveAlarms(int numberActiveAlarms);
 
 public slots:
     void addNewAlarm(AlarmItemData alarm);
@@ -50,6 +53,7 @@ signals:
     void atLeastOneEverydayAlarmChanged();
     void numberSelectedAlarmsChanged();
     void dataCountChanged();
+    void numberActiveAlarmsChanged();
 
 protected:
     QHash<int, QByteArray> roleNames() const override;

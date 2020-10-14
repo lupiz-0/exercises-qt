@@ -1,12 +1,11 @@
 #include "alarmitemmodel.h"
 #include "notifierofchange.h"
 
-
 const QHash<int, QByteArray> AlarmItemModel::m_roleNames {
     {EverydayRole, "everyday"}, {ActiveRole, "active"}, {SelectedRole, "selected"}, {DayRole, "day"},  {MonthRole, "month"}, {YearRole, "year"}, {HoursRole, "hours"}, {MinutesRole, "minutes"}
 };
 
-AlarmItemModel::AlarmItemModel(): m_atLeastOneEverydayAlarm(false), m_numberSelectedAlarms(0), m_dataCount(0)
+AlarmItemModel::AlarmItemModel(): m_atLeastOneEverydayAlarm(false), m_numberSelectedAlarms(0), m_dataCount(0), m_numberActiveAlarms(0)
 {
 }
 
@@ -79,6 +78,10 @@ bool AlarmItemModel::setData(const QModelIndex& index, const QVariant& value, in
         if (value != m_data[row].m_active) {
             m_data[row].m_active = value.toBool();
             emit dataChanged(index, index);
+            if(m_data[row].m_active)
+                setNumberActiveAlarms(m_numberActiveAlarms + 1);
+            else
+                setNumberActiveAlarms(m_numberActiveAlarms - 1);
             return true;
         }
     case SelectedRole:
@@ -149,6 +152,7 @@ void AlarmItemModel::addNewAlarm(AlarmItemData alarm) {
         m_data.push_back(alarm);
 
     setDataCount(m_dataCount + 1);
+    setNumberActiveAlarms(m_numberActiveAlarms + 1);
 }
 
 void AlarmItemModel::setAtLeastOneEverydayAlarm(bool atLeastOneEverydayAlarm) {
@@ -168,9 +172,14 @@ void AlarmItemModel::setNumberSelectedAlarms(int numberSelectedAlarms) {
 void AlarmItemModel::deleteSelectedAlarms() {
     for(int i = 0; i < m_data.count(); ) {
         if(m_data[i].m_selected) {
+
+            if(m_data[i].m_active)
+                setNumberActiveAlarms(m_numberActiveAlarms - 1);
+
             beginRemoveRows(QModelIndex(),i,i);
             m_data.remove(i);
             endRemoveRows();
+
             setNumberSelectedAlarms(m_numberSelectedAlarms - 1);
             setDataCount(m_dataCount - 1);
         }
@@ -185,3 +194,10 @@ void AlarmItemModel::setDataCount(int dataCount) {
        emit dataCountChanged(); 
     }
 }
+
+void AlarmItemModel::setNumberActiveAlarms(int numberActiveAlarms) {
+    if(m_numberActiveAlarms != numberActiveAlarms){
+        m_numberActiveAlarms = numberActiveAlarms;
+        emit numberActiveAlarmsChanged();
+    }
+} 
