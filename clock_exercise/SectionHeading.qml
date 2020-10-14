@@ -12,7 +12,7 @@ Item {
         anchors.leftMargin: 12
         anchors.bottom: root.bottom
         anchors.bottomMargin: 17.5
-        text: section === "true" ? "Everyday" : "Others"
+        text: section === "true" ? qsTr("Everyday") : qsTr("Others")
         color: "#FCB647"
         font.family: "Buenos Aires"
         font.styleName: "Regular"
