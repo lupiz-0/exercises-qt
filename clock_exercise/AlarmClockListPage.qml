@@ -28,13 +28,20 @@ Rectangle {
     Text {
         anchors.horizontalCenter: parent.horizontalCenter
         y: 342
-        visible: clockManager.alarmItemModel.rowCount() === 0
+        opacity: clockManager.alarmItemModel.dataCount === 0
+        visible: opacity > 0
         text: qsTr("No alarm")
         color: "#9FAAB0"
         font.pixelSize: 60
         horizontalAlignment: Text.AlignHCenter
         font.family: "Buenos Aires"
         font.styleName: "Thin"
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: clockManager.timeOfTheDissolveAnimation
+            }
+        }
     }
 
     ListView {
@@ -54,6 +61,7 @@ Rectangle {
     DeleteButton {
         x: 23
         y: 706
+        onButtonClicked: clockManager.alarmItemModel.deleteSelectedAlarms()
     }
 
     Component {

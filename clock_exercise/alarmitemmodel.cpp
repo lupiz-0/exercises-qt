@@ -6,7 +6,7 @@ const QHash<int, QByteArray> AlarmItemModel::m_roleNames {
     {EverydayRole, "everyday"}, {ActiveRole, "active"}, {SelectedRole, "selected"}, {DayRole, "day"},  {MonthRole, "month"}, {YearRole, "year"}, {HoursRole, "hours"}, {MinutesRole, "minutes"}
 };
 
-AlarmItemModel::AlarmItemModel(): m_atLeastOneEverydayAlarm(false), m_numberSelectedAlarms(0)
+AlarmItemModel::AlarmItemModel(): m_atLeastOneEverydayAlarm(false), m_numberSelectedAlarms(0), m_dataCount(0)
 {
 }
 
@@ -85,7 +85,10 @@ bool AlarmItemModel::setData(const QModelIndex& index, const QVariant& value, in
         if (value != m_data[row].m_selected) {
             m_data[row].m_selected = value.toBool();
             emit dataChanged(index, index);
-            countNumberSelectedAlarms();
+            if(m_data[row].m_selected)
+                setNumberSelectedAlarms(m_numberSelectedAlarms + 1);
+            else
+                setNumberSelectedAlarms(m_numberSelectedAlarms - 1);
             return true;
         }
     case DayRole:
@@ -144,6 +147,8 @@ void AlarmItemModel::addNewAlarm(AlarmItemData alarm) {
     }
     else
         m_data.push_back(alarm);
+
+    setDataCount(m_dataCount + 1);
 }
 
 void AlarmItemModel::setAtLeastOneEverydayAlarm(bool atLeastOneEverydayAlarm) {
@@ -160,16 +165,23 @@ void AlarmItemModel::setNumberSelectedAlarms(int numberSelectedAlarms) {
     }
 }
 
-void AlarmItemModel::countNumberSelectedAlarms() {
+void AlarmItemModel::deleteSelectedAlarms() {
+    for(int i = 0; i < m_data.count(); ) {
+        if(m_data[i].m_selected) {
+            beginRemoveRows(QModelIndex(),i,i);
+            m_data.remove(i);
+            endRemoveRows();
+            setNumberSelectedAlarms(m_numberSelectedAlarms - 1);
+            setDataCount(m_dataCount - 1);
+        }
+        else
+            i++;
+    }
+}
 
-    NotifierOfChange numberSelectedAlarmsNotifier( m_numberSelectedAlarms,
-        [this]() {
-            emit numberSelectedAlarmsChanged();
-        });
-
-    m_numberSelectedAlarms = 0;
-    for(int i = 0; i < m_data.count(); i++) {
-        if(m_data[i].m_selected)
-            m_numberSelectedAlarms++;
+void AlarmItemModel::setDataCount(int dataCount) {
+    if(m_dataCount != dataCount) {
+       m_dataCount = dataCount;
+       emit dataCountChanged(); 
     }
 }
