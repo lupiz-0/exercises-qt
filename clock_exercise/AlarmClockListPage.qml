@@ -51,17 +51,20 @@ Rectangle {
     ListView {
         x: 27
         width: 427
-        height: deleteButton.opacity
-                === 0 ? (parent.height - y - 17) : (deleteButton.y - y)
-                        - 17 //i not used "anchors.bottom" instead of set height because in this way is possible animate the changing of the bottom of the "ListView"
         anchors.top: lineUnderTitleOfThePage.bottom
         anchors.topMargin: 17
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 17
         model: clockManager.alarmItemModel
         delegate: alarmItemDelegate
         clip: true
         section.property: "everyday"
         section.criteria: ViewSection.FullString
         section.delegate: sectionHeading
+        footer: Item {
+            width: parent.width
+            height: 88
+        }
 
         Behavior on height {
             NumberAnimation {
