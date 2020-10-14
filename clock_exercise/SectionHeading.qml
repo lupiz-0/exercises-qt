@@ -4,7 +4,7 @@ Item {
     id: root
 
     width: 425
-    height: (clockManager.alarmItemModel.atLeastOneEverydayAlarm
+    height: (clockManager.alarmItemModel.numberEverydayAlarms > 0
              && section === "false") ? 88 : 42
 
     Text {

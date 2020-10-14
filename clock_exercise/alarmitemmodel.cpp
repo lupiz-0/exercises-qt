@@ -5,7 +5,7 @@ const QHash<int, QByteArray> AlarmItemModel::m_roleNames {
     {EverydayRole, "everyday"}, {ActiveRole, "active"}, {SelectedRole, "selected"}, {DayRole, "day"},  {MonthRole, "month"}, {YearRole, "year"}, {HoursRole, "hours"}, {MinutesRole, "minutes"}
 };
 
-AlarmItemModel::AlarmItemModel(): m_atLeastOneEverydayAlarm(false), m_numberSelectedAlarms(0), m_dataCount(0), m_numberActiveAlarms(0)
+AlarmItemModel::AlarmItemModel(): m_numberEverydayAlarms(0), m_numberSelectedAlarms(0), m_dataCount(0), m_numberActiveAlarms(0)
 {
 }
 
@@ -146,7 +146,7 @@ void AlarmItemModel::addNewAlarm(AlarmItemData alarm) {
         }
         m_data.insert(i, alarm);
 
-        setAtLeastOneEverydayAlarm(true);
+        setNumberEverydayAlarms(m_numberEverydayAlarms + 1);
     }
     else
         m_data.push_back(alarm);
@@ -155,10 +155,10 @@ void AlarmItemModel::addNewAlarm(AlarmItemData alarm) {
     setNumberActiveAlarms(m_numberActiveAlarms + 1);
 }
 
-void AlarmItemModel::setAtLeastOneEverydayAlarm(bool atLeastOneEverydayAlarm) {
-    if(m_atLeastOneEverydayAlarm != atLeastOneEverydayAlarm){
-        m_atLeastOneEverydayAlarm = atLeastOneEverydayAlarm;
-        emit atLeastOneEverydayAlarmChanged();
+void AlarmItemModel::setNumberEverydayAlarms(int numberEverydayAlarms) {
+    if(m_numberEverydayAlarms != numberEverydayAlarms){
+        m_numberEverydayAlarms = numberEverydayAlarms;
+        emit numberEverydayAlarmsChanged();
     }
 }
 
@@ -175,13 +175,15 @@ void AlarmItemModel::deleteSelectedAlarms() {
 
             if(m_data[i].m_active)
                 setNumberActiveAlarms(m_numberActiveAlarms - 1);
+            if(m_data[i].m_everyday)
+                setNumberEverydayAlarms(m_numberEverydayAlarms  - 1);
+
+            setNumberSelectedAlarms(m_numberSelectedAlarms - 1);
+            setDataCount(m_dataCount - 1);
 
             beginRemoveRows(QModelIndex(),i,i);
             m_data.remove(i);
             endRemoveRows();
-
-            setNumberSelectedAlarms(m_numberSelectedAlarms - 1);
-            setDataCount(m_dataCount - 1);
         }
         else
             i++;

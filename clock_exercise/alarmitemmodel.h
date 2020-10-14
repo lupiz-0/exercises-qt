@@ -7,12 +7,12 @@ class AlarmItemModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(bool atLeastOneEverydayAlarm MEMBER m_atLeastOneEverydayAlarm NOTIFY atLeastOneEverydayAlarmChanged WRITE setAtLeastOneEverydayAlarm)
+    Q_PROPERTY(int numberEverydayAlarms MEMBER m_numberEverydayAlarms NOTIFY numberEverydayAlarmsChanged WRITE setNumberEverydayAlarms)
     Q_PROPERTY(int numberSelectedAlarms MEMBER m_numberSelectedAlarms NOTIFY numberSelectedAlarmsChanged WRITE setNumberSelectedAlarms)
     Q_PROPERTY(int dataCount MEMBER m_dataCount NOTIFY dataCountChanged WRITE setDataCount)
     Q_PROPERTY(int numberActiveAlarms MEMBER m_numberActiveAlarms NOTIFY numberActiveAlarmsChanged WRITE setNumberActiveAlarms)
     
-    bool m_atLeastOneEverydayAlarm;
+    int m_numberEverydayAlarms;
     int m_numberSelectedAlarms;
     int m_dataCount;
     int m_numberActiveAlarms;
@@ -38,7 +38,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
     Qt::ItemFlags flags(const QModelIndex& index) const override;
-    void setAtLeastOneEverydayAlarm(bool atLeastOneEverydayAlarm);
+    void setNumberEverydayAlarms(int numberEverydayAlarms);
     void setNumberSelectedAlarms(int numberSelectedAlarms);
     void setDataCount(int dataCount);
     void setNumberActiveAlarms(int numberActiveAlarms);
@@ -50,7 +50,7 @@ public slots:
     void deleteSelectedAlarms();
 
 signals:
-    void atLeastOneEverydayAlarmChanged();
+    void numberEverydayAlarmsChanged();
     void numberSelectedAlarmsChanged();
     void dataCountChanged();
     void numberActiveAlarmsChanged();
