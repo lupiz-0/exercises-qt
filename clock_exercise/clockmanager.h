@@ -7,7 +7,6 @@ class ClockManager : public QObject
 {
     Q_OBJECT
 
-    // ↓↓↓ properties
     Q_PROPERTY(QString dateText MEMBER m_dateText NOTIFY dateTextChanged)
     Q_PROPERTY(int minutes MEMBER m_minutes NOTIFY minutesChanged)
     Q_PROPERTY(int hours MEMBER m_hours NOTIFY hoursChanged)
@@ -19,9 +18,6 @@ class ClockManager : public QObject
     Q_PROPERTY(QString dayOfDateName MEMBER m_dayOfDateName NOTIFY dayOfDateNameChanged WRITE setDayOfDateName)
     Q_PROPERTY(QString monthOfDateName MEMBER m_monthOfDateName NOTIFY monthOfDateNameChanged WRITE setMonthOfDateName)
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
-    Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
-    Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)
-    Q_PROPERTY(int alarmYear MEMBER m_alarmYear NOTIFY alarmYearChanged WRITE setAlarmYear)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
     Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
     Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)
@@ -40,13 +36,10 @@ class ClockManager : public QObject
     int m_alarmDay;
     int m_alarmMonth;
     int m_alarmYear;
-    // ↑↑↑ properties
 
-    // ↓↓↓ not properties
     QTimer m_timerForRefresh;
     int m_timerHoursOnStartTimer;
     int m_timerMinutesOnStartTimer;
-    // ↑↑↑ not properties
 
 public:
     explicit ClockManager(QObject *parent = nullptr);
