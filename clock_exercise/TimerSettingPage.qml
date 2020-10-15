@@ -4,7 +4,7 @@ Rectangle {
     id: timerSettingPage
 
     signal back
-    signal startTimer
+    signal startClicked
 
     color: "#151B2E"
 
@@ -65,7 +65,7 @@ Rectangle {
             clockManager.setTimerCurrentTime(hoursNumberField.value,
                                              minutesNumberField.value)
             clockManager.timerRunning = true
-            startTimer()
+            timerSettingPage.startClicked()
         }
     }
 }
