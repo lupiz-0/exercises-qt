@@ -62,7 +62,7 @@ Window {
         id: timerSettingPage
         TimerSettingPage {
             onBack: stack.pop()
-            onStartTimer: stack.push(timerPage)
+            onStartClicked: stack.push(timerPage)
         }
     }
 
