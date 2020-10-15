@@ -14,8 +14,6 @@ class ClockManager : public QObject
     Q_PROPERTY(bool timerRunning MEMBER m_timerRunning NOTIFY timerRunningChanged)
     Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged WRITE setTimerCurrentSeconds)
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
-    Q_PROPERTY(int minutesInOneHour MEMBER MINUTES_IN_ONE_HOUR CONSTANT)
-    Q_PROPERTY(int hoursInADay MEMBER HOURS_IN_A_DAY CONSTANT)
 
     QString m_dateText;
     int m_minutes;
