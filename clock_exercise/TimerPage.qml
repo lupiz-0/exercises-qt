@@ -4,9 +4,9 @@ Rectangle {
     id: timerPage
 
     property int timerHours: (clockManager.timerCurrentSeconds
-                              / clockManager.secondsInOneMinute) / clockManager.minutesInOneHour
+                              / clockManager.secondsInOneMinute) / 60
     property int timerMinutes: (clockManager.timerCurrentSeconds
-                                / clockManager.secondsInOneMinute) % clockManager.minutesInOneHour
+                                / clockManager.secondsInOneMinute) % 60
 
     signal back
 

@@ -11,9 +11,9 @@ Rectangle {
     width: 192
     height: 50
     color: "#339FAAB0"
-    border.color : selected? (mouseArea.containsMouse? "#99E2E5E7": "#E2E5E7"): "#00E2E5E7"
-    border.width : 1
-    radius: 25
+    border.color: selected ? (mouseArea.containsMouse ? "#99E2E5E7" : "#E2E5E7") : "#00E2E5E7"
+    border.width: 1
+    radius: height / 2
 
     Behavior on color {
         ColorAnimation {
@@ -27,11 +27,11 @@ Rectangle {
         }
     }
 
-
     TickOfTopAlarmButton {
         id: tick
 
-        x: 20; y:8
+        x: 20
+        y: 8
         visualizationOfSelected: root.selected
         visualizationOfHover: mouseArea.containsMouse
     }
@@ -39,7 +39,7 @@ Rectangle {
     Text {
         id: buttonText
 
-        color: mouseArea.containsMouse? "#66E2E5E7": "#E2E5E7"
+        color: mouseArea.containsMouse ? "#66E2E5E7" : "#E2E5E7"
         anchors.left: tick.right
         anchors.right: root.right
         anchors.rightMargin: root.radius
@@ -65,4 +65,3 @@ Rectangle {
         onClicked: root.buttonClicked()
     }
 }
-

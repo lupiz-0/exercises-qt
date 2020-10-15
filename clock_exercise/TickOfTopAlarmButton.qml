@@ -10,7 +10,8 @@ Item {
     height: 34
 
     Image {
-        opacity: (root.visualizationOfSelected && !root.visualizationOfHover || !root.visualizationOfSelected && root.visualizationOfHover)? 1:0
+        opacity: (root.visualizationOfSelected && !root.visualizationOfHover)
+                 || (!root.visualizationOfSelected && root.visualizationOfHover)
         source: "images/ic-tick-selected.svg"
 
         Behavior on opacity {
@@ -21,7 +22,7 @@ Item {
     }
 
     Image {
-        opacity: (root.visualizationOfSelected && root.visualizationOfHover)? 1:0
+        opacity: root.visualizationOfSelected && root.visualizationOfHover
         source: "images/ic-tick-hover.svg"
 
         Behavior on opacity {
@@ -32,7 +33,7 @@ Item {
     }
 
     Image {
-        opacity: (!root.visualizationOfSelected && !root.visualizationOfHover)? 1:0
+        opacity: !root.visualizationOfSelected && !root.visualizationOfHover
         source: "images/ic-tick-disabled.svg"
 
         Behavior on opacity {

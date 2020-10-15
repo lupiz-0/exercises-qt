@@ -5,14 +5,14 @@ Slider {
     id: root
 
     property int timeExpressedInMinutes: Math.round(value) % minutesInADay
-    property int hours: timeExpressedInMinutes / clockManager.minutesInOneHour
-    property int minutes: timeExpressedInMinutes % clockManager.minutesInOneHour
+    property int hours: timeExpressedInMinutes / 60
+    property int minutes: timeExpressedInMinutes % 60
     readonly property int startingHour: 6
-    readonly property int minutesInADay: clockManager.hoursInADay * clockManager.minutesInOneHour
+    readonly property int minutesInADay: 24 * 60
 
     value: 0.5
-    from: startingHour * clockManager.minutesInOneHour
-    to: (clockManager.hoursInADay + startingHour)*clockManager.minutesInOneHour
+    from: startingHour * 60
+    to: (24 + startingHour)*60
 
     background: Image {
             id: background

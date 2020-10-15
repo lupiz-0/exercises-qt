@@ -13,8 +13,8 @@ Rectangle {
     readonly property real clockHandAlarmImageAdaptationAngle: 180
     readonly property real amountHoursInClockFace: 12
     readonly property real angleOfOneHour: 360/amountHoursInClockFace
-    readonly property real angleOfOneMinute: 360/clockManager.minutesInOneHour
-    readonly property real angleOfOneMinuteForHourClockHand: 360.0/(clockManager.minutesInOneHour * amountHoursInClockFace)
+    readonly property real angleOfOneMinute: 360/60
+    readonly property real angleOfOneMinuteForHourClockHand: 360.0/(60 * amountHoursInClockFace)
 
     function angleFromHoursAndMinutes(hours, minutes, adaptationAngle) {
         var ang = hours % clockFace.amountHoursInClockFace
