@@ -5,7 +5,6 @@ Item {
 
     property alias text: textField.text
     property int value
-    property alias numberFontSize: numberText.font.pixelSize
 
     signal increase
     signal decrease
@@ -35,8 +34,6 @@ Item {
         }
 
         Text {
-            id: numberText
-
             x: 0
             y: 104
             width: 190
@@ -47,6 +44,7 @@ Item {
             verticalAlignment: Text.AlignVCenter
             font.family: "Buenos Aires"
             font.styleName: "Thin"
+            font.pixelSize: 120
         }
     }
 

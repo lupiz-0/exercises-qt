@@ -16,7 +16,6 @@ class ClockManager : public QObject
     Q_PROPERTY(int monthOfDate MEMBER m_monthOfDate NOTIFY monthOfDateChanged WRITE setMonthOfDate)
     Q_PROPERTY(int yearOfDate MEMBER m_yearOfDate NOTIFY yearOfDateChanged WRITE setYearOfDate)
     Q_PROPERTY(QString dayOfDateName MEMBER m_dayOfDateName NOTIFY dayOfDateNameChanged WRITE setDayOfDateName)
-    Q_PROPERTY(QString monthOfDateName MEMBER m_monthOfDateName NOTIFY monthOfDateNameChanged WRITE setMonthOfDateName)
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
     Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
@@ -48,7 +47,6 @@ public:
     void setMonthOfDate(int monthOfDate);
     void setYearOfDate(int yearOfDate);
     void setDayOfDateName(QString dayOfDateName);
-    void setMonthOfDateName(QString monthOfDateName);
     void setAlarmDay(int alarmDay);
     void setAlarmMonth(int alarmMonth);
     void setAlarmYear(int alarmYear);
@@ -96,6 +94,5 @@ private:
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
     void setDate(int days, int months, int years);
-    void setDateNames(QString day, QString month);
     void setAlarmDate(int days, int months, int years);
 };
