@@ -22,8 +22,6 @@ class ClockManager : public QObject
     Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
     Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)
     Q_PROPERTY(int alarmYear MEMBER m_alarmYear NOTIFY alarmYearChanged WRITE setAlarmYear)
-    Q_PROPERTY(QString alarmDayName MEMBER m_alarmDayName NOTIFY alarmDayNameChanged WRITE setAlarmDayName)
-    Q_PROPERTY(QString alarmMonthName MEMBER m_alarmMonthName NOTIFY alarmMonthNameChanged WRITE setAlarmMonthName)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
     Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
     Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)

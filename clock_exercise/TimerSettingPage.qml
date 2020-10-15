@@ -60,7 +60,7 @@ Rectangle {
         x: 23
         y: 706
         text: qsTr("START")
-        enabled: hoursNumberField.value || minutesNumberField.value
+        active: hoursNumberField.value || minutesNumberField.value
         onButtonClicked: {
             clockManager.setTimerCurrentTime(hoursNumberField.value,
                                              minutesNumberField.value)
