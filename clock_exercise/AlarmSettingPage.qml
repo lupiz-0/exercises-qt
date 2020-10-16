@@ -7,7 +7,7 @@ Rectangle {
     signal openDateSettingPage(var date)
 
     color: "#151B2E"
-    Component.onCompleted: clockManager.alarmDate = new Date();
+    Component.onCompleted: clockManager.alarmDate = new Date()
 
     BackButton {
         x: 28
@@ -38,7 +38,8 @@ Rectangle {
 
     TopAlarmButton {
 
-        property string alarmDateText: clockManager.alarmDate.toLocaleDateString( Qt.locale(), "dd/MM/yyyy")
+        property string alarmDateText: clockManager.alarmDate.toLocaleDateString(
+                                           Qt.locale(), "dd/MM/yyyy")
 
         x: 254
         y: 140
