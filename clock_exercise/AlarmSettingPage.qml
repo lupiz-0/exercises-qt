@@ -9,7 +9,7 @@ Rectangle {
     signal openDateSettingPage(var date)
 
     color: "#151B2E"
-    Component.onCompleted: clockManager.setCurrentAlarmDate()
+    Component.onCompleted: clockManager.alarmDate = new Date();
 
     BackButton {
         x: 28
@@ -41,18 +41,11 @@ Rectangle {
     TopAlarmButton {
         x: 254
         y: 140
-        text: {
-            clockManager.alarmDay.toString().padStart(
-                        2, '0') + "/" + clockManager.alarmMonth.toString(
-                        ).padStart(2, '0') + "/" + clockManager.alarmYear
-        }
+        text: clockManager.alarmDate.toLocaleDateString( Qt.locale(), "dd/MM/yyyy");
         selected: !alarmSettingPage.everydayModality
         onButtonClicked: {
             alarmSettingPage.everydayModality = false
-            alarmSettingPage.openDateSettingPage(
-                        new Date(clockManager.alarmYear,
-                                 clockManager.alarmMonth - 1,
-                                 clockManager.alarmDay))
+            alarmSettingPage.openDateSettingPage(clockManager.alarmDate)
         }
     }
 

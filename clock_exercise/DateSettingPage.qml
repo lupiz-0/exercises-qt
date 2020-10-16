@@ -64,7 +64,7 @@ Rectangle {
         y: 706
         text: qsTr("SET DATE")
         onButtonClicked: {
-            clockManager.confirmAlarmDate(dataSettingPage.dateObject)
+            clockManager.alarmDate = dataSettingPage.dateObject
             dataSettingPage.back()
         }
     }

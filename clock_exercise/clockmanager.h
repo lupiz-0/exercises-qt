@@ -15,18 +15,14 @@ class ClockManager : public QObject
     Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged WRITE setTimerCurrentSeconds)
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
-    Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
-    Q_PROPERTY(int alarmMonth MEMBER m_alarmMonth NOTIFY alarmMonthChanged WRITE setAlarmMonth)
-    Q_PROPERTY(int alarmYear MEMBER m_alarmYear NOTIFY alarmYearChanged WRITE setAlarmYear)
+    Q_PROPERTY(QDate alarmDate MEMBER m_alarmDate NOTIFY alarmDateChanged)
 
     QString m_dateText;
     int m_minutes;
     int m_hours;
     bool m_timerRunning;
     float m_timerCurrentSeconds;
-    int m_alarmDay;
-    int m_alarmMonth;
-    int m_alarmYear;
+    QDate m_alarmDate;
 
     QTimer m_timerForRefresh;
     int m_timerHoursOnStartTimer;
@@ -35,9 +31,6 @@ class ClockManager : public QObject
 public:
     explicit ClockManager(QObject *parent = nullptr);
     void setTimerCurrentSeconds(float timerCurrentSeconds);
-    void setAlarmDay(int alarmDay);
-    void setAlarmMonth(int alarmMonth);
-    void setAlarmYear(int alarmYear);
 
     static constexpr int TIME_OF_THE_DISSOLVE_ANIMATION = 500;
     static constexpr int MINUTES_IN_ONE_HOUR = 60;
@@ -48,8 +41,6 @@ public:
 public slots:
     void setTimerCurrentTime(int hours, int minutes);
     void restartTimer();
-    void setCurrentAlarmDate();
-    void confirmAlarmDate(QDate date);
 
 signals:
     void dateTextChanged();
@@ -59,9 +50,7 @@ signals:
     void timerHoursChanged();
     void timerRunningChanged();
     void timerCurrentSecondsChanged();
-    void alarmDayChanged();
-    void alarmMonthChanged();
-    void alarmYearChanged();
+    void alarmDateChanged();
 
 protected:
 
@@ -73,5 +62,4 @@ private:
     void refreshDateText();
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
-    void setAlarmDate(int days, int months, int years);
 };

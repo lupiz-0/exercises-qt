@@ -72,39 +72,3 @@ void ClockManager::setTimerCurrentSeconds(float timerCurrentSeconds) {
         emit timerCurrentSecondsChanged();
     }
 }
-
-void ClockManager::setCurrentAlarmDate() {
-    QDate date = QDate::currentDate();
-    setAlarmDate(date.day(), date.month(), date.year());
-}
-
-void ClockManager::setAlarmDate(int days, int months, int years) {
-    setAlarmDay(days);
-    setAlarmMonth(months);
-    setAlarmYear(years);
-}
-
-void ClockManager::setAlarmDay(int alarmDay) {
-    if(m_alarmDay != alarmDay){
-        m_alarmDay = alarmDay;
-        emit alarmDayChanged();
-    }
-}
-
-void ClockManager::setAlarmMonth(int alarmMonth) {
-    if(m_alarmMonth != alarmMonth) {
-        m_alarmMonth = alarmMonth;
-        emit alarmMonthChanged();
-    }
-}
-
-void ClockManager::setAlarmYear(int alarmYear){
-    if(m_alarmYear != alarmYear) {
-        m_alarmYear = alarmYear;
-        emit alarmYearChanged();
-    }
-}
-
-void ClockManager::confirmAlarmDate(QDate date) {
-    setAlarmDate(date.day(), date.month(), date.year());
-}
