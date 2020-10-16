@@ -73,64 +73,15 @@ void ClockManager::setTimerCurrentSeconds(float timerCurrentSeconds) {
     }
 }
 
-void ClockManager::setCurrentDate() {
-    QDate date = QDate::currentDate();
-    setDate(date.day(), date.month(), date.year());
-    setDayOfDateName(date.toString("ddd"));
-}
-
 void ClockManager::setCurrentAlarmDate() {
     QDate date = QDate::currentDate();
     setAlarmDate(date.day(), date.month(), date.year());
-}
-
-void ClockManager::setDayOfDate(int dayOfDate) {
-    if(m_dayOfDate != dayOfDate) {
-        m_dayOfDate = dayOfDate;
-        emit dayOfDateChanged();
-    }
-}
-
-void ClockManager::setMonthOfDate(int monthOfDate) {
-    if(m_monthOfDate != monthOfDate) {
-        m_monthOfDate = monthOfDate;
-        emit monthOfDateChanged();
-    }
-}
-
-void ClockManager::setYearOfDate(int yearOfDate) {
-    if(m_yearOfDate != yearOfDate) {
-        m_yearOfDate = yearOfDate;
-        emit yearOfDateChanged();
-    }
-}
-
-void ClockManager::addToDate(int daysNumber, int monthsNumber, int yearsNumber) {
-    QDate date(m_yearOfDate, m_monthOfDate, m_dayOfDate);
-    date = date.addDays(daysNumber);
-    date = date.addMonths(monthsNumber);
-    date = date.addYears(yearsNumber);
-    setDate(date.day(), date.month(), date.year());
-    setDayOfDateName(date.toString("ddd"));
-}
-
-void ClockManager::setDate(int days, int months, int years) {
-    setDayOfDate(days);
-    setMonthOfDate(months);
-    setYearOfDate(years);
 }
 
 void ClockManager::setAlarmDate(int days, int months, int years) {
     setAlarmDay(days);
     setAlarmMonth(months);
     setAlarmYear(years);
-}
-
-void ClockManager::setDayOfDateName(QString dayOfDateName) {
-    if(m_dayOfDateName != dayOfDateName) {
-        m_dayOfDateName = dayOfDateName;
-        emit dayOfDateNameChanged();
-    }
 }
 
 void ClockManager::setAlarmDay(int alarmDay) {
@@ -154,12 +105,6 @@ void ClockManager::setAlarmYear(int alarmYear){
     }
 }
 
-void ClockManager::confirmAlarmDate() {
-    setAlarmDate(m_dayOfDate, m_monthOfDate, m_yearOfDate);
-}
-
-void ClockManager::setDateOfDatePageLikeDateOfAlarm(){
-    setDate(m_alarmDay, m_alarmMonth, m_alarmYear);
-    QDate date(m_alarmYear, m_alarmMonth, m_alarmDay);
-    setDayOfDateName(date.toString("ddd"));
+void ClockManager::confirmAlarmDate(QDate date) {
+    setAlarmDate(date.day(), date.month(), date.year());
 }

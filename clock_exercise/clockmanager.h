@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QDate>
 
 class ClockManager : public QObject
 {
@@ -12,10 +13,6 @@ class ClockManager : public QObject
     Q_PROPERTY(int hours MEMBER m_hours NOTIFY hoursChanged)
     Q_PROPERTY(bool timerRunning MEMBER m_timerRunning NOTIFY timerRunningChanged)
     Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged WRITE setTimerCurrentSeconds)
-    Q_PROPERTY(int dayOfDate MEMBER m_dayOfDate NOTIFY dayOfDateChanged WRITE setDayOfDate)
-    Q_PROPERTY(int monthOfDate MEMBER m_monthOfDate NOTIFY monthOfDateChanged WRITE setMonthOfDate)
-    Q_PROPERTY(int yearOfDate MEMBER m_yearOfDate NOTIFY yearOfDateChanged WRITE setYearOfDate)
-    Q_PROPERTY(QString dayOfDateName MEMBER m_dayOfDateName NOTIFY dayOfDateNameChanged WRITE setDayOfDateName)
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
     Q_PROPERTY(int alarmDay MEMBER m_alarmDay NOTIFY alarmDayChanged WRITE setAlarmDay)
@@ -27,11 +24,6 @@ class ClockManager : public QObject
     int m_hours;
     bool m_timerRunning;
     float m_timerCurrentSeconds;
-    int m_dayOfDate;
-    int m_monthOfDate;
-    int m_yearOfDate;
-    QString m_dayOfDateName;
-    QString m_monthOfDateName;
     int m_alarmDay;
     int m_alarmMonth;
     int m_alarmYear;
@@ -43,10 +35,6 @@ class ClockManager : public QObject
 public:
     explicit ClockManager(QObject *parent = nullptr);
     void setTimerCurrentSeconds(float timerCurrentSeconds);
-    void setDayOfDate(int dayOfDate);
-    void setMonthOfDate(int monthOfDate);
-    void setYearOfDate(int yearOfDate);
-    void setDayOfDateName(QString dayOfDateName);
     void setAlarmDay(int alarmDay);
     void setAlarmMonth(int alarmMonth);
     void setAlarmYear(int alarmYear);
@@ -60,11 +48,8 @@ public:
 public slots:
     void setTimerCurrentTime(int hours, int minutes);
     void restartTimer();
-    void setCurrentDate();
     void setCurrentAlarmDate();
-    void addToDate(int daysNumber, int monthsNumber, int yearsNumber);
-    void confirmAlarmDate();
-    void setDateOfDatePageLikeDateOfAlarm();
+    void confirmAlarmDate(QDate date);
 
 signals:
     void dateTextChanged();
@@ -74,11 +59,6 @@ signals:
     void timerHoursChanged();
     void timerRunningChanged();
     void timerCurrentSecondsChanged();
-    void dayOfDateChanged();
-    void monthOfDateChanged();
-    void yearOfDateChanged();
-    void dayOfDateNameChanged();
-    void monthOfDateNameChanged();
     void alarmDayChanged();
     void alarmMonthChanged();
     void alarmYearChanged();
@@ -93,6 +73,5 @@ private:
     void refreshDateText();
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
-    void setDate(int days, int months, int years);
     void setAlarmDate(int days, int months, int years);
 };

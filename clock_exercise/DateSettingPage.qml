@@ -3,6 +3,12 @@ import QtQuick 2.0
 Rectangle {
     id: dataSettingPage
 
+    property date dateObject: new Date()
+    property string dayName: dateObject.toLocaleDateString(Qt.locale(), "ddd")
+    property string monthText: dateObject.toLocaleDateString(Qt.locale(), "MM")
+    property string yearText: dateObject.toLocaleDateString(Qt.locale(), "yyyy")
+    readonly property int dayMilliseconds: 1000 * 60 * 60 * 24
+
     signal back
 
     color: "#151B2E"
@@ -29,13 +35,20 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
 
         DateUpDownNumberField {
-            value: clockManager.dayOfDate
-            text: clockManager.dayOfDateName
-            onIncrease: clockManager.addToDate(1, 0, 0)
-            onDecrease: clockManager.addToDate(-1, 0, 0)
+            value: dataSettingPage.dateObject.getDate()
+            text: dataSettingPage.dayName
+            onIncrease: {
+                dataSettingPage.dateObject = new Date(dataSettingPage.dateObject.getTime(
+                                                          ) + dataSettingPage.dayMilliseconds)
+            }
+            onDecrease: {
+                dataSettingPage.dateObject = new Date(dataSettingPage.dateObject.getTime(
+                                                          ) - dataSettingPage.dayMilliseconds)
+            }
         }
+
         Text {
-            text: " / " + clockManager.monthOfDate + " / " + clockManager.yearOfDate
+            text: " / " + dataSettingPage.monthText + " / " + dataSettingPage.yearText
             font.pixelSize: 40
             font.family: "Buenos Aires"
             font.styleName: "Regular"
@@ -51,7 +64,7 @@ Rectangle {
         y: 706
         text: qsTr("SET DATE")
         onButtonClicked: {
-            clockManager.confirmAlarmDate()
+            clockManager.confirmAlarmDate(dataSettingPage.dateObject)
             dataSettingPage.back()
         }
     }

@@ -1,7 +1,6 @@
 #pragma once
 #include <functional>
 
-
 template <typename T>
 class NotifierOfChange
 {

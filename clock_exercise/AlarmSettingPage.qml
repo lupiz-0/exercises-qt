@@ -6,7 +6,7 @@ Rectangle {
     property bool everydayModality: true
 
     signal back
-    signal openDateSettingPage
+    signal openDateSettingPage(var date)
 
     color: "#151B2E"
     Component.onCompleted: clockManager.setCurrentAlarmDate()
@@ -48,9 +48,11 @@ Rectangle {
         }
         selected: !alarmSettingPage.everydayModality
         onButtonClicked: {
-            clockManager.setDateOfDatePageLikeDateOfAlarm()
             alarmSettingPage.everydayModality = false
-            alarmSettingPage.openDateSettingPage()
+            alarmSettingPage.openDateSettingPage(
+                        new Date(clockManager.alarmYear,
+                                 clockManager.alarmMonth - 1,
+                                 clockManager.alarmDay))
         }
     }
 

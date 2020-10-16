@@ -76,7 +76,9 @@ Window {
         id: alarmSettingPage
         AlarmSettingPage {
             onBack: stack.pop()
-            onOpenDateSettingPage: stack.push(dateSettingPage)
+            onOpenDateSettingPage: stack.push(dateSettingPage, {
+                                                  "dateObject": date
+                                              })
         }
     }
 
