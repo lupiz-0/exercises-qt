@@ -53,7 +53,6 @@
         <file>images/comp-slider.svg</file>
         <file>DateSettingPage.qml</file>
         <file>DateUpDownNumberField.qml</file>
-        <file>DateNumberField.qml</file>
         <file>AlarmClockListPage.qml</file>
         <file>ActivationAlarmSwitch.qml</file>
         <file>images/switch-off-selected.svg</file>

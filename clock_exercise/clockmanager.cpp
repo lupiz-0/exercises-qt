@@ -71,3 +71,17 @@ void ClockManager::setTimerCurrentSeconds(float timerCurrentSeconds) {
         emit timerCurrentSecondsChanged();
     }
 }
+
+void ClockManager::setAlarmEverydayModality(bool alarmEverydayModality) {
+    if(m_alarmEverydayModality != alarmEverydayModality) {
+        m_alarmEverydayModality = alarmEverydayModality;
+        emit alarmEverydayModalityChanged();
+    }
+}
+
+void ClockManager::setDateAlarmValid(bool dateAlarmValid) {
+    if(m_dateAlarmValid != dateAlarmValid) {
+        m_dateAlarmValid = dateAlarmValid;
+        dateAlarmValidChanged();
+    }
+}
