@@ -64,5 +64,6 @@
         <file>SectionHeading.qml</file>
         <file>DeleteButton.qml</file>
         <file>images/223-bell-active.svg</file>
+        <file>images/223-bell-active.png</file>
     </qresource>
 </RCC>
