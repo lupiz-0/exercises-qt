@@ -42,7 +42,6 @@ Window {
         source: "fonts/BuenosAires_Family/BuenosAires-Book.otf"
     }
 
-
     StackView {
         id: stack
         initialItem: clockPage
@@ -76,6 +75,16 @@ Window {
     Component {
         id: alarmSettingPage
         AlarmSettingPage {
+            onBack: stack.pop()
+            onOpenDateSettingPage: stack.push(dateSettingPage, {
+                                                  "dateObject": date
+                                              })
+        }
+    }
+
+    Component {
+        id: dateSettingPage
+        DateSettingPage {
             onBack: stack.pop()
         }
     }

@@ -48,7 +48,7 @@ Rectangle {
         font.pixelSize: 20
         horizontalAlignment: Text.AlignHCenter
         font.family: "Buenos Aires"
-        font.styleName: "SemiBold"
+        font.styleName: "Regular"
 
         Behavior on color {
             ColorAnimation {

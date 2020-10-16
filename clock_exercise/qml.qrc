@@ -51,5 +51,7 @@
         <file>images/handle-enable.svg</file>
         <file>images/handle-pressed.svg</file>
         <file>images/comp-slider.svg</file>
+        <file>DateSettingPage.qml</file>
+        <file>DateUpDownNumberField.qml</file>
     </qresource>
 </RCC>
