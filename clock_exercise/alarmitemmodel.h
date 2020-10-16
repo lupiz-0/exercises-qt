@@ -2,6 +2,7 @@
 
 #include <QAbstractListModel>
 #include "alarmitemdata.h"
+#include <QDate>
 
 class AlarmItemModel : public QAbstractListModel
 {
@@ -44,8 +45,7 @@ public:
     void setNumberActiveAlarms(int numberActiveAlarms);
 
 public slots:
-    void addNewAlarm(AlarmItemData alarm);
-    AlarmItemData newAlarmItemData(){return AlarmItemData();}
+    void addNewAlarm(bool everyDay, QDate date, int hours, int minutes);
     void setAllNotSelected();
     void deleteSelectedAlarms();
 
