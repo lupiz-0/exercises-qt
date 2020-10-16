@@ -44,7 +44,7 @@ Rectangle {
             width: 29
             height: 29
             source: clockManager.alarmItemModel.numberActiveAlarms
-                    > 0 ? "images/223-bell-active.svg" : "images/223-bell.svg"
+                    > 0 ? "images/223-bell-active.png" : "images/223-bell.svg"
         }
     }
 
