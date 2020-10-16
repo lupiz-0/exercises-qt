@@ -135,7 +135,10 @@ Qt::ItemFlags AlarmItemModel::flags(const QModelIndex& index) const
     return QAbstractListModel::flags(index) | Qt::ItemIsEditable;
 }
 
-void AlarmItemModel::addNewAlarm(AlarmItemData alarm) {
+void AlarmItemModel::addNewAlarm(bool everyDay, QDate date, int hours, int minutes) {
+
+    AlarmItemData alarm(everyDay, true, false, date.day(), date.month(), date.year(), hours, minutes );
+
     if(alarm.m_everyday)
     {
         int i = 0;

@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
 
     engine.rootContext()->setContextProperty("clockManager", new ClockManager(&engine));
-    qRegisterMetaType<AlarmItemData>();
     engine.load(url);
 
     return app.exec();
