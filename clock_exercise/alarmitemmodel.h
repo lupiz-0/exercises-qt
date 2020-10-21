@@ -8,10 +8,10 @@ class AlarmItemModel : public QAbstractListModel
 {
     Q_OBJECT
 
-    Q_PROPERTY(int numberEverydayAlarms MEMBER m_numberEverydayAlarms NOTIFY numberEverydayAlarmsChanged WRITE setNumberEverydayAlarms)
-    Q_PROPERTY(int numberSelectedAlarms MEMBER m_numberSelectedAlarms NOTIFY numberSelectedAlarmsChanged WRITE setNumberSelectedAlarms)
-    Q_PROPERTY(int dataCount MEMBER m_dataCount NOTIFY dataCountChanged WRITE setDataCount)
-    Q_PROPERTY(int numberActiveAlarms MEMBER m_numberActiveAlarms NOTIFY numberActiveAlarmsChanged WRITE setNumberActiveAlarms)
+    Q_PROPERTY(int numberEverydayAlarms MEMBER m_numberEverydayAlarms NOTIFY numberEverydayAlarmsChanged)
+    Q_PROPERTY(int numberSelectedAlarms MEMBER m_numberSelectedAlarms NOTIFY numberSelectedAlarmsChanged)
+    Q_PROPERTY(int dataCount MEMBER m_dataCount NOTIFY dataCountChanged)
+    Q_PROPERTY(int numberActiveAlarms MEMBER m_numberActiveAlarms NOTIFY numberActiveAlarmsChanged)
     
     int m_numberEverydayAlarms;
     int m_numberSelectedAlarms;
@@ -39,10 +39,6 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole) override;
     Qt::ItemFlags flags(const QModelIndex& index) const override;
-    void setNumberEverydayAlarms(int numberEverydayAlarms);
-    void setNumberSelectedAlarms(int numberSelectedAlarms);
-    void setDataCount(int dataCount);
-    void setNumberActiveAlarms(int numberActiveAlarms);
 
 public slots:
     void addNewAlarm(bool everyDay, QDate date, int hours, int minutes);
@@ -61,7 +57,10 @@ protected:
 private slots:
 
 private:
-
+    void setNumberEverydayAlarms(int numberEverydayAlarms);
+    void setNumberSelectedAlarms(int numberSelectedAlarms);
+    void setDataCount(int dataCount);
+    void setNumberActiveAlarms(int numberActiveAlarms);
 };
 
 Q_DECLARE_METATYPE(AlarmItemModel*)

@@ -13,13 +13,13 @@ class ClockManager : public QObject
     Q_PROPERTY(int minutes MEMBER m_minutes NOTIFY minutesChanged)
     Q_PROPERTY(int hours MEMBER m_hours NOTIFY hoursChanged)
     Q_PROPERTY(bool timerRunning MEMBER m_timerRunning NOTIFY timerRunningChanged)
-    Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged WRITE setTimerCurrentSeconds)
+    Q_PROPERTY(float timerCurrentSeconds MEMBER m_timerCurrentSeconds NOTIFY timerCurrentSecondsChanged)
     Q_PROPERTY(int secondsInOneMinute MEMBER SECONDS_IN_ONE_MINUTE CONSTANT)
     Q_PROPERTY(int timeOfTheDissolveAnimation MEMBER TIME_OF_THE_DISSOLVE_ANIMATION CONSTANT)
     Q_PROPERTY(QDate alarmDate MEMBER m_alarmDate NOTIFY alarmDateChanged)
     Q_PROPERTY(AlarmItemModel* alarmItemModel READ getAlarmItemModel CONSTANT)
-    Q_PROPERTY(bool alarmEverydayModality MEMBER m_alarmEverydayModality NOTIFY alarmEverydayModalityChanged WRITE setAlarmEverydayModality)
-    Q_PROPERTY(bool dateAlarmValid MEMBER m_dateAlarmValid NOTIFY dateAlarmValidChanged WRITE setDateAlarmValid)
+    Q_PROPERTY(bool alarmEverydayModality NOTIFY alarmEverydayModalityChanged WRITE setAlarmEverydayModality READ getAlarmEverydayModality)
+    Q_PROPERTY(bool dateAlarmValid NOTIFY dateAlarmValidChanged WRITE setDateAlarmValid READ getDateAlarmValid)
 
     QString m_dateText;
     int m_minutes;
@@ -37,9 +37,10 @@ class ClockManager : public QObject
 
 public:
     explicit ClockManager(QObject *parent = nullptr);
-    void setTimerCurrentSeconds(float timerCurrentSeconds);
     void setAlarmEverydayModality(bool alarmEverydayModality);
     void setDateAlarmValid(bool dateAlarmValid);
+    bool getAlarmEverydayModality(){return m_alarmEverydayModality; }
+    bool getDateAlarmValid(){return m_dateAlarmValid;}
 
     static constexpr int TIME_OF_THE_DISSOLVE_ANIMATION = 500;
     static constexpr int MINUTES_IN_ONE_HOUR = 60;
@@ -72,5 +73,6 @@ private:
     void refreshDateText();
     void decreaseTimerCurrentSeconds();
     float convertHoursAndMinutesToSeconds(int hours, int minutes);
+    void setTimerCurrentSeconds(float timerCurrentSeconds);
 };
 
