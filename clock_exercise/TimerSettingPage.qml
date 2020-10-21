@@ -20,7 +20,7 @@ Rectangle {
         text: qsTr("Timer")
     }
 
-    LineUnderTitleOfThePage {
+    Separator {
         y: 115
         anchors.horizontalCenter: parent.horizontalCenter
     }

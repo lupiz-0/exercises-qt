@@ -25,7 +25,7 @@ Rectangle {
         text: qsTr("Set date")
     }
 
-    LineUnderTitleOfThePage {
+    Separator {
         y: 115
         anchors.horizontalCenter: parent.horizontalCenter
     }

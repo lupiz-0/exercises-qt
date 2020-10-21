@@ -22,7 +22,7 @@ Rectangle {
         text: qsTr("Alarm clock list")
     }
 
-    LineUnderTitleOfThePage {
+    Separator {
         id: lineUnderTitleOfThePage
 
         y: 115

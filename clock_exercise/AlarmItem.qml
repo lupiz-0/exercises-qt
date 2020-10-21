@@ -9,10 +9,6 @@ Item {
     CheckBox {
         x: 11
         anchors.verticalCenter: parent.verticalCenter
-        on: selected
-        onChanged: {
-            selected = !selected
-        }
     }
 
     Text {
@@ -40,7 +36,7 @@ Item {
         font.pixelSize: 40
     }
 
-    ActivationAlarmSwitch {
+    AlarmSwitch {
         x: 303
         anchors.verticalCenter: parent.verticalCenter
         on: active

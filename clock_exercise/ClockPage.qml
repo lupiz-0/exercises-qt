@@ -48,7 +48,7 @@ Rectangle {
         }
     }
 
-    LineUnderTitleOfThePage {
+    Separator {
         y: 115
         anchors.horizontalCenter: parent.horizontalCenter
     }

@@ -21,7 +21,7 @@ Rectangle {
         text: qsTr("Alarm")
     }
 
-    LineUnderTitleOfThePage {
+    Separator {
         y: 115
         anchors.horizontalCenter: parent.horizontalCenter
     }
