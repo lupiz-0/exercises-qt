@@ -10,16 +10,6 @@
 #include <optional>
 #include <set>
 
-using std::ifstream;
-using std::string;
-using std::cout;
-using std::map;
-using std::pair;
-using std::vector;
-using std::ofstream;
-using std::list;
-using std::set;
-
 std::size_t strlen_utf8(const std::string& str) {
     std::size_t length = 0;
     for (char c : str) {
@@ -30,52 +20,52 @@ std::size_t strlen_utf8(const std::string& str) {
     return length;
 }
 
-void addToFirstTen(vector<pair<string, int>>& words, const string& word, int frequency) {
+void addToFirstTen(std::vector<std::pair<std::string, int>>& words, const std::string& word, int frequency) {
     bool inserted = false;
 
     for(ulong i = 0; i < words.size(); i++) {
         if(frequency > words[i].second)
         {
             auto it = words.begin() + i;
-            words.insert(it, pair(word, frequency));
+            words.insert(it, std::pair(word, frequency));
             inserted = true;
             break;
         }
     }
 
     if(!inserted)
-        words.push_back(pair(word, frequency));
+        words.push_back(std::pair(word, frequency));
 
     if(words.size() > 10)
         words.pop_back();
 }
 
-void printTenMostFrequent(const string& fileName, vector<pair<string, int>>& firstTen) {
-    map<string, int> words;
+void printTenMostFrequent(const std::string& fileName, std::vector<std::pair<std::string, int>>& firstTen) {
+    std::map<std::string, int> words;
 
-    ifstream file;
+    std::ifstream file;
     file.open (fileName);
 
-    string word;
+    std::string word;
     while (file >> word)
     {
         if(strlen_utf8(word) > 3)
             words[word]++;
     }
 
-    for (map<string, int>::iterator it = words.begin(); it != words.end(); it++ )
+    for (std::map<std::string, int>::iterator it = words.begin(); it != words.end(); it++ )
         addToFirstTen(firstTen, it->first, it->second);
 
 
-    cout << '\n' << "start:" << '\n';
+    std::cout << '\n' << "start:" << '\n';
     for(ulong i = 0; i < firstTen.size(); i++) {
-        cout << firstTen[i].first << " " << firstTen[i].second << '\n';
+        std::cout << firstTen[i].first << " " << firstTen[i].second << '\n';
     }
 
     file.close();
 }
 
-void compare(const string& word, const vector<pair<string, int>>& firstTen, const vector<pair<string, int>>& firstTenWithoutPunctuation, set<string>& alreadyComparedWords) {
+void compare(const std::string& word, const std::vector<std::pair<std::string, int>>& firstTen, const std::vector<std::pair<std::string, int>>& firstTenWithoutPunctuation, std::set<std::string>& alreadyComparedWords) {
    if(alreadyComparedWords.find(word) == alreadyComparedWords.end()) {
         alreadyComparedWords.insert(word);
 
@@ -100,42 +90,42 @@ void compare(const string& word, const vector<pair<string, int>>& firstTen, cons
         if(frequencyWithPunctuation.has_value()
             && frequencyWithoutPunctuation.has_value()
             && frequencyWithPunctuation.value() == frequencyWithoutPunctuation.value())
-            cout << word << " is present in both and with the same frequency: " << frequencyWithPunctuation.value() << '\n';
+            std::cout << word << " is present in both and with the same frequency: " << frequencyWithPunctuation.value() << '\n';
 
         if(frequencyWithPunctuation.has_value()
             && frequencyWithoutPunctuation.has_value()
             && frequencyWithPunctuation.value() != frequencyWithoutPunctuation.value())
-            cout << word << " is present in both but with different frequency: " << frequencyWithPunctuation.value() << " " << frequencyWithoutPunctuation.value() << '\n';
+            std::cout << word << " is present in both but with different frequency: " << frequencyWithPunctuation.value() << " " << frequencyWithoutPunctuation.value() << '\n';
 
         if(frequencyWithPunctuation.has_value()
             && !frequencyWithoutPunctuation.has_value())
-            cout << word << " is present only with punctuation: " << frequencyWithPunctuation.value() << '\n';
+            std::cout << word << " is present only with punctuation: " << frequencyWithPunctuation.value() << '\n';
 
         if(frequencyWithoutPunctuation.has_value()
             && !frequencyWithPunctuation.has_value())
-            cout << word << " is present only without punctuation: " << frequencyWithoutPunctuation.value() << '\n';
+            std::cout << word << " is present only without punctuation: " << frequencyWithoutPunctuation.value() << '\n';
    }
 }
 
 int main()
 {
-    vector<pair<string, int>> firstTen;
-    vector<pair<string, int>> firstTenWithoutPunctuation;
-    set<string> alreadyComparedWords;
+    std::vector<std::pair<std::string, int>> firstTen;
+    std::vector<std::pair<std::string, int>> firstTenWithoutPunctuation;
+    std::set<std::string> alreadyComparedWords;
 
 
-    string nameFileWithoutPunctuation = "file without punctuation.txt";
-    string nameOriginalFile = "canto1.txt";
+    std::string nameFileWithoutPunctuation = "file without punctuation.txt";
+    std::string nameOriginalFile = "canto1.txt";
     printTenMostFrequent(nameOriginalFile, firstTen);
 
-    string specialPunctuation = "’";
+    std::string specialPunctuation = "’";
 
-    ofstream fileWithoutPunctuation;
+    std::ofstream fileWithoutPunctuation;
     fileWithoutPunctuation.open (nameFileWithoutPunctuation);
-    ifstream file;
+    std::ifstream file;
     file.open (nameOriginalFile);
     char character;
-    list<char> charactersBuffer;
+    std::list<char> charactersBuffer;
     int writingJumpCountdown = 0;
     while (file.get(character)) {
         charactersBuffer.push_back(character);
@@ -177,7 +167,7 @@ int main()
 
     printTenMostFrequent(nameFileWithoutPunctuation, firstTenWithoutPunctuation);
 
-    cout << '\n' << "compare: " << '\n';
+    std::cout << '\n' << "compare: " << '\n';
     for(ulong i = 0; i < firstTen.size(); i++)
         compare(firstTen[i].first, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
     for(ulong i = 0; i < firstTenWithoutPunctuation.size(); i++)
