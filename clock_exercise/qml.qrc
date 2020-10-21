@@ -28,7 +28,7 @@
         <file>BigButton.qml</file>
         <file>TimerPage.qml</file>
         <file>TitleOfThePage.qml</file>
-        <file>LineUnderTitleOfThePage.qml</file>
+        <file>Separator.qml</file>
         <file>TimerButton.qml</file>
         <file>images/btn-reload-active.svg</file>
         <file>images/btn-reload-hover.svg</file>
@@ -54,7 +54,7 @@
         <file>DateSettingPage.qml</file>
         <file>DateUpDownNumberField.qml</file>
         <file>AlarmClockListPage.qml</file>
-        <file>ActivationAlarmSwitch.qml</file>
+        <file>AlarmSwitch.qml</file>
         <file>images/switch-off-selected.svg</file>
         <file>images/check_disabled.svg</file>
         <file>images/check_selected.svg</file>

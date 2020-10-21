@@ -33,8 +33,6 @@ Rectangle {
     Image {
         x: 4
         y: 4
-        width: 52
-        height: 52
         source: "images/switch-off-selected.svg"
         visible: !root.on
     }
@@ -42,8 +40,6 @@ Rectangle {
     Image {
         x: 56
         y: 4
-        width: 52
-        height: 52
         source: "images/switch-on-selected.svg"
         visible: root.on
     }
