@@ -14,7 +14,6 @@ using std::ifstream;
 using std::string;
 using std::cout;
 using std::map;
-using std::endl;
 using std::pair;
 using std::vector;
 using std::ofstream;
@@ -68,9 +67,9 @@ void printTenMostFrequent(const string& fileName, vector<pair<string, int>>& fir
         addToFirstTen(firstTen, it->first, it->second);
 
 
-    cout << endl << "start:" << endl;
+    cout << '\n' << "start:" << '\n';
     for(ulong i = 0; i < firstTen.size(); i++) {
-        cout << firstTen[i].first << " " << firstTen[i].second << endl;
+        cout << firstTen[i].first << " " << firstTen[i].second << '\n';
     }
 
     file.close();
@@ -101,20 +100,20 @@ void compare(const string& word, const vector<pair<string, int>>& firstTen, cons
         if(frequencyWithPunctuation.has_value()
             && frequencyWithoutPunctuation.has_value()
             && frequencyWithPunctuation.value() == frequencyWithoutPunctuation.value())
-            cout << word << " is present in both and with the same frequency: " << frequencyWithPunctuation.value() << endl;
+            cout << word << " is present in both and with the same frequency: " << frequencyWithPunctuation.value() << '\n';
 
         if(frequencyWithPunctuation.has_value()
             && frequencyWithoutPunctuation.has_value()
             && frequencyWithPunctuation.value() != frequencyWithoutPunctuation.value())
-            cout << word << " is present in both but with different frequency: " << frequencyWithPunctuation.value() << " " << frequencyWithoutPunctuation.value() << endl;
+            cout << word << " is present in both but with different frequency: " << frequencyWithPunctuation.value() << " " << frequencyWithoutPunctuation.value() << '\n';
 
         if(frequencyWithPunctuation.has_value()
             && !frequencyWithoutPunctuation.has_value())
-            cout << word << " is present only with punctuation: " << frequencyWithPunctuation.value() << endl;
+            cout << word << " is present only with punctuation: " << frequencyWithPunctuation.value() << '\n';
 
         if(frequencyWithoutPunctuation.has_value()
             && !frequencyWithPunctuation.has_value())
-            cout << word << " is present only without punctuation: " << frequencyWithoutPunctuation.value() << endl;
+            cout << word << " is present only without punctuation: " << frequencyWithoutPunctuation.value() << '\n';
    }
 }
 
@@ -178,7 +177,7 @@ int main()
 
     printTenMostFrequent(nameFileWithoutPunctuation, firstTenWithoutPunctuation);
 
-    cout << endl << "compare: " << endl;
+    cout << '\n' << "compare: " << '\n';
     for(ulong i = 0; i < firstTen.size(); i++)
         compare(firstTen[i].first, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
     for(ulong i = 0; i < firstTenWithoutPunctuation.size(); i++)
