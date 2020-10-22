@@ -11,27 +11,32 @@
 #include <set>
 #include <cassert>
 
-void addToFirstTen(std::vector<std::pair<std::string, int>>& words, const std::string& word, int frequency) {
+struct WordAndFrequency {
+    std::string word;
+    int frequency;
+};
+
+void addToFirstTen(std::vector<WordAndFrequency>& words, const std::string& word, int frequency) {
     bool inserted = false;
 
     for(ulong i = 0; i < words.size(); i++) {
-        if(frequency > words[i].second)
+        if(frequency > words[i].frequency)
         {
             auto it = words.begin() + i;
-            words.insert(it, std::pair(word, frequency));
+            words.insert(it, {word, frequency});
             inserted = true;
             break;
         }
     }
 
     if(!inserted)
-        words.push_back(std::pair(word, frequency));
+        words.push_back({word, frequency});
 
     if(words.size() > 10)
         words.pop_back();
 }
 
-void collectMostFrequent(const std::string& fileName, std::vector<std::pair<std::string, int>>& firstTen) {
+void collectMostFrequent(const std::string& fileName, std::vector<WordAndFrequency>& firstTen) {
     std::map<std::string, int> words;
 
     std::ifstream file;
@@ -50,19 +55,19 @@ void collectMostFrequent(const std::string& fileName, std::vector<std::pair<std:
 
     std::cout << "start:\n";
     for(ulong i = 0; i < firstTen.size(); i++) {
-        std::cout << firstTen[i].first << " " << firstTen[i].second << '\n';
+        std::cout << firstTen[i].word << " " << firstTen[i].frequency << '\n';
     }
 }
 
-std::optional<int> getFrequency(const std::vector<std::pair<std::string, int>>& array, const std::string& word) {
+std::optional<int> getFrequency(const std::vector<WordAndFrequency>& array, const std::string& word) {
     for(ulong i = 0; i < array.size(); i++) {
-        if(array[i].first == word)
-            return std::optional<int>(array[i].second);
+        if(array[i].word == word)
+            return std::optional<int>(array[i].frequency);
     }
     return std::optional<int>();
 }
 
-void compare(const std::string& word, const std::vector<std::pair<std::string, int>>& firstTen, const std::vector<std::pair<std::string, int>>& firstTenWithoutPunctuation) {
+void compare(const std::string& word, const std::vector<WordAndFrequency>& firstTen, const std::vector<WordAndFrequency>& firstTenWithoutPunctuation) {
     std::optional<int> frequencyWithPunctuation = getFrequency(firstTen, word);
     std::optional<int> frequencyWithoutPunctuation = getFrequency(firstTenWithoutPunctuation, word);
 
@@ -81,7 +86,7 @@ void compare(const std::string& word, const std::vector<std::pair<std::string, i
         assert(false);
 }
 
-void compareIfNotAlreadyCompared(const std::string& word, const std::vector<std::pair<std::string, int>>& firstTen, const std::vector<std::pair<std::string, int>>& firstTenWithoutPunctuation, std::set<std::string>& alreadyComparedWords) {
+void compareIfNotAlreadyCompared(const std::string& word, const std::vector<WordAndFrequency>& firstTen, const std::vector<WordAndFrequency>& firstTenWithoutPunctuation, std::set<std::string>& alreadyComparedWords) {
    if(alreadyComparedWords.find(word) == alreadyComparedWords.end()) {
         alreadyComparedWords.insert(word);
         compare(word, firstTen, firstTenWithoutPunctuation);
@@ -107,23 +112,23 @@ void creationFileWithoutPunctuation(const std::string& nameOriginalFile, const s
 
 int main()
 {
-    std::vector<std::pair<std::string, int>> firstTen;
+    std::vector<WordAndFrequency> firstTen;
     std::string nameOriginalFile = "canto1.txt";
     collectMostFrequent(nameOriginalFile, firstTen);
 
     std::string nameFileWithoutPunctuation = "file without punctuation.txt";
     creationFileWithoutPunctuation(nameOriginalFile, nameFileWithoutPunctuation);
 
-    std::vector<std::pair<std::string, int>> firstTenWithoutPunctuation;
+    std::vector<WordAndFrequency> firstTenWithoutPunctuation;
     std::cout << '\n';
     collectMostFrequent(nameFileWithoutPunctuation, firstTenWithoutPunctuation);
 
     std::set<std::string> alreadyComparedWords;
     std::cout << "\ncompare:\n";
     for(ulong i = 0; i < firstTen.size(); i++)
-        compareIfNotAlreadyCompared(firstTen[i].first, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
+        compareIfNotAlreadyCompared(firstTen[i].word, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
     for(ulong i = 0; i < firstTenWithoutPunctuation.size(); i++)
-        compareIfNotAlreadyCompared(firstTenWithoutPunctuation[i].first, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
+        compareIfNotAlreadyCompared(firstTenWithoutPunctuation[i].word, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
 
     return 0;
 }
