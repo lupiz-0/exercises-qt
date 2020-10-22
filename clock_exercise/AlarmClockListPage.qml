@@ -73,7 +73,7 @@ Rectangle {
         }
     }
 
-    DeleteButton {
+    AlarmListPageDeleteButton {
         id: deleteButton
 
         x: 23
