@@ -16,14 +16,13 @@ struct WordAndFrequency {
     int frequency;
 };
 
-void addToFirstTen(std::vector<WordAndFrequency>& words, const std::string& word, int frequency) {
+void addToFirstTenIfHaveRequirements(std::vector<WordAndFrequency>& words, const std::string& word, int frequency) {
     bool inserted = false;
 
     for(size_t i = 0; i < words.size(); i++) {
         if(frequency > words[i].frequency)
         {
-            auto it = words.begin() + i;
-            words.insert(it, {word, frequency});
+            words.insert(words.begin() + i, {word, frequency});
             inserted = true;
             break;
         }
@@ -36,7 +35,7 @@ void addToFirstTen(std::vector<WordAndFrequency>& words, const std::string& word
         words.pop_back();
 }
 
-void collectMostFrequent(const std::string& fileName, std::vector<WordAndFrequency>& firstTen) {
+std::vector<WordAndFrequency> collectMostFrequent(const std::string& fileName) {
     std::map<std::string, int> words;
 
     std::ifstream file;
@@ -50,12 +49,15 @@ void collectMostFrequent(const std::string& fileName, std::vector<WordAndFrequen
     }
     file.close();
 
-    for (std::map<std::string, int>::iterator it = words.begin(); it != words.end(); it++ )
-        addToFirstTen(firstTen, it->first, it->second);
+    std::vector<WordAndFrequency> firstTen;
+    for (auto it = words.begin(); it != words.end(); it++ )
+        addToFirstTenIfHaveRequirements(firstTen, it->first, it->second);
 
     std::cout << "start:\n";
     for(const auto& wordAndFrequency: firstTen)
         std::cout << wordAndFrequency.word << " " << wordAndFrequency.frequency << '\n';
+
+    return firstTen;
 }
 
 std::optional<int> getFrequency(const std::vector<WordAndFrequency>& array, const std::string& word) {
@@ -111,16 +113,14 @@ void creationFileWithoutPunctuation(const std::string& nameOriginalFile, const s
 
 int main()
 {
-    std::vector<WordAndFrequency> firstTen;
     std::string nameOriginalFile = "canto1.txt";
-    collectMostFrequent(nameOriginalFile, firstTen);
+    std::vector<WordAndFrequency> firstTen = collectMostFrequent(nameOriginalFile);
 
     std::string nameFileWithoutPunctuation = "file without punctuation.txt";
     creationFileWithoutPunctuation(nameOriginalFile, nameFileWithoutPunctuation);
 
-    std::vector<WordAndFrequency> firstTenWithoutPunctuation;
     std::cout << '\n';
-    collectMostFrequent(nameFileWithoutPunctuation, firstTenWithoutPunctuation);
+    std::vector<WordAndFrequency> firstTenWithoutPunctuation = collectMostFrequent(nameFileWithoutPunctuation);
 
     std::set<std::string> alreadyComparedWords;
     std::cout << "\ncompare:\n";
