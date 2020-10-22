@@ -38,9 +38,8 @@ int main()
     }
 
     cout << "the median of the values: ";
-    for(ulong i = 0; i < values.size(); i++){
-        cout << values[i] << " ";
-    }
+    for(const auto& v: values)
+        cout << v << " ";
     cout << "   is: " << median << endl;
 
     return 0;
