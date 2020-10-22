@@ -2,8 +2,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "clockmanager.h"
-#include "alarmitemmodel.h"
-#include "alarmitemdata.h"
 
 int main(int argc, char *argv[])
 {
