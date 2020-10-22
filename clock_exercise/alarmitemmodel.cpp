@@ -173,16 +173,22 @@ void AlarmItemModel::setNumberSelectedAlarms(int numberSelectedAlarms) {
 }
 
 void AlarmItemModel::deleteSelectedAlarms() {
+
+    int numberActiveAlarmsDecrement = 0;
+    int numberEverydayAlarmsDecrement = 0;
+    int numberSelectedAlarmsDecrement = 0;
+    int dataCountDecrement = 0;
+
     for(int i = 0; i < m_data.count(); ) {
         if(m_data[i].m_selected) {
 
             if(m_data[i].m_active)
-                setNumberActiveAlarms(m_numberActiveAlarms - 1);
+                numberActiveAlarmsDecrement++;
             if(m_data[i].m_everyday)
-                setNumberEverydayAlarms(m_numberEverydayAlarms  - 1);
+                numberEverydayAlarmsDecrement++;
 
-            setNumberSelectedAlarms(m_numberSelectedAlarms - 1);
-            setDataCount(m_dataCount - 1);
+            numberSelectedAlarmsDecrement++;
+            dataCountDecrement++;
 
             beginRemoveRows(QModelIndex(),i,i);
             m_data.remove(i);
@@ -191,6 +197,11 @@ void AlarmItemModel::deleteSelectedAlarms() {
         else
             i++;
     }
+
+    setNumberActiveAlarms(m_numberActiveAlarms - numberActiveAlarmsDecrement);
+    setNumberEverydayAlarms(m_numberEverydayAlarms  - numberEverydayAlarmsDecrement);
+    setNumberSelectedAlarms(m_numberSelectedAlarms - numberSelectedAlarmsDecrement);
+    setDataCount(m_dataCount - dataCountDecrement);
 }
 
 void AlarmItemModel::setDataCount(int dataCount) {
