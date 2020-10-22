@@ -19,7 +19,7 @@ struct WordAndFrequency {
 void addToFirstTen(std::vector<WordAndFrequency>& words, const std::string& word, int frequency) {
     bool inserted = false;
 
-    for(ulong i = 0; i < words.size(); i++) {
+    for(size_t i = 0; i < words.size(); i++) {
         if(frequency > words[i].frequency)
         {
             auto it = words.begin() + i;
@@ -54,15 +54,14 @@ void collectMostFrequent(const std::string& fileName, std::vector<WordAndFrequen
         addToFirstTen(firstTen, it->first, it->second);
 
     std::cout << "start:\n";
-    for(ulong i = 0; i < firstTen.size(); i++) {
-        std::cout << firstTen[i].word << " " << firstTen[i].frequency << '\n';
-    }
+    for(const auto& wordAndFrequency: firstTen)
+        std::cout << wordAndFrequency.word << " " << wordAndFrequency.frequency << '\n';
 }
 
 std::optional<int> getFrequency(const std::vector<WordAndFrequency>& array, const std::string& word) {
-    for(ulong i = 0; i < array.size(); i++) {
-        if(array[i].word == word)
-            return std::optional<int>(array[i].frequency);
+    for(const auto& wordAndFrequency: array) {
+        if(wordAndFrequency.word == word)
+            return std::optional<int>(wordAndFrequency.frequency);
     }
     return std::optional<int>();
 }
@@ -125,10 +124,10 @@ int main()
 
     std::set<std::string> alreadyComparedWords;
     std::cout << "\ncompare:\n";
-    for(ulong i = 0; i < firstTen.size(); i++)
-        compareIfNotAlreadyCompared(firstTen[i].word, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
-    for(ulong i = 0; i < firstTenWithoutPunctuation.size(); i++)
-        compareIfNotAlreadyCompared(firstTenWithoutPunctuation[i].word, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
+    for(const auto& wordAndFrequency: firstTen)
+        compareIfNotAlreadyCompared(wordAndFrequency.word, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
+    for(const auto& wordAndFrequency: firstTenWithoutPunctuation)
+        compareIfNotAlreadyCompared(wordAndFrequency.word, firstTen, firstTenWithoutPunctuation, alreadyComparedWords);
 
     return 0;
 }
