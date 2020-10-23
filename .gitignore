@@ -71,4 +71,10 @@ Thumbs.db
 *.dll
 *.exe
 *.code-workspace
-
+build-clock_exercise-Desktop_Qt_5_15_0_GCC_64bit-Debug/
+build-median-Desktop_Qt_5_15_0_GCC_64bit-Debug/
+build-sumAndAverage-Desktop_Qt_5_15_0_GCC_64bit-Debug/
+build-wordsFrequency-Desktop_Qt_5_15_0_GCC_64bit-Debug/
+cpp_exercises/day2/build-date-Desktop_Qt_5_15_0_GCC_64bit-Debug/
+day3/build-notes-Desktop_Qt_5_15_0_GCC_64bit-Debug/
+day3/build-recipe-Desktop_Qt_5_15_0_GCC_64bit-Debug/
