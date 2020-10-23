@@ -28,7 +28,7 @@ public:
     int year() const {return m_year;}
 
 private:
-    bool isLeapYear(int year);
+    static bool isLeapYear(int year);
 
     int m_day;
     int m_month;
