@@ -19,6 +19,8 @@ private slots:
     void notDefaultConstructorTest();
     void insertionOperatorTest();
     void equalityOperatorTest();
+private:
+    static bool isDefaultDate(const Date& date);
 };
 
 testDate::testDate()
@@ -43,9 +45,7 @@ void testDate::cleanupTestCase()
 
 void testDate::defaultConstructorTest() {
     Date date;
-    QCOMPARE(date.day(), 1);
-    QCOMPARE(date.month(), Date::January);
-    QCOMPARE(date.year(), 1970);
+    QVERIFY(isDefaultDate(date));
 }
 
 void testDate::notDefaultConstructorTest() {
@@ -66,6 +66,10 @@ void testDate::equalityOperatorTest() {
     Date dateA(23, Date::October, 2020);
     Date dateB(23, Date::October, 2020);
     QVERIFY(dateA == dateB);
+}
+
+bool testDate::isDefaultDate(const Date& date) {
+    return date.day() == 1 && date.month() == Date::January && date.year() == 1970;
 }
 
 QTEST_APPLESS_MAIN(testDate)
