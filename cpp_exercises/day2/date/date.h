@@ -19,7 +19,7 @@ public:
         December
     };
 
-    Date(): Date(1, Date::January, 1970){}
+    Date(): Date(DEFAULT_DAY_ZERO_BASE, DEFAULT_MONTH_ZERO_BASE, DEFAULT_YEAR){}
 
     Date(int day, int month, int year): m_day(day - 1), m_month(month - 1), m_year(year){}
 
@@ -49,6 +49,9 @@ private:
     int m_month;
     int m_year;
 
+    static constexpr int DEFAULT_DAY_ZERO_BASE = 0;
+    static constexpr int DEFAULT_MONTH_ZERO_BASE = 0;
+    static constexpr int DEFAULT_YEAR = 1970;
     constexpr static int MONTHS_DAYS[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 };
 
