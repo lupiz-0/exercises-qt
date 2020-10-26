@@ -91,10 +91,19 @@ void testDate::notDefaultConstructorTest() {
 }
 
 void testDate::insertionOperatorTest() {
-    Date date(23, Date::October, 2020);
-    std::stringstream out;
-    out << date;
-    QCOMPARE(out.str(), "23/10/2020");
+    {
+        Date date(23, Date::October, 2020);
+        std::stringstream out;
+        out << date;
+        QCOMPARE(out.str(), "23/10/2020");
+    }
+
+    {
+        Date date(7, Date::March, 2020);
+        std::stringstream out;
+        out << date;
+        QCOMPARE(out.str(), "07/03/2020");
+    }
 }
 
 void testDate::equalityOperatorTest() {
