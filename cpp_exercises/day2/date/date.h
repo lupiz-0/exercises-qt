@@ -58,7 +58,7 @@ private:
     static constexpr int DEFAULT_DAY_ZERO_BASE = 0;
     static constexpr int DEFAULT_MONTH_ZERO_BASE = 0;
     static constexpr int DEFAULT_YEAR = 1970;
-    constexpr static int MONTHS_DAYS[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    static constexpr int MONTHS_DAYS[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 };
 
 std::ostream& operator<<(std::ostream& ostream, const Date& date);
