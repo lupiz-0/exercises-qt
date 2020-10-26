@@ -19,6 +19,7 @@ private slots:
     void notDefaultConstructorTest();
     void insertionOperatorTest();
     void equalityOperatorTest();
+    void addYearsTest();
 private:
 };
 
@@ -132,6 +133,16 @@ void testDate::equalityOperatorTest() {
     Date dateA(23, Date::October, 2020);
     Date dateB(23, Date::October, 2020);
     QVERIFY(dateA == dateB);
+}
+
+void testDate::addYearsTest() {
+    Date date(26, Date::October, 2020);
+    date.addYears(13);
+    QCOMPARE(date, Date(26, Date::October, 2033));
+    date.addYears(-13);
+    QCOMPARE(date, Date(26, Date::October, 2020));
+    date.addYears(-2021);
+    QCOMPARE(date, Date(26, Date::October, 0));
 }
 
 QTEST_APPLESS_MAIN(testDate)

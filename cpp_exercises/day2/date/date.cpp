@@ -1,6 +1,7 @@
 #include "date.h"
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 #include <limits.h>
 
 std::ostream& operator<<(std::ostream& ostream, const Date& date) {
@@ -63,3 +64,9 @@ std::string Date::toString() const {
     stringstream << std::setfill('0') << std::setw(2) << day() << "/" << std::setfill('0') << std::setw(2) << month() << "/" << std::setfill('0') << std::setw(4) << year();
     return stringstream.str();
 }
+
+void Date::addYears(int years) {
+    m_year += years;
+    m_year = std::max(m_year, 0);
+}
+
