@@ -21,7 +21,7 @@ public:
 
     Date(): Date(DEFAULT_DAY_ZERO_BASE, DEFAULT_MONTH_ZERO_BASE, DEFAULT_YEAR){}
 
-    Date(int day, int month, int year): m_day(day - 1), m_month(month - 1), m_year(year){}
+    Date(int day, int month, int year);
 
     int day() const {return m_day + 1;}
     int month() const {return m_month + 1;}
@@ -43,8 +43,13 @@ private:
         NovemberZeroBase,
         DecemberZeroBase
     };
+
     static bool isLeapYear(int year);
     static int getMonthDays(int month, int year);
+    static bool isDayValid(int day, int month, int year);
+    static bool isYearValid(int year);
+    static bool isMonthValid(int month);
+    static bool isDateValid(int day, int month, int year);
 
     int m_day;
     int m_month;
