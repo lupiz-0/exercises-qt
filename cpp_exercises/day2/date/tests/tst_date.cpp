@@ -56,45 +56,60 @@ void testDate::defaultConstructorTest() {
 }
 
 void testDate::notDefaultConstructorTest() {
+    Date defaultDate;
+
     Date date0(26, Date::October, 2020);
-    QVERIFY(date0.compare(26, Date::October, 2020));
+    QCOMPARE(date0.day(), 26);
+    QCOMPARE(date0.month(), Date::October);
+    QCOMPARE(date0.year(), 2020);
 
     Date date1(26, Date::October, -1);
-    QVERIFY(isDefaultDate(date1));
+    QCOMPARE(date1, defaultDate);
 
     Date date2(26, Date::October, 0);
-    QVERIFY(date2.compare(26, Date::October, 0));
+    QCOMPARE(date2.day(), 26);
+    QCOMPARE(date2.month(), Date::October);
+    QCOMPARE(date2.year(), 0);
 
     Date date3(26, 0, 2020);
-    QVERIFY(isDefaultDate(date3));
+    QCOMPARE(date3, defaultDate);
 
     Date date4(26, 1, 2020);
-    QVERIFY(date4.compare(26, 1, 2020));
+    QCOMPARE(date4.day(), 26);
+    QCOMPARE(date4.month(), 1);
+    QCOMPARE(date4.year(), 2020);
 
     Date date5(26, 13, 2020);
-    QVERIFY(isDefaultDate(date5));
+    QCOMPARE(date5, defaultDate);
 
     Date date6(26, 12, 2020);
-    QVERIFY(date6.compare(26, 12, 2020));
+    QCOMPARE(date6.day(), 26);
+    QCOMPARE(date6.month(), 12);
+    QCOMPARE(date6.year(), 2020);
 
     Date date7(1, Date::November, 2020);
-    QVERIFY(date7.compare(1, Date::November, 2020));
+    QCOMPARE(date7.day(), 1);
+    QCOMPARE(date7.month(), Date::November);
+    QCOMPARE(date7.year(), 2020);
 
     Date date8(0, Date::November, 2020);
-    QVERIFY(isDefaultDate(date8));
+    QCOMPARE(date8, defaultDate);
 
     Date date9(30, Date::November, 2020);
-    QVERIFY(date9.compare(30, Date::November, 2020));
+    QCOMPARE(date9.day(), 30);
+    QCOMPARE(date9.month(), Date::November);
+    QCOMPARE(date9.year(), 2020);
 
     Date date10(31, Date::November, 2020);
-    QVERIFY(isDefaultDate(date10));
+    QCOMPARE(date10, defaultDate);
 
     Date date11(29, Date::February, 2019);
-    QVERIFY(isDefaultDate(date11));
+    QCOMPARE(date11, defaultDate);
 
     Date date12(29, Date::February, 2020);
-    QVERIFY(date12.compare(29, Date::February, 2020));
-
+    QCOMPARE(date12.day(), 29);
+    QCOMPARE(date12.month(), Date::February);
+    QCOMPARE(date12.year(), 2020);
 }
 
 void testDate::insertionOperatorTest() {
