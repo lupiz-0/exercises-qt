@@ -14,3 +14,8 @@ bool operator==(const Date& dateA, const Date& dateB) {
 bool Date::isLeapYear(int year) {
     return year % 100 == 0? (year % 400 == 0):(year % 4 == 0);
 }
+
+int Date::getMonthDays(int month, int year) {
+    return (Date::isLeapYear(year) && month == Date::FebruaryZeroBase) ? (Date::MONTHS_DAYS[month] + 1) : (Date::MONTHS_DAYS[month]) ;
+}
+

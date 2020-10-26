@@ -28,13 +28,28 @@ public:
     int year() const {return m_year;}
 
 private:
+    enum MonthZeroBase {
+        JanuaryZeroBase = 0,
+        FebruaryZeroBase,
+        MarchZeroBase,
+        AprilZeroBase,
+        MayZeroBase,
+        JuneZeroBase,
+        JulyZeroBase,
+        AugustZeroBase,
+        SeptemberZeroBase,
+        OctoberZeroBase,
+        NovemberZeroBase,
+        DecemberZeroBase
+    };
     static bool isLeapYear(int year);
+    static int getMonthDays(int month, int year);
 
     int m_day;
     int m_month;
     int m_year;
 
-    int m_monthsDays[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    constexpr static int MONTHS_DAYS[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 };
 
 std::ostream& operator<<(std::ostream& ostream, const Date& date);
