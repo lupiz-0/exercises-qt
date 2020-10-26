@@ -26,6 +26,7 @@ public:
     int day() const {return m_day + 1;}
     int month() const {return m_month + 1;}
     int year() const {return m_year;}
+    bool compare(int day, int month, int year);
 
 private:
     enum MonthZeroBase {

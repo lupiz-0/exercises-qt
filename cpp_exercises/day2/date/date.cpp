@@ -19,3 +19,6 @@ int Date::getMonthDays(int month, int year) {
     return (Date::isLeapYear(year) && month == Date::FebruaryZeroBase) ? (Date::MONTHS_DAYS[month] + 1) : (Date::MONTHS_DAYS[month]) ;
 }
 
+bool Date::compare(int day, int month, int year) {
+    return day - 1 == m_day && month - 1 == m_month && year == m_year;
+}
