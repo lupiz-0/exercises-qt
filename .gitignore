@@ -71,6 +71,7 @@ Thumbs.db
 *.dll
 *.exe
 *.code-workspace
+*.user
 build-clock_exercise-Desktop_Qt_5_15_0_GCC_64bit-Debug/
 build-median-Desktop_Qt_5_15_0_GCC_64bit-Debug/
 build-sumAndAverage-Desktop_Qt_5_15_0_GCC_64bit-Debug/
