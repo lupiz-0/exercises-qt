@@ -54,3 +54,9 @@ bool Date::isDateValid(int day, int month, int year){
 bool Date::compare(int day, int month, int year) {
     return day - 1 == m_day && month - 1 == m_month && year == m_year;
 }
+
+std::string Date::toString() const {
+    std::stringstream stringstream;
+    stringstream << std::setfill('0') << std::setw(2) << day() << "/" << std::setfill('0') << std::setw(2) << month() << "/" << std::setfill('0') << std::setw(4) << year();
+    return stringstream.str();
+}

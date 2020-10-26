@@ -2,6 +2,8 @@
 
 #include<iosfwd>
 
+class string;
+
 class Date
 {
 public:
@@ -28,6 +30,7 @@ public:
     int month() const {return m_month + 1;}
     int year() const {return m_year;}
     bool compare(int day, int month, int year);
+    std::string toString() const;
 
 private:
     enum MonthZeroBase {
