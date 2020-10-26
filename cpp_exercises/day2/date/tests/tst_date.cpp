@@ -23,6 +23,12 @@ private:
     static bool isDefaultDate(const Date& date);
 };
 
+
+char *toString(const Date &date)
+{
+    return QTest::toString(date.toString().c_str());
+}
+
 testDate::testDate()
 {
 
