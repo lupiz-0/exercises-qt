@@ -32,7 +32,10 @@ bool Date::isLeapYear(int year) {
 }
 
 int Date::getMonthDays(int month, int year) {
-    return (Date::isLeapYear(year) && month == Date::FebruaryZeroBase) ? (Date::MONTHS_DAYS[month] + 1) : (Date::MONTHS_DAYS[month]) ;
+    if(month == Date::FebruaryZeroBase && Date::isLeapYear(year))
+        return Date::MONTHS_DAYS[month] + 1;
+    else
+        return Date::MONTHS_DAYS[month];
 }
 
 bool Date::isYearValid(int year) {
