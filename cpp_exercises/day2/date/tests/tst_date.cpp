@@ -51,7 +51,9 @@ void testDate::cleanupTestCase()
 
 void testDate::defaultConstructorTest() {
     Date date;
-    QVERIFY(isDefaultDate(date));
+    QCOMPARE(date.day(), 1);
+    QCOMPARE(date.month(), 1);
+    QCOMPARE(date.year(), 1970);
 }
 
 void testDate::notDefaultConstructorTest() {
