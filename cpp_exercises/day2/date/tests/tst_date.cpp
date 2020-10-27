@@ -208,6 +208,54 @@ void testDate::addMonthsTest() {
         date.addMonths(-4 - 24);
         QCOMPARE(date, Date(26, Date::November, 2017));
     }
+
+    {
+        Date date(31, Date::March, 2020);
+        date.addMonths(-1);
+        QCOMPARE(date, Date(29, Date::February, 2020));
+    }
+
+    {
+        Date date(31, Date::March, 2020);
+        date.addMonths(+1);
+        QCOMPARE(date, Date(30, Date::April, 2020));
+    }
+
+    {
+        Date date(29, Date::February, 2020);
+        date.addMonths(+1);
+        QCOMPARE(date, Date(29, Date::March, 2020));
+    }
+
+    {
+        Date date(29, Date::February, 2020);
+        date.addMonths(-1);
+        QCOMPARE(date, Date(29, Date::January, 2020));
+    }
+
+    {
+        Date date(28, Date::February, 2020);
+        date.addMonths(-12);
+        QCOMPARE(date, Date(28, Date::February, 2019));
+    }
+
+    {
+        Date date(28, Date::February, 2020);
+        date.addMonths(+12);
+        QCOMPARE(date, Date(28, Date::February, 2021));
+    }
+
+    {
+        Date date(29, Date::February, 2020);
+        date.addMonths(48);
+        QCOMPARE(date, Date(29, Date::February, 2024));
+    }
+
+    {
+        Date date(29, Date::February, 2020);
+        date.addMonths(-48);
+        QCOMPARE(date, Date(29, Date::February, 2016));
+    }
 }
 
 QTEST_APPLESS_MAIN(testDate)
