@@ -75,6 +75,7 @@ void Date::clampDayDependingMonthYear() {
 }
 
 void Date::addYearsWithoutDayCut(int years) {
+    years = std::clamp(years, -2000, 2000);
     m_year += years;
     m_year = std::max(m_year, 0);
 }

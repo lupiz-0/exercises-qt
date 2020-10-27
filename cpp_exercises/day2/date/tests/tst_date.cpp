@@ -143,7 +143,17 @@ void testDate::addYearsTest() {
         date.addYears(-13);
         QCOMPARE(date, Date(26, Date::October, 2020));
         date.addYears(-2021);
+        QCOMPARE(date, Date(26, Date::October, 20));
+        date.addYears(-19);
+        QCOMPARE(date, Date(26, Date::October, 1));
+        date.addYears(-2);
         QCOMPARE(date, Date(26, Date::October, 0));
+    }
+
+    {
+        Date date(26, Date::October, 2020);
+        date.addYears(2020);
+        QCOMPARE(date, Date(26, Date::October, 4020));
     }
 
     {
