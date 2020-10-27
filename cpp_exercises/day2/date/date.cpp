@@ -78,3 +78,17 @@ void Date::addYearsWithoutDayCut(int years) {
     m_year += years;
     m_year = std::max(m_year, 0);
 }
+
+void Date::addMonths(int months) {
+    int yearsNumber = months / 12;
+    addYears(yearsNumber);
+    months %= 12;
+    m_month += months;
+    if(m_month < 0) {
+        addYears(-1);
+        m_month = 12 + m_month;
+    } else if(m_month >= 12) {
+        addYears(1);
+        m_month %= 12;
+    }
+}

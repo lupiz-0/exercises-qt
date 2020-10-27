@@ -32,6 +32,7 @@ public:
     bool compare(int day, int month, int year);
     std::string toString() const;
     void addYears(int years);
+    void addMonths(int months);
 
 private:
     enum MonthZeroBase {
