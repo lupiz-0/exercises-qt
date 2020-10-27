@@ -133,6 +133,8 @@ void testDate::equalityOperatorTest() {
     Date dateA(23, Date::October, 2020);
     Date dateB(23, Date::October, 2020);
     QVERIFY(dateA == dateB);
+    Date dateC(22, Date::October, 2020);
+    QVERIFY(!(dateA == dateC));
 }
 
 void testDate::addYearsTest() {
