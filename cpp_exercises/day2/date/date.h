@@ -49,6 +49,9 @@ private:
         DecemberZeroBase
     };
 
+    void clampDayDependingMonthYear();
+    void addYearsWithoutDayCut(int years);
+
     static bool isLeapYear(int year);
     static int getMonthDays(int month, int year);
     static bool isDayValid(int day, int month, int year);

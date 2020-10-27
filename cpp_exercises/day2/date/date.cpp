@@ -66,7 +66,15 @@ std::string Date::toString() const {
 }
 
 void Date::addYears(int years) {
+    addYearsWithoutDayCut(years);
+    clampDayDependingMonthYear();
+}
+
+void Date::clampDayDependingMonthYear() {
+    m_day = std::clamp(m_day, 0, Date::getMonthDays(m_month, m_year) - 1);
+}
+
+void Date::addYearsWithoutDayCut(int years) {
     m_year += years;
     m_year = std::max(m_year, 0);
 }
-
