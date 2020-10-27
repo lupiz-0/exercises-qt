@@ -1,6 +1,7 @@
 #include "date.h"
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
 #include <limits.h>
 
 std::ostream& operator<<(std::ostream& ostream, const Date& date) {
@@ -34,8 +35,7 @@ bool Date::isLeapYear(int year) {
 int Date::getMonthDays(int month, int year) {
     if(month == Date::FebruaryZeroBase && Date::isLeapYear(year))
         return Date::MONTHS_DAYS[month] + 1;
-    else
-        return Date::MONTHS_DAYS[month];
+    return Date::MONTHS_DAYS[month];
 }
 
 bool Date::isYearValid(int year) {
@@ -62,4 +62,19 @@ std::string Date::toString() const {
     std::stringstream stringstream;
     stringstream << std::setfill('0') << std::setw(2) << day() << "/" << std::setfill('0') << std::setw(2) << month() << "/" << std::setfill('0') << std::setw(4) << year();
     return stringstream.str();
+}
+
+void Date::addYears(int years) {
+    addYearsWithoutDayCut(years);
+    clampDayDependingMonthYear();
+}
+
+void Date::clampDayDependingMonthYear() {
+    m_day = std::clamp(m_day, 0, Date::getMonthDays(m_month, m_year) - 1);
+}
+
+void Date::addYearsWithoutDayCut(int years) {
+    years = std::clamp(years, -2000, 2000);
+    m_year += years;
+    m_year = std::max(m_year, 0);
 }

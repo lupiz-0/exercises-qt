@@ -31,6 +31,7 @@ public:
     int year() const {return m_year;}
     bool compare(int day, int month, int year);
     std::string toString() const;
+    void addYears(int years);
 
 private:
     enum MonthZeroBase {
@@ -47,6 +48,9 @@ private:
         NovemberZeroBase,
         DecemberZeroBase
     };
+
+    void clampDayDependingMonthYear();
+    void addYearsWithoutDayCut(int years);
 
     static bool isLeapYear(int year);
     static int getMonthDays(int month, int year);
