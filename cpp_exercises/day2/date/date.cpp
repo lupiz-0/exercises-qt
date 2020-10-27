@@ -81,14 +81,15 @@ void Date::addYearsWithoutDayCut(int years) {
 
 void Date::addMonths(int months) {
     int yearsNumber = months / 12;
-    addYears(yearsNumber);
+    addYearsWithoutDayCut(yearsNumber);
     months %= 12;
     m_month += months;
     if(m_month < 0) {
-        addYears(-1);
+        addYearsWithoutDayCut(-1);
         m_month = 12 + m_month;
     } else if(m_month >= 12) {
-        addYears(1);
+        addYearsWithoutDayCut(1);
         m_month %= 12;
     }
+    clampDayDependingMonthYear();
 }
