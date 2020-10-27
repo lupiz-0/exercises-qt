@@ -20,6 +20,7 @@ private slots:
     void insertionOperatorTest();
     void equalityOperatorTest();
     void addYearsTest();
+    void addMonthsTest();
 private:
 };
 
@@ -168,6 +169,44 @@ void testDate::addYearsTest() {
         Date date(29, Date::February, 2020);
         date.addYears(3);
         QCOMPARE(date, Date(28, Date::February, 2023));
+    }
+}
+
+void testDate::addMonthsTest() {
+    {
+        Date date(26, Date::October, 2020);
+        date.addMonths(2);
+        QCOMPARE(date, Date(26, Date::December, 2020));
+    }
+
+    {
+        Date date(26, Date::October, 2020);
+        date.addMonths(3 + 12);
+        QCOMPARE(date, Date(26, Date::January, 2022));
+    }
+
+    {
+        Date date(26, Date::October, 2020);
+        date.addMonths(4 + 24);
+        QCOMPARE(date, Date(26, Date::February, 2023));
+    }
+
+    {
+        Date date(26, Date::March, 2020);
+        date.addMonths(-2);
+        QCOMPARE(date, Date(26, Date::January, 2020));
+    }
+
+    {
+        Date date(26, Date::March, 2020);
+        date.addMonths(-3 - 12);
+        QCOMPARE(date, Date(26, Date::December, 2018));
+    }
+
+    {
+        Date date(26, Date::March, 2020);
+        date.addMonths(-4 - 24);
+        QCOMPARE(date, Date(26, Date::November, 2017));
     }
 }
 
