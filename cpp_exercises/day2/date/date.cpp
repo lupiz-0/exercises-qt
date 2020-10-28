@@ -139,7 +139,7 @@ void Date::addDays(int days) {
     fromJulianDay(toJulianDay() + days);
 }
 
-Date Date::fromString(std::string string) {
+Date Date::fromString(const std::string& string) {
     if(std::count(string.begin(), string.end(), ' ') != 0)
         return Date();
 

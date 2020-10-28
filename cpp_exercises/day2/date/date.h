@@ -35,7 +35,7 @@ public:
     void addYears(int years);
     void addMonths(int months);
     void addDays(int days);
-    static Date fromString(std::string string);
+    static Date fromString(const std::string& string);
 
 private:
     enum MonthZeroBase {
