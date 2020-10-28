@@ -94,10 +94,18 @@ void Date::addMonths(int months) {
     clampDayDependingMonthYear();
 }
 
+/*!
+ * references: https://en.wikipedia.org/wiki/Julian_day
+ */
+
 qint64 Date::toJulianDay()
 {
     return (1461 * (year() + 4800 + (month() - 14)/12))/4 +(367 * (month() - 2 - 12 * ((month() - 14)/12)))/12 - (3 * ((year() + 4900 + (month() - 14)/12)/100))/4 + day() - 32075;
 }
+
+/*!
+ * references: https://en.wikipedia.org/wiki/Julian_day
+ */
 
 void Date::fromJulianDay(qint64 julianDay) {
     qint64 y = 4716;
