@@ -54,6 +54,7 @@ private:
     void clampDayDependingMonthYear();
     void addYearsWithoutDayCut(int years);
     qint64 toJulianDay();
+    void fromJulianDay(qint64 julianDay);
 
     static bool isLeapYear(int year);
     static int getMonthDays(int month, int year);

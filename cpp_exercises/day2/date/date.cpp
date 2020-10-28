@@ -99,3 +99,30 @@ qint64 Date::toJulianDay()
     return (1461 * (year() + 4800 + (month() - 14)/12))/4 +(367 * (month() - 2 - 12 * ((month() - 14)/12)))/12 - (3 * ((year() + 4900 + (month() - 14)/12)/100))/4 + day() - 32075;
 }
 
+void Date::fromJulianDay(qint64 julianDay) {
+    qint64 y = 4716;
+    qint64 v = 3;
+    qint64 j = 1401;
+    qint64 u = 5;
+    qint64 m = 2;
+    qint64 s = 153;
+    qint64 n = 12;
+    qint64 w = 2;
+    qint64 r = 4;
+    qint64 B = 274277;
+    qint64 p = 1461;
+    qint64 C  = -38;
+
+    qint64 f = julianDay + j + (((4 * julianDay + B) / 146097) * 3) / 4 + C;
+
+    qint64 e = r * f + v;
+    qint64 g = (e%p) / r;
+    qint64 h = u * g + w;
+    qint64 D = (h%s) / u + 1;
+    qint64 M = (h / s + m)%n + 1;
+
+    m_year = e/p - y + (n + m - M) / n;
+    m_day = D - 1;
+    m_month = M - 1;
+}
+
