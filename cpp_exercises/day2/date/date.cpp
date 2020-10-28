@@ -139,6 +139,32 @@ void Date::addDays(int days) {
     fromJulianDay(toJulianDay() + days);
 }
 
+Date Date::fromString(std::string string) {
+    if(std::count(string.begin(), string.end(), ' ') != 0)
+        return Date();
+
+    if(std::count(string.begin(), string.end(), '-') != 2)
+        return Date();
+
+    std::string dayString, monthString, yearString;
+    Date::splitDayMonthYearString(string, dayString, monthString, yearString);
+
+    if(dayString.size() != 2 || monthString.size() != 2 || yearString.size() != 4)
+        return Date();
+
+    if(!Date::areStringValidInteger(dayString) || !Date::areStringValidInteger(monthString) || !Date::areStringValidInteger(yearString))
+        return Date();
+
+    int day = std::stoi(dayString);
+    int month = std::stoi(monthString);
+    int year = std::stoi(yearString);
+
+    if(!Date::isDateValid(day, month, year))
+        return Date();
+
+    return Date(day, month, year);
+}
+
 bool Date::areStringValidInteger(const std::string& string) {
     char* p;
     strtol(string.c_str(), &p, 10);

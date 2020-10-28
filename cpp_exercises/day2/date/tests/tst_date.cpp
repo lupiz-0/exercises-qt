@@ -22,6 +22,7 @@ private slots:
     void addYearsTest();
     void addMonthsTest();
     void addDaysTest();
+    void fromStringTest();
 private:
 };
 
@@ -325,6 +326,34 @@ void testDate::addDaysTest() {
         Date result(29, Date::February, 2020);
         QCOMPARE(date, result);
     }
+}
+
+void testDate::fromStringTest() {
+    QCOMPARE(Date::fromString("28-10-2020"), Date(28, 10, 2020));
+
+    QCOMPARE(Date::fromString("08-10-2020"), Date(8, 10, 2020));
+    QCOMPARE(Date::fromString("28-07-2020"), Date(28, 7, 2020));
+    QCOMPARE(Date::fromString("28-07-0020"), Date(28, 7, 20));
+
+    QCOMPARE(Date::fromString("a2-10-2020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-1a-2020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-10-20a0"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-10-2.20"), Date(1, 1, 1970));
+
+    QCOMPARE(Date::fromString("28-10-020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-1-2020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("8-10-2020"), Date(1, 1, 1970));
+
+    QCOMPARE(Date::fromString("28-10-2020-20"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28--1020"), Date(1, 1, 1970));
+
+    QCOMPARE(Date::fromString("29-02-2020"), Date(29, 2, 2020));
+    QCOMPARE(Date::fromString("29-02-2021"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("31-04-2020"), Date(1, 1, 1970));
+
+    QCOMPARE(Date::fromString("28- 7-2020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-10-  20"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString(" 8-10-2020"), Date(1, 1, 1970));
 }
 
 QTEST_APPLESS_MAIN(testDate)
