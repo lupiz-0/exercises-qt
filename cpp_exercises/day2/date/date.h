@@ -1,6 +1,7 @@
 #pragma once
 
-#include<iosfwd>
+#include <QtGlobal>
+#include <iosfwd>
 
 class string;
 
@@ -52,6 +53,7 @@ private:
 
     void clampDayDependingMonthYear();
     void addYearsWithoutDayCut(int years);
+    qint64 toJulianDay();
 
     static bool isLeapYear(int year);
     static int getMonthDays(int month, int year);
