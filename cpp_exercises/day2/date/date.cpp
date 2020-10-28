@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <limits.h>
+#include <stdlib.h>
 
 std::ostream& operator<<(std::ostream& ostream, const Date& date) {
     ostream << std::setfill('0') << std::setw(2) << date.day() << '/' << std::setfill('0') << std::setw(2) << date.month() << '/' << date.year();
@@ -136,4 +137,10 @@ void Date::fromJulianDay(int64_t julianDay) {
 
 void Date::addDays(int days) {
     fromJulianDay(toJulianDay() + days);
+}
+
+bool Date::areStringValidInteger(const std::string& string) {
+    char* p;
+    strtol(string.c_str(), &p, 10);
+    return *p == 0;
 }
