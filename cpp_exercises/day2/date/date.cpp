@@ -126,3 +126,6 @@ void Date::fromJulianDay(qint64 julianDay) {
     m_month = M - 1;
 }
 
+void Date::addDays(int days) {
+    fromJulianDay(toJulianDay() + days);
+}

@@ -21,6 +21,7 @@ private slots:
     void equalityOperatorTest();
     void addYearsTest();
     void addMonthsTest();
+    void addDaysTest();
 private:
 };
 
@@ -255,6 +256,71 @@ void testDate::addMonthsTest() {
         Date date(29, Date::February, 2020);
         date.addMonths(-48);
         QCOMPARE(date, Date(29, Date::February, 2016));
+    }
+}
+
+void testDate::addDaysTest() {
+    {
+        Date date(28, 10, 2020);
+        date.addDays(-1596);
+        Date result(15, Date::June, 2016);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(28, 10, 2020);
+        date.addDays(18240);
+        Date result(6, Date::October, 2070);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(28, 10, 2020);
+        date.addDays(9357);
+        Date result(11, Date::June, 2046);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(28, 10, 2020);
+        date.addDays(-27493);
+        Date result(21, Date::July, 1945);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(29, 2, 2020);
+        date.addDays(-365);
+        Date result(1, Date::March, 2019);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(31, Date::March, 2020);
+        date.addDays(365*2 + 30);
+        Date result(30, Date::April, 2022);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(29, 2, 2020);
+        date.addDays(365*2);
+        Date result(28, Date::February, 2022);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(28, 2, 2019);
+        date.addDays(366);
+        Date result(29, Date::February, 2020);
+        QCOMPARE(date, result);
+    }
+
+    {
+        Date date(28, 2, 2022);
+        date.addDays(-730);
+        Date result(29, Date::February, 2020);
+        QCOMPARE(date, result);
     }
 }
 

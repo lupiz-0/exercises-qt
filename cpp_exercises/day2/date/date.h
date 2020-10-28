@@ -34,6 +34,7 @@ public:
     std::string toString() const;
     void addYears(int years);
     void addMonths(int months);
+    void addDays(int days);
 
 private:
     enum MonthZeroBase {
