@@ -21,6 +21,9 @@ private slots:
     void equalityOperatorTest();
     void addYearsTest();
     void addMonthsTest();
+    /*!
+     * results of the tests taken from https://www.timeanddate.com/date/dateadd.html
+     */
     void addDaysTest();
 private:
 };
