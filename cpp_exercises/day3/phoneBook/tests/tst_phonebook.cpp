@@ -10,11 +10,19 @@ public:
     ~testPhoneBook();
 
 private slots:
+    void fill(PhoneBook& phoneBook);
     void initTestCase();
     void cleanupTestCase();
     void findTest();
 
 };
+
+
+void testPhoneBook::fill(PhoneBook& phoneBook) {
+    phoneBook.append(Contact{"Gerry", "Calà", "+39 0123456789"});
+    phoneBook.append(Contact{"Alberto", "Sordi", "+39 111222333"});
+    phoneBook.append(Contact{"Bud", "Spencer", "+39 20202020"});
+}
 
 testPhoneBook::testPhoneBook()
 {
@@ -39,9 +47,7 @@ void testPhoneBook::cleanupTestCase()
 void testPhoneBook::findTest()
 {
     PhoneBook phoneBook;
-    phoneBook.append(Contact{"Gerry", "Calà", "+39 0123456789"});
-    phoneBook.append(Contact{"Alberto", "Sordi", "+39 111222333"});
-    phoneBook.append(Contact{"Bud", "Spencer", "+39 20202020"});
+    fill(phoneBook);
 
     const Contact* contact = phoneBook.find("Gerry");
     QVERIFY(contact);
