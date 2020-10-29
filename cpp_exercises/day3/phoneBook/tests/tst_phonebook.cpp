@@ -1,7 +1,5 @@
 #include <QtTest>
- #include "../phonebook.h"
-
-// add necessary includes here
+#include "../phonebook.h"
 
 class testPhoneBook : public QObject
 {
