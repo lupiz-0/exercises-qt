@@ -17,7 +17,10 @@ public:
     void append(const Contact& contact);
     Contact* find(const std::string& name);
 
+    friend std::ostream& operator<<(std::ostream& ostream, const PhoneBook& phoneBook);
+
 private:
     std::vector<Contact> m_contacts;
 };
 
+std::ostream& operator<<(std::ostream& ostream, const PhoneBook& phoneBook);

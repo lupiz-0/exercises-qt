@@ -1,4 +1,5 @@
 #include <QtTest>
+#include <sstream>
 #include "../phonebook.h"
 
 class testPhoneBook : public QObject
@@ -14,6 +15,7 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
     void findTest();
+    void insertionOperatorTest();
 
 };
 
@@ -69,6 +71,21 @@ void testPhoneBook::findTest()
 
     contact = phoneBook.find("Sordi");
     QCOMPARE(contact, nullptr);
+}
+
+void testPhoneBook::insertionOperatorTest() {
+    PhoneBook phoneBook;
+    fill(phoneBook);
+
+    std::stringstream out;
+    out << phoneBook;
+    const char* resultExpected = "1) Calà Gerry\n"
+                                 "   tel: +39 0123456789\n"
+                                 "2) Sordi Alberto\n"
+                                 "   tel: +39 111222333\n"
+                                 "3) Spencer Bud\n"
+                                 "   tel: +39 20202020\n";
+    QCOMPARE(out.str(), resultExpected);
 }
 
 QTEST_APPLESS_MAIN(testPhoneBook)
