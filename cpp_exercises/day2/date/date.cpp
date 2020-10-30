@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <algorithm>
 #include <limits.h>
+#include <stdlib.h>
 
 std::ostream& operator<<(std::ostream& ostream, const Date& date) {
     ostream << std::setfill('0') << std::setw(2) << date.day() << '/' << std::setfill('0') << std::setw(2) << date.month() << '/' << date.year();
@@ -136,4 +137,34 @@ void Date::fromJulianDay(int64_t julianDay) {
 
 void Date::addDays(int days) {
     fromJulianDay(toJulianDay() + days);
+}
+
+Date Date::fromString(const std::string& string) {
+    if(string.size() != 10)
+        return Date();
+
+    if(string[2] != '-' || string[5] != '-')
+        return Date();
+
+    std::string dayString = string.substr(0, 2);
+    std::string monthString = string.substr(3, 2);
+    std::string yearString = string.substr(6, 4);
+
+    if(dayString[0] == ' ' || monthString[0] == ' ' || yearString[0] == ' ')
+        return Date();
+
+    if(!Date::isInteger(dayString) || !Date::isInteger(monthString) || !Date::isInteger(yearString))
+        return Date();
+
+    int day = std::stoi(dayString);
+    int month = std::stoi(monthString);
+    int year = std::stoi(yearString);
+
+    return Date(day, month, year);
+}
+
+bool Date::isInteger(const std::string& string) {
+    char* p;
+    strtol(string.c_str(), &p, 10);
+    return *p == '\0';
 }
