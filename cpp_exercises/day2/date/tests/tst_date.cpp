@@ -335,27 +335,27 @@ void testDate::fromStringTest() {
     QCOMPARE(Date::fromString("28-07-2020"), Date(28, 7, 2020));
     QCOMPARE(Date::fromString("28-07-0020"), Date(28, 7, 20));
 
-    QCOMPARE(Date::fromString("a2-10-2020"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28-1a-2020"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28-10-20a0"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28-10-2.20"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("a2-10-2020"), Date());
+    QCOMPARE(Date::fromString("28-1a-2020"), Date());
+    QCOMPARE(Date::fromString("28-10-20a0"), Date());
+    QCOMPARE(Date::fromString("28-10-2.20"), Date());
 
-    QCOMPARE(Date::fromString("28-10-020"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28-1-2020"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("8-10-2020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-10-020"), Date());
+    QCOMPARE(Date::fromString("28-1-2020"), Date());
+    QCOMPARE(Date::fromString("8-10-2020"), Date());
 
-    QCOMPARE(Date::fromString("28-10-2020-20"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28--1020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-10-2020-20"), Date());
+    QCOMPARE(Date::fromString("28--1020"), Date());
 
     QCOMPARE(Date::fromString("29-02-2020"), Date(29, 2, 2020));
-    QCOMPARE(Date::fromString("29-02-2021"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("31-04-2020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("29-02-2021"), Date());
+    QCOMPARE(Date::fromString("31-04-2020"), Date());
 
-    QCOMPARE(Date::fromString("28- 7-2020"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28-10-  20"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28-10-2 20"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString(" 8-10-2020"), Date(1, 1, 1970));
-    QCOMPARE(Date::fromString("28-10-202 "), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28- 7-2020"), Date());
+    QCOMPARE(Date::fromString("28-10-  20"), Date());
+    QCOMPARE(Date::fromString("28-10-2 20"), Date());
+    QCOMPARE(Date::fromString(" 8-10-2020"), Date());
+    QCOMPARE(Date::fromString("28-10-202 "), Date());
 }
 
 QTEST_APPLESS_MAIN(testDate)
