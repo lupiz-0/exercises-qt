@@ -15,7 +15,7 @@ public:
     PhoneBook();
 
     void append(const Contact& contact);
-    const Contact* find(const std::string& name);
+    Contact* find(const std::string& name);
 
 private:
     std::vector<Contact> m_contacts;
