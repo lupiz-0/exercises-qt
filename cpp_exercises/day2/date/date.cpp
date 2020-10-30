@@ -140,16 +140,17 @@ void Date::addDays(int days) {
 }
 
 Date Date::fromString(const std::string& string) {
-    if(std::count(string.begin(), string.end(), ' ') != 0)
+    if(string.size() != 10)
         return Date();
 
-    if(std::count(string.begin(), string.end(), '-') != 2)
+    if(string[2] != '-' || string[5] != '-')
         return Date();
 
-    std::string dayString, monthString, yearString;
-    Date::splitDayMonthYearString(string, dayString, monthString, yearString);
+    std::string dayString = string.substr(0, 2);
+    std::string monthString = string.substr(3, 2);
+    std::string yearString = string.substr(6, 4);
 
-    if(dayString.size() != 2 || monthString.size() != 2 || yearString.size() != 4)
+    if(dayString[0] == ' ' || monthString[0] == ' ' || yearString[0] == ' ')
         return Date();
 
     if(!Date::areStringValidInteger(dayString) || !Date::areStringValidInteger(monthString) || !Date::areStringValidInteger(yearString))
@@ -158,9 +159,6 @@ Date Date::fromString(const std::string& string) {
     int day = std::stoi(dayString);
     int month = std::stoi(monthString);
     int year = std::stoi(yearString);
-
-    if(!Date::isDateValid(day, month, year))
-        return Date();
 
     return Date(day, month, year);
 }
