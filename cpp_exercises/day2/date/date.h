@@ -64,7 +64,7 @@ private:
     static bool isYearValid(int year);
     static bool isMonthValid(int month);
     static bool isDateValid(int day, int month, int year);
-    static bool areStringValidInteger(const std::string& string);
+    static bool isInteger(const std::string& string);
 
     int m_day;
     int m_month;

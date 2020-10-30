@@ -153,7 +153,7 @@ Date Date::fromString(const std::string& string) {
     if(dayString[0] == ' ' || monthString[0] == ' ' || yearString[0] == ' ')
         return Date();
 
-    if(!Date::areStringValidInteger(dayString) || !Date::areStringValidInteger(monthString) || !Date::areStringValidInteger(yearString))
+    if(!Date::isInteger(dayString) || !Date::isInteger(monthString) || !Date::isInteger(yearString))
         return Date();
 
     int day = std::stoi(dayString);
@@ -163,8 +163,8 @@ Date Date::fromString(const std::string& string) {
     return Date(day, month, year);
 }
 
-bool Date::areStringValidInteger(const std::string& string) {
+bool Date::isInteger(const std::string& string) {
     char* p;
     strtol(string.c_str(), &p, 10);
-    return *p == 0;
+    return *p == '\0';
 }
