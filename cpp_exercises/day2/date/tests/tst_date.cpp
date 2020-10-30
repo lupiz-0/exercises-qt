@@ -353,7 +353,9 @@ void testDate::fromStringTest() {
 
     QCOMPARE(Date::fromString("28- 7-2020"), Date(1, 1, 1970));
     QCOMPARE(Date::fromString("28-10-  20"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-10-2 20"), Date(1, 1, 1970));
     QCOMPARE(Date::fromString(" 8-10-2020"), Date(1, 1, 1970));
+    QCOMPARE(Date::fromString("28-10-202 "), Date(1, 1, 1970));
 }
 
 QTEST_APPLESS_MAIN(testDate)
