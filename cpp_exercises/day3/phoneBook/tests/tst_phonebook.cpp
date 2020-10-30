@@ -2,6 +2,17 @@
 #include <sstream>
 #include "../phonebook.h"
 
+class RangeFilter: public PhoneBookPassFiter {
+
+public:
+    RangeFilter(int max_id): m_max_id(max_id){};
+    bool pass() override{
+        return m_id <= m_max_id;
+    };
+
+private:
+    int m_max_id;
+};
 class testPhoneBook : public QObject
 {
     Q_OBJECT
@@ -19,6 +30,7 @@ private slots:
 
 private:
     void fill(PhoneBook& phoneBook);
+    void filterTest();
 };
 
 bool testPhoneBook::haveContact(const std::vector<Contact*>& contacts, const Contact& toCheck) {
@@ -98,6 +110,21 @@ void testPhoneBook::insertionOperatorTest() {
                                  "4) Carrisi Albano\n"
                                  "   tel: +39 444333444\n";
     QCOMPARE(out.str(), resultExpected);
+}
+
+
+void testPhoneBook::filterTest() {
+    PhoneBook phoneBook;
+    fill(phoneBook);
+
+    {
+        RangeFilter filter(1);
+        std::vector<Contact*> contacts = phoneBook.filter(&filter);
+        QVERIFY(haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}));
+        QVERIFY(haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}));
+        QCOMPARE(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}), false);
+        QCOMPARE(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}), false);
+    }
 }
 
 QTEST_APPLESS_MAIN(testPhoneBook)
