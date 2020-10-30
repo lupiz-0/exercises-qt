@@ -25,6 +25,16 @@ public:
 private:
     std::string m_startingString;
 };
+
+class ItalianNumberFilter: public PhoneBookPassFiter {
+
+public:
+    bool pass() override{
+        const std::string startingString = "+39";
+        return !m_contact->telephoneNumber.compare(0, startingString.size(), startingString);
+    };
+};
+
 class testPhoneBook : public QObject
 {
     Q_OBJECT
@@ -145,6 +155,15 @@ void testPhoneBook::filterTest() {
         QVERIFY(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}));
         QCOMPARE(haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}), false);
         QCOMPARE(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}), false);
+    }
+
+    {
+        ItalianNumberFilter filter;
+        std::vector<Contact*> contacts = phoneBook.filter(&filter);
+        QCOMPARE(haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}), false);
+        QVERIFY(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}));
+        QVERIFY(haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}));
+        QVERIFY(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}));
     }
 }
 
