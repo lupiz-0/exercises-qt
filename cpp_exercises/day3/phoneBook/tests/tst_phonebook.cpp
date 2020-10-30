@@ -23,8 +23,9 @@ private:
 
 void testPhoneBook::fill(PhoneBook& phoneBook) {
     phoneBook.append(Contact{"Gerry", "Calà", "+39 0123456789"});
-    phoneBook.append(Contact{"Alberto", "Sordi", "+39 111222333"});
+    phoneBook.append(Contact{"Alberto", "Sordi", "+38 111222333"});
     phoneBook.append(Contact{"Bud", "Spencer", "+39 20202020"});
+    phoneBook.append(Contact{"Albano", "Carrisi", "+39 444333444"});
 }
 
 testPhoneBook::testPhoneBook()
@@ -62,7 +63,7 @@ void testPhoneBook::findTest()
     QVERIFY(contact);
     QCOMPARE(contact->name, "Alberto");
     QCOMPARE(contact->surname, "Sordi");
-    QCOMPARE(contact->telephoneNumber, "+39 111222333");
+    QCOMPARE(contact->telephoneNumber, "+38 111222333");
 
     contact = phoneBook.find("Bud");
     QVERIFY(contact);
@@ -80,15 +81,14 @@ void testPhoneBook::insertionOperatorTest() {
 
     std::stringstream out;
     out << phoneBook;
-
-    const char* resultExpected = R"(1) Calà Gerry
-   tel: +39 0123456789
-2) Sordi Alberto
-   tel: +39 111222333
-3) Spencer Bud
-   tel: +39 20202020
-)";
-
+    const char* resultExpected = "1) Calà Gerry\n"
+                                 "   tel: +39 0123456789\n"
+                                 "2) Sordi Alberto\n"
+                                 "   tel: +38 111222333\n"
+                                 "3) Spencer Bud\n"
+                                 "   tel: +39 20202020\n"
+                                 "4) Carrisi Albano\n"
+                                 "   tel: +39 444333444\n";
     QCOMPARE(out.str(), resultExpected);
 }
 
