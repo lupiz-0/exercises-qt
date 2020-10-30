@@ -13,6 +13,18 @@ public:
 private:
     int m_max_id;
 };
+
+class NameStartsWithFilter: public PhoneBookPassFiter {
+
+public:
+    NameStartsWithFilter(const std::string& startingString): m_startingString(startingString){};
+    bool pass() override{
+        return !m_contact->name.compare(0, m_startingString.size(), m_startingString);
+    };
+
+private:
+    std::string m_startingString;
+};
 class testPhoneBook : public QObject
 {
     Q_OBJECT
@@ -124,6 +136,15 @@ void testPhoneBook::filterTest() {
         QVERIFY(haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}));
         QCOMPARE(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}), false);
         QCOMPARE(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}), false);
+    }
+
+    {
+        NameStartsWithFilter filter("Alb");
+        std::vector<Contact*> contacts = phoneBook.filter(&filter);
+        QVERIFY(haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}));
+        QVERIFY(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}));
+        QCOMPARE(haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}), false);
+        QCOMPARE(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}), false);
     }
 }
 
