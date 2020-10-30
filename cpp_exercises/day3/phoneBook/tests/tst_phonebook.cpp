@@ -11,12 +11,13 @@ public:
     ~testPhoneBook();
 
 private slots:
-    void fill(PhoneBook& phoneBook);
     void initTestCase();
     void cleanupTestCase();
     void findTest();
     void insertionOperatorTest();
 
+private:
+    void fill(PhoneBook& phoneBook);
 };
 
 
