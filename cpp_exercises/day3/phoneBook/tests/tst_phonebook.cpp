@@ -11,6 +11,7 @@ public:
     ~testPhoneBook();
 
 private slots:
+    bool haveContact(const std::vector<Contact*>& contacts, const Contact& toCheck);
     void initTestCase();
     void cleanupTestCase();
     void findTest();
@@ -20,6 +21,13 @@ private:
     void fill(PhoneBook& phoneBook);
 };
 
+bool testPhoneBook::haveContact(const std::vector<Contact*>& contacts, const Contact& toCheck) {
+    for(const Contact* contact: contacts) {
+        if(*contact == toCheck)
+            return true;
+    }
+    return false;
+}
 
 void testPhoneBook::fill(PhoneBook& phoneBook) {
     phoneBook.append(Contact{"Gerry", "Calà", "+39 0123456789"});

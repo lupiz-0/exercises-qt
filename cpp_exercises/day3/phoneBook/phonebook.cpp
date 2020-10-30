@@ -42,3 +42,8 @@ std::ostream& operator<<(std::ostream& ostream, const PhoneBook& phoneBook) {
     });
     return ostream;
 }
+
+bool operator==(const Contact& contactA, const Contact& contactB) {
+    return contactA.name == contactB.name && contactA.surname == contactB.surname && contactA.telephoneNumber == contactB.telephoneNumber;
+}
+

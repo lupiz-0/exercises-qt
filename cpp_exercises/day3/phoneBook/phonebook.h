@@ -37,3 +37,4 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& ostream, const PhoneBook& phoneBook);
+bool operator==(const Contact& contactA, const Contact& contactB);
