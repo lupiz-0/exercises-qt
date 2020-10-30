@@ -23,10 +23,11 @@ Contact* PhoneBook::find(const std::string& name) {
 }
 
 std::ostream& operator<<(std::ostream& ostream, const PhoneBook& phoneBook) {
-    for(size_t i = 0; i < phoneBook.m_contacts.size(); i++) {
-        const Contact& contact = phoneBook.m_contacts[i];
-        ostream << i + 1 << ") " << contact.surname << ' ' << contact.name << '\n';
+    int id = 0;
+    std::for_each(phoneBook.m_contacts.begin(), phoneBook.m_contacts.end(), [&ostream, &id](const Contact& contact) {
+        ostream << id + 1 << ") " << contact.surname << ' ' << contact.name << '\n';
         ostream << "   tel: " << contact.telephoneNumber << '\n';
-    }
+        id++;
+    });
     return ostream;
 }
