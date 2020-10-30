@@ -65,7 +65,6 @@ private:
     static bool isMonthValid(int month);
     static bool isDateValid(int day, int month, int year);
     static bool areStringValidInteger(const std::string& string);
-    static void splitDayMonthYearString(const std::string& string, std::string& dayString, std::string& monthString, std::string& yearString);
 
     int m_day;
     int m_month;

@@ -168,11 +168,3 @@ bool Date::areStringValidInteger(const std::string& string) {
     strtol(string.c_str(), &p, 10);
     return *p == 0;
 }
-
-void Date::splitDayMonthYearString(const std::string& string, std::string& dayString, std::string& monthString, std::string& yearString) {
-    constexpr char separator = '-';
-    std::stringstream stringStream(string);
-    std::getline(stringStream, dayString, separator);
-    std::getline(stringStream, monthString, separator);
-    std::getline(stringStream, yearString, separator);
-}
