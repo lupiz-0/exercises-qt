@@ -1,7 +1,6 @@
 #include <QtTest>
- #include "../phonebook.h"
-
-// add necessary includes here
+#include <sstream>
+#include "../phonebook.h"
 
 class testPhoneBook : public QObject
 {
@@ -15,8 +14,18 @@ private slots:
     void initTestCase();
     void cleanupTestCase();
     void findTest();
+    void insertionOperatorTest();
 
+private:
+    void fill(PhoneBook& phoneBook);
 };
+
+
+void testPhoneBook::fill(PhoneBook& phoneBook) {
+    phoneBook.append(Contact{"Gerry", "Calà", "+39 0123456789"});
+    phoneBook.append(Contact{"Alberto", "Sordi", "+39 111222333"});
+    phoneBook.append(Contact{"Bud", "Spencer", "+39 20202020"});
+}
 
 testPhoneBook::testPhoneBook()
 {
@@ -41,9 +50,7 @@ void testPhoneBook::cleanupTestCase()
 void testPhoneBook::findTest()
 {
     PhoneBook phoneBook;
-    phoneBook.append(Contact{"Gerry", "Calà", "+39 0123456789"});
-    phoneBook.append(Contact{"Alberto", "Sordi", "+39 111222333"});
-    phoneBook.append(Contact{"Bud", "Spencer", "+39 20202020"});
+    fill(phoneBook);
 
     const Contact* contact = phoneBook.find("Gerry");
     QVERIFY(contact);
@@ -65,6 +72,24 @@ void testPhoneBook::findTest()
 
     contact = phoneBook.find("Sordi");
     QCOMPARE(contact, nullptr);
+}
+
+void testPhoneBook::insertionOperatorTest() {
+    PhoneBook phoneBook;
+    fill(phoneBook);
+
+    std::stringstream out;
+    out << phoneBook;
+
+    const char* resultExpected = R"(1) Calà Gerry
+   tel: +39 0123456789
+2) Sordi Alberto
+   tel: +39 111222333
+3) Spencer Bud
+   tel: +39 20202020
+)";
+
+    QCOMPARE(out.str(), resultExpected);
 }
 
 QTEST_APPLESS_MAIN(testPhoneBook)

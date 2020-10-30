@@ -1,5 +1,6 @@
 #include "phonebook.h"
 #include <algorithm>
+#include <ostream>
 
 PhoneBook::PhoneBook()
 {
@@ -19,4 +20,14 @@ Contact* PhoneBook::find(const std::string& name) {
         return nullptr;
 
     return &(*it);
+}
+
+std::ostream& operator<<(std::ostream& ostream, const PhoneBook& phoneBook) {
+    int id = 0;
+    std::for_each(phoneBook.m_contacts.begin(), phoneBook.m_contacts.end(), [&ostream, &id](const Contact& contact) {
+        ostream << id + 1 << ") " << contact.surname << ' ' << contact.name << '\n';
+        ostream << "   tel: " << contact.telephoneNumber << '\n';
+        id++;
+    });
+    return ostream;
 }
