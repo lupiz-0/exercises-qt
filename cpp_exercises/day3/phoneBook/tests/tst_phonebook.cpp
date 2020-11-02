@@ -123,14 +123,15 @@ void testPhoneBook::insertionOperatorTest() {
 
     std::stringstream out;
     out << phoneBook;
-    const char* resultExpected = "1) Calà Gerry\n"
-                                 "   tel: +39 0123456789\n"
-                                 "2) Sordi Alberto\n"
-                                 "   tel: +38 111222333\n"
-                                 "3) Spencer Bud\n"
-                                 "   tel: +39 20202020\n"
-                                 "4) Carrisi Albano\n"
-                                 "   tel: +39 444333444\n";
+    const char* resultExpected = R"(1) Calà Gerry
+   tel: +39 0123456789
+2) Sordi Alberto
+   tel: +38 111222333
+3) Spencer Bud
+   tel: +39 20202020
+4) Carrisi Albano
+   tel: +39 444333444
+)";
     QCOMPARE(out.str(), resultExpected);
 }
 
