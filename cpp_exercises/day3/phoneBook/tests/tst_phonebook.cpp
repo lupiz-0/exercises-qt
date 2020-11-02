@@ -43,16 +43,16 @@ public:
     testPhoneBook();
     ~testPhoneBook();
 
-private slots:
-    bool haveContact(const std::vector<Contact*>& contacts, const Contact& toCheck);
+private slots:    
     void initTestCase();
     void cleanupTestCase();
     void findTest();
     void insertionOperatorTest();
+    void filterTest();
 
 private:
     void fill(PhoneBook& phoneBook);
-    void filterTest();
+    bool haveContact(const std::vector<Contact*>& contacts, const Contact& toCheck);
 };
 
 bool testPhoneBook::haveContact(const std::vector<Contact*>& contacts, const Contact& toCheck) {
