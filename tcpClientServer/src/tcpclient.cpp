@@ -14,8 +14,8 @@ bool TcpClient::init() {
 bool TcpClient::update() {
 
     if(m_tcpSocket.waitForReadyRead(1000)) {
-        m_tcpSocket.read(m_buffer, BUFFER_SIZE);
-        std::cout << m_buffer << '\n';
+        QByteArray serverResult = m_tcpSocket.read(MAX_READ);
+        std::cout << serverResult.toStdString();
     }
 
     std::string string;

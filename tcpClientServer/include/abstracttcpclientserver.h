@@ -11,7 +11,6 @@ public:
 protected:
     virtual bool update() = 0;
 
-    static constexpr int BUFFER_SIZE = 256;
-    char m_buffer[BUFFER_SIZE];
+    static constexpr int MAX_READ = 1024;
 };
 
