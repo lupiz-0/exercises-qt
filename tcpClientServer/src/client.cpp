@@ -23,5 +23,8 @@ int main(int argc, char *argv[])
         std::cerr << "Client initialization fail !!!" << '\n';
         return 1;
     }
+
+    client.run();
+
     return 0;
 }

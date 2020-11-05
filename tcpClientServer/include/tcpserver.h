@@ -11,6 +11,7 @@ public:
     bool init() override;
 
 private:
+    bool update() override;
 
     QTcpServer m_tcpServer;
     QTcpSocket* m_client;

@@ -12,5 +12,8 @@ int main(int argc, char *argv[])
         std::cerr << "Server initialization fail !!!" << '\n';
         return 1;
     }
+
+    server.run();
+
     return 0;
 }
