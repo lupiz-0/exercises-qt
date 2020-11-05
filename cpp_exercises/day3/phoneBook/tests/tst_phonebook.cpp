@@ -145,8 +145,8 @@ void testPhoneBook::filterTest() {
         std::vector<Contact*> contacts = phoneBook.filter(&filter);
         QVERIFY(haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}));
         QVERIFY(haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}));
-        QCOMPARE(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}), false);
-        QCOMPARE(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}), false);
+        QVERIFY(!haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}));
+        QVERIFY(!haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}));
     }
 
     {
@@ -154,14 +154,14 @@ void testPhoneBook::filterTest() {
         std::vector<Contact*> contacts = phoneBook.filter(&filter);
         QVERIFY(haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}));
         QVERIFY(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}));
-        QCOMPARE(haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}), false);
-        QCOMPARE(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}), false);
+        QVERIFY(!haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}));
+        QVERIFY(!haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}));
     }
 
     {
         ItalianNumberFilter filter;
         std::vector<Contact*> contacts = phoneBook.filter(&filter);
-        QCOMPARE(haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}), false);
+        QVERIFY(!haveContact(contacts, Contact{"Alberto", "Sordi", "+38 111222333"}));
         QVERIFY(haveContact(contacts, Contact{"Albano", "Carrisi", "+39 444333444"}));
         QVERIFY(haveContact(contacts, Contact{"Gerry", "Calà", "+39 0123456789"}));
         QVERIFY(haveContact(contacts, Contact{"Bud", "Spencer", "+39 20202020"}));
