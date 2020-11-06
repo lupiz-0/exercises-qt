@@ -1,4 +1,4 @@
-find_package(Qt5 COMPONENTS Test REQUIRED)
+find_package(Qt5 COMPONENTS Test Core REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
