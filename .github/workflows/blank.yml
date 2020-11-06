@@ -36,6 +36,6 @@ jobs:
           cd day2
           mkdir date_build
           cd date_build
-          cmake ../date
+          cmake ../date -DCMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/cmake/Qt5"
           make
           echo end build and run ...
