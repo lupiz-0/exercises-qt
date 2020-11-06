@@ -30,6 +30,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo start build and run ...
+          sudo apt-get install qt5-default
           cd cpp_exercises
           cd day2
           mkdir date_build
