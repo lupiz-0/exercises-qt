@@ -1,4 +1,4 @@
-find_package(Qt5Test REQUIRED)
+find_package(Qt5 COMPONENTS Test Core REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -11,5 +11,6 @@ enable_testing()
 add_executable(date tst_date.cpp ../date.cpp)
 add_test(NAME date COMMAND date)
 
+target_include_directories(date PRIVATE ${Qt5Test_INCLUDE_DIRS})
 target_link_libraries(date PRIVATE Qt5::Test)
 
